@@ -6,12 +6,12 @@ parent: Asserts
 
 # Error Assertion
 
-The error assertion functionality in GdUnit4 is designed to test for runtime errors and exceptions. Due to the fundamental differences between GdScript
-and C# as programming languages and their integration with the Godot engine, GdUnit4 provides different approaches for error testing in each language.
+The error assertion functionality in gunit is designed to test for runtime errors and exceptions. Due to the fundamental differences between GdScript
+and C# as programming languages and their integration with the Godot engine, gunit provides different approaches for error testing in each language.
 
 ## Why Different Approaches?
 
-**GdScript Integration**: GdScript is Godot's native scripting language with built-in error handling mechanisms. GdUnit4 leverages Godot's internal error
+**GdScript Integration**: GdScript is Godot's native scripting language with built-in error handling mechanisms. gunit leverages Godot's internal error
 reporting system to capture `push_error()`, `push_warning()`, and assertion failures through the `assert_error()` function approach.
 
 **C# Integration**: C# operates as a managed language within Godot's runtime, where exceptions can occur at multiple levels - both in managed C# code and
@@ -314,6 +314,6 @@ not available in GdScript testing.
 
 ## Conclusion
 
-Error assertion capabilities in GdUnit4 provide comprehensive testing for both expected and unexpected error conditions.
+Error assertion capabilities in gunit provide comprehensive testing for both expected and unexpected error conditions.
 While GdScript offers fundamental error testing through `assert_error`, the C# API provides advanced exception handling with precise control over
 exception verification and Godot runtime exception monitoring.

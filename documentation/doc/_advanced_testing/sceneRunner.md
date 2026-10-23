@@ -118,7 +118,7 @@ public async Task simulate_frame() {
 
 ## Processing and Rendering Your Scene
 
-This section provides guidance on how to process and render your scene during tests using GdUnit4.
+This section provides guidance on how to process and render your scene during tests using gunit.
 
 {% tabs scene-runner-processing %}
 {% tab scene-runner-processing GdScript %}

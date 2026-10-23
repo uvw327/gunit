@@ -51,8 +51,8 @@ Use the **[TestCase]** attribute to define a method as a TestCase.
 ```cs
 namespace Examples;
 
-using GdUnit4;
-using static GdUnit4.Assertions;
+using gunit;
+using static gunit.Assertions;
 
 [TestSuite]
 public class GdUnitExampleTest
@@ -161,7 +161,7 @@ and get clearer failure reports.
 
 ### Why Use Fail Fast?
 
-By default, GdUnit4 will continue executing all assertions in a test case even after one fails.
+By default, gunit will continue executing all assertions in a test case even after one fails.
 While this can provide comprehensive feedback about all failing conditions, it can also lead to:
 
 * **Cascading failures**: Later assertions may fail because earlier ones didn't establish the expected state

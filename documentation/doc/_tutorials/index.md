@@ -6,12 +6,12 @@ has_children: true
 has_toc: false
 ---
 
-## GdUnit4 Tutorials
+## gunit Tutorials
 
-Welcome to the GdUnit4 tutorial page! Here, we'll go through a set of tutorials that will help you learn how to use GdUnit4 to write tests for your Godot game.
+Welcome to the gunit tutorial page! Here, we'll go through a set of tutorials that will help you learn how to use gunit to write tests for your Godot game.
 
 **Prerequisites**
-Before starting these tutorials, you should have a basic understanding of the Godot engine and the GDScript language. You should also have GdUnit4 installed
+Before starting these tutorials, you should have a basic understanding of the Godot engine and the GDScript language. You should also have gunit installed
 and set up in your Godot project.
 
 ## Tutorial List
@@ -24,7 +24,7 @@ Here's a list of tutorials we currently have available:<br>
 * [~~Test Doubles: Stubs, Mocks, and Spies~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Running Tests from the Command Line~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Testing Signals and Events~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
-* [Test Driven Development (TDD) with GdUnit4]({{site.baseurl}}/tutorials/tdd/#test-driven-development-tdd-with-gdunit4)<br>
+* [Test Driven Development (TDD) with gunit]({{site.baseurl}}/tutorials/tdd/#test-driven-development-tdd-with-gdunit4)<br>
 * [Testing Scene Interactions]({{site.baseurl}}/tutorials/scenerunner_examples/#testing-scene-interactions)<br>
 
 ## Basics

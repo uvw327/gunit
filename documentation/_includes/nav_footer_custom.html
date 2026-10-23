@@ -5,7 +5,7 @@
     <div class="version-selector">
       <select onchange="location = this.value;">
         {% for version in site.versions %}
-        <option value="/gdUnit4/{{ version }}/" class="version-dropdown-item" {% if {{site.baseurl}} contains {{version}} %}selected{% endif %}>
+        <option value="/gunit/{{ version }}/" class="version-dropdown-item" {% if {{site.baseurl}} contains {{version}} %}selected{% endif %}>
           {{ version }}
         </option>
         {% endfor %}

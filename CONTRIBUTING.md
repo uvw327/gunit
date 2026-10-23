@@ -1,13 +1,13 @@
-# Contributing to GdUnit4
+# Contributing to gunit
 
-**Thank you for considering contributing to GdUnit4!**<br>
+**Thank you for considering contributing to gunit!**<br>
 We appreciate your input and want to make the contribution process as easy and transparent as possible.
 Whether you want to report a bug, discuss code improvements, submit a fix, propose new features, or become a maintainer,
 we welcome your involvement.
 
 ## Reporting Bugs
 
-If you encounter any bugs or issues, please use GitHub's issue tracking system. You can report a bug by [opening a new issue](https://github.com/MikeSchulze/gdUnit4/issues/new?assignees=MikeSchulze&labels=bug&projects=projects%2F5&template=bug_report.yml&title=GD-XXX%3A+Describe+the+issue+briefly).
+If you encounter any bugs or issues, please use GitHub's issue tracking system. You can report a bug by [opening a new issue](https://github.com/uvw327/gunit/issues/new?labels=bug&template=bug_report.yml&title=Describe+the+issue+briefly).
 When submitting a bug report, please provide detailed information, including the steps to reproduce the issue, relevant background information,
 and sample code if possible.
 
@@ -107,7 +107,7 @@ You can optionally run `gdstyle check` locally to check your changes before subm
 Linting is required for all plugin sources and tests, any warning fails the check:
 
 ```bash
-gdstyle check --max-warnings 0 addons/gdUnit4/
+gdstyle check --max-warnings 0 addons/gunit/
 ```
 
 ### Project Structure
@@ -135,7 +135,7 @@ In short: We eliminate the clutter so the AI can find the right answers faster.
 ## License
 
 By contributing to this project, you agree that your contributions will be licensed under the same
-<a href='https://github.com/MikeSchulze/gdUnit4/blob/master/LICENSE' target="_blank">MIT License</a> that covers the project.
+<a href='https://github.com/uvw327/gunit/blob/master/LICENSE' target="_blank">MIT License</a> that covers the project.
 If you have any concerns, please reach out to the maintainers.
 
 ## Coding Style

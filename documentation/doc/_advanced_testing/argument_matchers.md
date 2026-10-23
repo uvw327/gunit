@@ -9,7 +9,7 @@ nav_order: 8
 
 ## Definition
 
-GdUnit4 provides a set of argument matchers designed to facilitate testing of function calls with specific argument types.
+gunit provides a set of argument matchers designed to facilitate testing of function calls with specific argument types.
 Argument matchers allow you to verify the behavior of a function call without needing to specify the exact argument value(s).
 This is particularly useful when you're interested in verifying the type of argument passed to a function rather than its exact value.
 

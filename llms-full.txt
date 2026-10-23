@@ -1,8 +1,8 @@
-# GdUnit4 — Full Reference
+# gunit — Full Reference
 
 > Extended reference for contributors and advanced users. See [llms.txt](llms.txt) for the user-facing overview.
 
-## Source Modules (`addons/gdUnit4/src/`)
+## Source Modules (`addons/gunit/src/`)
 
 - `asserts/` — Fluent assertion implementations per type (Array, String, Signal, Vector, Dictionary, etc.)
 - `core/` — Test case execution, discovery, events, attributes, versioning
@@ -39,7 +39,7 @@ Tests mirror `src/` structure under `test/`. Example:
 ## GDScript Linting
 
 ```bash
-gdstyle check --max-warnings 0 addons/gdUnit4/
+gdstyle check --max-warnings 0 addons/gunit/
 ```
 
 ## Branch and PR Conventions

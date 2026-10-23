@@ -33,7 +33,7 @@ func full_name() -> String:
 
 ## Creating a Test
 
-To create a test in GdUnit4, you can use the built-in "Create Test" function. Follow these steps:
+To create a test in gunit, you can use the built-in "Create Test" function. Follow these steps:
 
 1. Open the script that you want to test.
 2. Right-click on the function that you want to create a test for.
@@ -54,7 +54,7 @@ After creating your first test, you can execute it by selecting it in the editor
 to click on **Run Tests** or **Debug Tests**.
 ![run-selected-test-case]({{site.baseurl}}/assets/images/first-steps/run-selected-test-case.png){:.centered}
 
-The test run is visualized in the GdUnit4 inspector, allowing you to inspect the test results.
+The test run is visualized in the gunit inspector, allowing you to inspect the test results.
 ![first-test-run-result]({{site.baseurl}}/assets/images/first-steps/first-test-run-result.png){:.centered}
 
 As you can see, your first test has resulted in a failure: "Test not implemented!" This is because a generated test first fails with this message since

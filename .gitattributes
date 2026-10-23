@@ -3,15 +3,15 @@
 
 /**                    export-ignore
 /addons                !export-ignore
-/addons/gdUnit4        !export-ignore
-/addons/gdUnit4/**     !export-ignore
-/addons/gdUnit4/test   export-ignore
+/addons/gunit        !export-ignore
+/addons/gunit/**     !export-ignore
+/addons/gunit/test   export-ignore
 /documentation         export-ignore
 
 # Exclude AI agent files from asset library exports
-/addons/gdUnit4/**/AGENTS.md   export-ignore
-/addons/gdUnit4/**/CLAUDE.md   export-ignore
-/addons/gdUnit4/**/.claude     export-ignore
+/addons/gunit/**/AGENTS.md   export-ignore
+/addons/gunit/**/CLAUDE.md   export-ignore
+/addons/gunit/**/.claude     export-ignore
 
 
 # Ensure Unix line endings for text files

@@ -13,14 +13,14 @@ This section lists known problems and possible solutions/workarounds.
 - [Script/Resource Errors after the plugin is installed]({{site.baseurl}}/faq/solutions/#scriptresource-errors-after-the-plugin-is-installed)
 - [Modifying the Game Engine State 'mainLoop.Paused = true' during Tests]({{site.baseurl}}/faq/solutions/#modifying-the-game-engine-state-mainlooppaused--true-during-tests)
 - [Modifying ProjectSettings during Tests]({{site.baseurl}}/faq/solutions/#modifying-projectsettings-during-tests)
-- [Export Failures with GdUnit4 Plugin Installed]({{site.baseurl}}/faq/solutions/#export-failures-with-gdunit4-plugin-installed)
+- [Export Failures with gunit Plugin Installed]({{site.baseurl}}/faq/solutions/#export-failures-with-gdunit4-plugin-installed)
 - [How to Exclude Directories from Test Discovery]({{site.baseurl}}/faq/solutions/#how-to-exclude-directories-from-test-discovery)
 
 ---
 
 ### Script/Resource Errors after the plugin is installed
 
-When installing the GdUnit4 plugin and activating it, you may encounter a lot of script and resource loading errors.
+When installing the gunit plugin and activating it, you may encounter a lot of script and resource loading errors.
 These errors occur due to a cache problem in the Godot Engine.
 
 <h4> Solution </h4>
@@ -39,7 +39,7 @@ the Godot cache folder:
 
 When a test modifies the game engine state `Paused` on the `SceneTree`, it can affect the test execution.
 Setting the main loop to paused will stop the engine running, including the test execution running in the main loop,
-causing the GdUnit4 test window to remain open even after tests are complete.
+causing the gunit test window to remain open even after tests are complete.
 
 <h4> Solution </h4>
 
@@ -59,7 +59,7 @@ func test_game_paused() -> void:
     var mainLoop :SceneTree = Engine.get_main_loop()
 
     assert_that(mainLoop.paused).is_false()
-    # The following lines cause the GdUnit4 test window to remain open even after tests are complete
+    # The following lines cause the gunit test window to remain open even after tests are complete
     mainLoop.paused = true
     assert_that(mainLoop.paused).is_true()
 ```
@@ -81,7 +81,7 @@ public void GamePaused()
 
     AssertThat(mainLoop.Paused).IsFalse();
 
-    // The following lines cause the GdUnit4 test window to remain open even after tests are complete
+    // The following lines cause the gunit test window to remain open even after tests are complete
     mainLoop.Paused = true;
     AssertThat(mainLoop.Paused).IsTrue();
 }
@@ -99,7 +99,7 @@ persist across tests within the same Godot session and can cause later tests to 
 
 <h4> Solution </h4>
 
-GdUnit4 automatically snapshots all `ProjectSettings` before each test suite and each individual test, and
+gunit automatically snapshots all `ProjectSettings` before each test suite and each individual test, and
 restores any changed values afterwards. There is no need to manually save and restore settings in `after` hooks:
 
 {% tabs projectsettings_isolation %}
@@ -156,36 +156,36 @@ public void Setup()
 
 ---
 
-### Export Failures with GdUnit4 Plugin Installed
+### Export Failures with gunit Plugin Installed
 
-When exporting games with the GdUnit4 plugin installed, you may encounter crashes during the export process,
+When exporting games with the gunit plugin installed, you may encounter crashes during the export process,
 particularly in CI/CD environments.
 The crash typically shows a "Program crashed with signal 11" error and occurs because Godot has issues when exporting
-projects that include editor-only plugins like GdUnit4.
+projects that include editor-only plugins like gunit.
 
 <h4> Solution </h4>
 
-The recommended solution is to **exclude the GdUnit4 addon from the export** rather than disabling the plugin entirely.
+The recommended solution is to **exclude the gunit addon from the export** rather than disabling the plugin entirely.
 This allows you to keep the plugin active for development while ensuring clean exports.
 
-<b>Exclude GdUnit4 from Export Settings</b>
+<b>Exclude gunit from Export Settings</b>
 
 1. Open your project in the Godot Editor
 2. Go to **Project > Export...**
 3. Select your export preset (e.g., "Windows Desktop", "macOS", etc.)
 4. In the **Resources** tab, locate the **Filters to exclude files/folders from project** section
-5. Add the following filter to exclude the GdUnit4 addon:
+5. Add the following filter to exclude the gunit addon:
    ```shell
-   addons/gdunit4/*
+   addons/gunit/*
    ```
    ![export-excludes]({{site.baseurl}}/assets/images/faq/export-excludes.png)
 6. Export your game - the crash should no longer occur
 
 **Important Notes:**
 
-- The export exclusion method is preferred over disabling the plugin because it keeps GdUnit4 functional
+- The export exclusion method is preferred over disabling the plugin because it keeps gunit functional
   during development
-- The GdUnit4 addon is designed for development and testing environments and should not be included in production builds
+- The gunit addon is designed for development and testing environments and should not be included in production builds
 - After applying the exclusion filters, test your export to ensure it works correctly
 
 ---
@@ -193,10 +193,10 @@ This allows you to keep the plugin active for development while ensuring clean e
 ### How to Exclude Directories from Test Discovery
 
 When your project contains directories that should not be scanned for tests — such as third-party plugins,
-subprojects, or generated content — you can prevent GdUnit4 from scanning them by placing a `.gdignore` file
+subprojects, or generated content — you can prevent gunit from scanning them by placing a `.gdignore` file
 in those directories.
 
-GdUnit4's test discovery scanner respects `.gdignore` files the same way Godot does: any directory containing
+gunit's test discovery scanner respects `.gdignore` files the same way Godot does: any directory containing
 a `.gdignore` file is skipped entirely during the scan.
 
 <h4> Solution </h4>
@@ -207,4 +207,4 @@ Create an empty `.gdignore` file in any directory you want to exclude from test 
 touch addons/some_other_plugin/.gdignore
 ```
 
-GdUnit4 will no longer scan that directory or any of its subdirectories for test suites.
+gunit will no longer scan that directory or any of its subdirectories for test suites.

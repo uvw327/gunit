@@ -1,19 +1,18 @@
 name: Documentation
-description: Report missing or incorrect GdUnit4 documentation
+description: Report missing or incorrect gunit documentation
 title: "DOC-XXX: Brief description of documentation issue"
 labels: ["documentation"]
-projects: ["godot-gdunit-labs/3"]
 type: documentation
 assignees:
-  - MikeSchulze
+  - uvw327
 
 body:
   - type: markdown
     attributes:
       value: |
-        ### Thanks for helping improve GdUnit4 documentation!
-        - Please search [existing issues](https://github.com/godot-gdunit-labs/gdUnit4/issues?q=label%3Adocumentation%20is%3Aissue) to avoid duplicates
-        - Check the [official GdUnit4 documentation](https://godot-gdunit-labs.github.io/gdUnit4/latest/) first
+        ### Thanks for helping improve gunit documentation!
+        - Please search [existing issues](https://github.com/uvw327/gunit/issues?q=label%3Adocumentation%20is%3Aissue) to avoid duplicates
+        - Check the [official gunit documentation](https://github.com/uvw327/gunit/tree/master/documentation) first
         - Consider if this might be better as a GitHub Discussion for questions
 
   - type: dropdown
@@ -65,7 +64,7 @@ body:
     attributes:
       label: Documentation Link (if applicable)
       description: Link to the specific documentation page
-      placeholder: https://godot-gdunit-labs.github.io/gdUnit4/path/to/page
+      placeholder: https://github.com/uvw327/gunit/blob/master/documentation/path/to/page.md
     validations:
       required: true
 

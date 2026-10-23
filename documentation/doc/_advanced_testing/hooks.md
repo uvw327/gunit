@@ -7,7 +7,7 @@ nav_order: 2
 
 # Testing with Hooks
 
-Test hooks provide powerful extension points in GdUnit4 that allow you to execute custom logic at specific moments during the test lifecycle. They enable sophisticated test environment management, custom reporting, and integration with external systems.
+Test hooks provide powerful extension points in gunit that allow you to execute custom logic at specific moments during the test lifecycle. They enable sophisticated test environment management, custom reporting, and integration with external systems.
 
 ## What are Test Hooks?
 
@@ -65,7 +65,7 @@ content="The GdUnitTestSessionHook is current not implemented and will be releas
 %}
 
 ```csharp
-using GdUnit4;
+using gunit;
 using Godot;
 
 public class MyCustomHook : GdUnitTestSessionHook
@@ -255,9 +255,9 @@ func _generate_report(total_time: int) -> Dictionary:
 
 ## Registering Hooks
 
-To use your custom hooks, you need to register them in the GdUnit4 settings:
+To use your custom hooks, you need to register them in the gunit settings:
 
-1. Open the **GdUnit4 Settings** (Tools button in the GdUnit Inspector)
+1. Open the **gunit Settings** (Tools button in the GdUnit Inspector)
    ![inspector-settings]({{site.baseurl}}/assets/images/settings/inspector-settings.png){:.centered}
 2. Navigate to the Hooks tab
 ![settings-hook]({{site.baseurl}}/assets/images/settings/settings-hooks.png){:.centered}
@@ -346,7 +346,7 @@ func _on_test_event(event: GdUnitEvent) -> void:
 
 ## System Hooks
 
-GdUnit4 includes built-in system hooks that cannot be removed:
+gunit includes built-in system hooks that cannot be removed:
 
 ### GdUnitHtmlTestReporter
 Extends `GdUnitBaseReporterTestSessionHook` to generate interactive HTML test reports with:
@@ -384,5 +384,5 @@ Extends `GdUnitBaseReporterTestSessionHook` to generate JUnit-compatible XML rep
 
 ## See Also
 
-- [Settings - Hooks Configuration]({{site.baseurl}}/first_steps/settings/#hooks-settings) - Configure and manage hooks in the GdUnit4 settings
+- [Settings - Hooks Configuration]({{site.baseurl}}/first_steps/settings/#hooks-settings) - Configure and manage hooks in the gunit settings
 - [Test Setup/Teardown]({{site.baseurl}}/testing/hooks/#test-setupteardown) - Learn about test-level fixtures

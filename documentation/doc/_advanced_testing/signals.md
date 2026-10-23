@@ -87,8 +87,8 @@ func test_is_signal_exists() -> void:
 ```cs
 using System.Threading.Tasks;
 
-using GdUnit4.Asserts;
-using GdUnit4.Core.Signals;
+using gunit.Asserts;
+using gunit.Core.Signals;
 
 using static Assertions;
 
@@ -239,8 +239,8 @@ func test_monitor_signals() -> void:
 ```cs
 using System.Threading.Tasks;
 
-using GdUnit4.Asserts;
-using GdUnit4.Core.Signals;
+using gunit.Asserts;
+using gunit.Core.Signals;
 
 using static Assertions;
 

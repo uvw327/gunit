@@ -6,7 +6,7 @@ nav_order: 2
 
 # Settings
 
-GdUnit4 provides several customizable settings to meet your testing needs.
+gunit provides several customizable settings to meet your testing needs.
 To access these settings, simply press the 'tools' button located in the GdUnit inspector.
 ![inspector-settings]({{site.baseurl}}/assets/images/settings/inspector-settings.png){:.centered}
 
@@ -109,7 +109,7 @@ Test session hooks execute custom logic at the beginning and end of test session
 
 ### Built-in System Hooks
 
-GdUnit4 includes two pre-installed system hooks that provide essential reporting functionality:
+gunit includes two pre-installed system hooks that provide essential reporting functionality:
 
 * **GdUnitHtmlTestReporter** `SYSTEM`  
   Generates interactive HTML test reports with detailed results, execution times, and statistics. Reports include collapsible sections and visual charts for easy analysis.
@@ -271,12 +271,12 @@ To view a list of all the supported tags, simply click on the **Supported Tags**
 
 ## Updates
 
-The Updates section provides automatic update management for GdUnit4 by monitoring the GitHub repository for new releases.
+The Updates section provides automatic update management for gunit by monitoring the GitHub repository for new releases.
 
 ![settings-update]({{site.baseurl}}/assets/images/settings/settings-update.png){:.centered}
 
 * **Update Notification**<br>
-  When a new version of GdUnit4 is available on GitHub, the Updates tab will display a yellow bell icon to notify you of the available update.
+  When a new version of gunit is available on GitHub, the Updates tab will display a yellow bell icon to notify you of the available update.
   This visual indicator makes it easy to spot when updates are ready for installation.
   The update notification is enabled by default but can be manually disabled in the Common settings section if you prefer not to receive update notifications.
 
@@ -287,7 +287,7 @@ The Updates section provides automatic update management for GdUnit4 by monitori
 * **Update Installation**<br>
   To install the new version, simply click the **Update** button. The update process will:
     1. Download the latest version from the GitHub repository
-    2. Replace the currently installed GdUnit4 plugin with the new version
+    2. Replace the currently installed gunit plugin with the new version
     3. Automatically restart Godot after the installation is complete
 
 * **Technical Details**<br>

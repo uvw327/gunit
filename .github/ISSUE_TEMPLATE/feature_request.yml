@@ -1,18 +1,17 @@
 name: Feature Request
-description: Suggest an idea for GdUnit4
-title: "GD-XXX: Brief description of the feature"
+description: Suggest an idea for gunit
+title: "GUNIT-XXX: Brief description of the feature"
 labels: ["API", "enhancement"]
-projects: ["godot-gdunit-labs/3"]
 type: feature
 assignees:
-  - MikeSchulze
+  - uvw327
 
 body:
   - type: markdown
     attributes:
       value: |
         ### Thanks for suggesting a new feature!
-        - Please search [existing feature requests](https://github.com/godot-gdunit-labs/gdUnit4/issues?q=label%3Aenhancement%20is%3Aissue) to avoid duplicates
+        - Please search [existing feature requests](https://github.com/uvw327/gunit/issues?q=label%3Aenhancement%20is%3Aissue) to avoid duplicates
         - Consider if this might be better as a GitHub Discussion to gather community feedback first
         - Check if this feature might already exist in the latest version
 
@@ -86,13 +85,13 @@ body:
     id: impact-benefits
     attributes:
       label: Impact and Benefits
-      description: How would this feature benefit the GdUnit4 community?
+      description: How would this feature benefit the gunit community?
       placeholder: |
         Describe the potential impact:
         - Who would benefit from this feature?
         - How common is this use case?
         - What testing scenarios would this improve?
-        - Would this make GdUnit4 more competitive with other testing frameworks?
+        - Would this make gunit more competitive with other testing frameworks?
     validations:
       required: false
 

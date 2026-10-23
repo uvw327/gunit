@@ -9,7 +9,7 @@ nav_order: 1
 
 # Simulate Actions
 
-This page provides guidance on how to test actions in your scene using GdUnit4.
+This page provides guidance on how to test actions in your scene using gunit.
 For more detailed information on Godot actions, please refer to
 the [official Godot documentation](https://docs.godotengine.org/en/stable/tutorials/inputs/inputevent.html#actions){:target="_blank"}
 

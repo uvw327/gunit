@@ -70,7 +70,7 @@ func test_object_reference_comparison():
 
 ## How to use GdUnit assets to verify things
 
-GdUnit4 provides a set of assertions that give you helpful error messages and improve the readability of your test code.
+gunit provides a set of assertions that give you helpful error messages and improve the readability of your test code.
 Assertions are organized by type and support fluent syntax writing.<br>
 The pattern for using asserts is defined as `assert_<type>(<current>).<comparison function>([expected])`.
 If you don't know the type of the current value, use the generic `assert_that(<current>)` instead.
@@ -96,11 +96,11 @@ func test_hello_world() -> void:
 {% endtab %}
 {% tab assert-example C# %}
 The C# assert is smart and switches to the equivalent assert implementation by auto-typing and should also be used preferentially.
-Alternatively, you can use the typed asserts if you want to. To use the assert, you have to import it via `static GdUnit4.Assertions`.
+Alternatively, you can use the typed asserts if you want to. To use the assert, you have to import it via `static gunit.Assertions`.
 
 ```cs
-using GdUnit4;
-using static GdUnit4.Assertions;
+using gunit;
+using static gunit.Assertions;
 
 namespace ExampleProject.Tests
 {
@@ -151,8 +151,8 @@ func test_hello_world_fluent() -> void:
 {% tab assert-fluent-example C# %}
 
 ```cs
-using GdUnit4;
-using static GdUnit4.Assertions;
+using gunit;
+using static gunit.Assertions;
 
 namespace ExampleProject.Tests
 {

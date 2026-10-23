@@ -12,9 +12,9 @@ nav_order: 11
 Flaky tests are tests that may pass or fail inconsistently, even when run against the same code. This can happen due to various reasons such as timing issues,
 race conditions, or external dependencies that can cause unexpected behaviors during test execution.
 
-### How to handle flaky tests in GdUnit4
+### How to handle flaky tests in gunit
 
-GdUnit4 provides built-in support for handling flaky tests to help improve the reliability of your test suite.
+gunit provides built-in support for handling flaky tests to help improve the reliability of your test suite.
 This feature allows tests that fail intermittently to be re-executed automatically, reducing the chance of reporting false negatives.
 
 ### Flaky Test Settings
@@ -23,11 +23,11 @@ This feature allows tests that fail intermittently to be re-executed automatical
 
 * **Flaky Test**
     The Flaky Test setting allows you to enable or disable the detection and handling of flaky tests.
-    When enabled, GdUnit4 will automatically retry tests that fail,
+    When enabled, gunit will automatically retry tests that fail,
     helping to distinguish between actual test failures and sporadic issues caused by flaky tests.
 
     **Enabled:**
-        GdUnit4 will monitor test failures and automatically rerun tests that fail to determine if they are truly faulty or just flaky.<br>
+        gunit will monitor test failures and automatically rerun tests that fail to determine if they are truly faulty or just flaky.<br>
     **Disabled:**
         No additional handling for flaky tests. All test failures will be reported immediately.
 
@@ -51,4 +51,4 @@ This feature allows tests that fail intermittently to be re-executed automatical
 ### Conclusion
 
 Handling flaky tests effectively can significantly improve the stability and reliability of your test suite.
-By using GdUnit4’s built-in settings for flaky tests, you can automatically manage intermittent test failures and focus on addressing real issues in your codebase.
+By using gunit’s built-in settings for flaky tests, you can automatically manage intermittent test failures and focus on addressing real issues in your codebase.

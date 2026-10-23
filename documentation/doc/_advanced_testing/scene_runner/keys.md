@@ -9,7 +9,7 @@ nav_order: 2
 
 # Simulate Key Inputs
 
-This page provides guidance on how to test key inputs in your scene using GdUnit4.
+This page provides guidance on how to test key inputs in your scene using gunit.
 For more detailed information on Godot keyboard events, please refer to
 the [official Godot documentation](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#keyboard-events){:target="_blank"}
 

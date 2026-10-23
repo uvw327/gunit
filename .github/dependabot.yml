@@ -6,7 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: '/addons/gdUnit4/'
+    directory: '/addons/gunit/'
     schedule:
       interval: daily
 

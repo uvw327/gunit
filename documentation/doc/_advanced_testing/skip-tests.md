@@ -5,9 +5,9 @@ parent: Advanced Testing
 nav_order: 10
 ---
 
-# How to Skip Tests in GdUnit4
+# How to Skip Tests in gunit
 
-In GdUnit4, you can skip individual test cases or entire test suites using the `do_skip` parameter. This parameter allows you to specify conditions
+In gunit, you can skip individual test cases or entire test suites using the `do_skip` parameter. This parameter allows you to specify conditions
 under which a test should be skipped during execution. By default, tests are not skipped unless specified.
 
 ## Skipping Individual Test Cases

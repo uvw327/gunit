@@ -1,16 +1,13 @@
-#
-
 <p align="center">
-  <img src="https://github.com/godot-gdunit-labs/gdUnit4/blob/master/icon.png?branch=master" alt=""></br>
-  <h1 align="center">GdUnit4 <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/MikeSchulze/gdunit4" width="14%"> </h1>
+  <img src="icon.png" alt="gunit"></br>
+  <h1 align="center">gunit <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/uvw327/gunit" width="14%"> </h1>
 </p>
 <h2 align="center">A Godot Embedded Unit Testing Framework</h2>
 
-<p align="center">
-  <a href="https://www.patreon.com/cw/GodotGdUnitLabs">
-    <img src="assets/patreon-banner.svg" alt="Stay Connected &amp; Updated — Follow on Patreon" width="100%"/>
-  </a>
-</p>
+> **gunit** is a personal, GDScript-only fork of
+> [GdUnit4](https://github.com/MikeSchulze/gdUnit4) by Mike Schulze, released under the MIT license.
+> It is not affiliated with or endorsed by the upstream project.
+> The public API keeps the upstream `GdUnit*` class names so existing test suites keep working.
 
 <h1 align="center">Supported Godot Versions</h1>
 <p align="center">
@@ -31,7 +28,7 @@
 <table align="center">
   <thead>
  <tr>
-   <th>GdUnit4 Version</th>
+   <th>gunit Version</th>
    <th>Godot minimal required/compatible Version</th>
  </tr>
   </thead>
@@ -70,25 +67,18 @@
 </table>
 
 <p align="center">
-  <a target="_blank" href="https://www.youtube.com/watch?v=-iqxs3KPvLQ">
-    <img src="https://github.com/godot-gdunit-labs/gdUnit4/blob/master/assets/gdUnit4-animated.gif" width="100%" alt=""/>
-  </a>
-</p>
-
-<p align="center">
-  <img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/MikeSchulze/gdunit4/master"></br>
   <img alt="Release Addon" src="https://github.com/uvw327/gunit/actions/workflows/release-addon.yml/badge.svg"></br>
 </p>
 
-## What is GdUnit4?
+## What is gunit?
 
-**Gd**(*Godot*)**Unit**(*Unit Testing*)**4**(*Godot 4.x*)
+**g**(*Godot*)**unit**(*Unit Testing*)
 
-GdUnit4 is an embedded unit testing framework designed for testing GDScript files and scenes in the Godot editor.
-With GdUnit4, you can easily create and run unit tests to verify the functionality and performance of your code, ensuring
+gunit is an embedded unit testing framework designed for testing GDScript files and scenes in the Godot editor.
+With gunit, you can easily create and run unit tests to verify the functionality and performance of your code, ensuring
 that it meets your requirements and specifications.<br>
-GdUnit4 is a powerful tool that supports Test-Driven Development ([TDD](https://en.wikipedia.org/wiki/Test-driven_development)), a popular software development
-approach that emphasizes creating automated tests before writing any code. By using GdUnit4 for TDD, you can
+gunit is a powerful tool that supports Test-Driven Development ([TDD](https://en.wikipedia.org/wiki/Test-driven_development)), a popular software development
+approach that emphasizes creating automated tests before writing any code. By using gunit for TDD, you can
 ensure that your code is thoroughly tested and free of bugs, which can save you time and effort in the long run.
 
 ---
@@ -104,7 +94,7 @@ ensure that your code is thoroughly tested and free of bugs, which can save you 
 * **Test Discovery**  
   Automatically searches for tests at runtime and adds them to the inspector
 * **Convenient Interface**  
-  Run test-suites directly from Godot using the context menu (FileSystem panel, ScriptEditor, or GdUnit Inspector)
+  Run test-suites directly from Godot using the context menu (FileSystem panel, ScriptEditor, or gunit Inspector)
 * **Create Tests from Editor**  
   Right-click on any function in the ScriptEditor and select "Create TestCase" to generate tests automatically
 
@@ -157,7 +147,7 @@ ensure that your code is thoroughly tested and free of bugs, which can save you 
 * **JUnit XML Report**  
   Export test results in JUnit XML format for CI integration
 * **GitHub Action Integration**  
-  Public marketplace action for integrating GdUnit4 into your CI workflow  
+  Public marketplace action for integrating gunit into your CI workflow  
   [gdunit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action)
 
 ---
@@ -180,13 +170,15 @@ func test_example():
 
 [![Watch the video](https://i.ytimg.com/an_webp/CreugthdgJ0/mqdefault_6s.webp?du=3000&sqp=CPzPoMYG&rs=AOn4CLCnb4LpbgbUEjAExFj1NAdZ5lnqKA)](https://www.youtube.com/watch?v=CreugthdgJ0)
 
-This excellent example is provided by [Godotneers](https://www.youtube.com/@godotneers) and demonstrates how to effectively test your game scenes using GDUnit4.
+This excellent example is provided by [Godotneers](https://www.youtube.com/@godotneers) and demonstrates how to effectively test your game scenes using gunit.
 The video walks through practical automated testing techniques that can help improve your Godot project's reliability and maintainability.
 
 ## Documentation
 
+The fork keeps the upstream GDScript API. These links point to the upstream GdUnit4 documentation:
+
 <p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">
-  <a href="https://godot-gdunit-labs.github.io/gdUnit4/latest/first_steps/install/">How to Install the GdUnit4 plugin</a>
+  <a href="https://godot-gdunit-labs.github.io/gdUnit4/latest/first_steps/install/">How to Install the gunit plugin</a>
 </p>
 
 <p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">
@@ -197,26 +189,17 @@ The video walks through practical automated testing techniques that can help imp
 
 ### You Are Welcome To
 
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable -->
-
-* [Give Feedback](https://github.com/godot-gdunit-labs/gdUnit4/discussions) on the gdUnit GitHub Discussions page.
-* [Suggest Improvements](https://github.com/godot-gdunit-labs/gdUnit4/issues/new?assignees=MikeSchulze&labels=enhancement&template=feature_request.md&title=) by creating a new feature
-  request issue on the gdUnit GitHub Issues page.
-* [Report Bugs](https://github.com/godot-gdunit-labs/gdUnit4/issues/new?assignees=MikeSchulze&labels=bug&projects=projects%2F5&template=bug_report.yml&title=GD-XXX%3A+Describe+the+issue+briefly)
-  by creating a new bug report issue on the gdUnit GitHub Issues page.
-
-<!-- markdownlint-enable -->
-<!-- markdownlint-restore -->
+* [Report Bugs](https://github.com/uvw327/gunit/issues/new?template=bug_report.yml) on the gunit GitHub Issues page.
+* [Suggest Improvements](https://github.com/uvw327/gunit/issues/new?template=feature_request.yml) on the gunit GitHub Issues page.
 
 ---
 
-## GdUnit Test Coverage and Code Quality
+## gunit Test Coverage and Code Quality
 
 ### Test Coverage
 
-GdUnit is comprehensively tested to ensure robust functionality.<br>
-Continuous Integration (CI) is in place for every pull request to prevent any potential functionality issues.
+gunit is comprehensively tested with its own test suite to ensure robust functionality.<br>
+The release workflow validates the packaged addon when a `v*` tag is pushed.
 
 ### Code Formatting
 
@@ -226,9 +209,9 @@ Continuous Integration (CI) is in place for every pull request to prevent any po
 
 ### Contribution Guidelines
 
-**Thank you for your interest in contributing to GdUnit4!**<br>
+**Thank you for your interest in contributing to gunit!**<br>
 To ensure a smooth and collaborative contribution process, please review our
-[contribution guidelines](https://github.com/godot-gdunit-labs/gdUnit4/blob/master/CONTRIBUTING.md) before getting started.
+[contribution guidelines](CONTRIBUTING.md) before getting started.
 These guidelines outline the standards and expectations we uphold in this project.
 
 **Code of Conduct:**<br>
@@ -236,37 +219,22 @@ We strictly adhere to the Godot code of conduct in this project.
 As a contributor, it is important to respect and follow this code to maintain a positive and inclusive community.
 
 **Using GitHub Issues:**<br>
-We utilize GitHub issues for tracking feature requests and bug reports.
-If you have a general question or wish to engage in discussions, we recommend joining the [GdUnit Discord Server](https://discord.gg/rdq36JwuaJ) for specific inquiries.
+We utilize GitHub issues on this repository for tracking feature requests and bug reports.
 
-We value your input and appreciate your contributions to make GdUnit4 even better!
+We value your input and appreciate your contributions to make gunit even better!
 
 ---
-
-<p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">
-  <img alt="GitHub issues" src="https://img.shields.io/github/issues/MikeSchulze/gdunit4">
-  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/MikeSchulze/gdunit4"></br>
-  <img alt="" src="https://img.shields.io/packagecontrol/dm/SwitchDictionary.svg">
-  <img alt="" src="https://img.shields.io/packagecontrol/dt/SwitchDictionary.svg">
-
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/MikeSchulze/gdunit4">
-  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/MikeSchulze/gdunit4">
-  <img alt="" src="https://img.shields.io/badge/License-MIT-blue.svg">
-</p>
 
 <p align="left">
-  <a href="https://discord.gg/rdq36JwuaJ">
-    <img src="https://discordapp.com/api/guilds/885149082119733269/widget.png?style=banner4" alt="Join GdUnit Server"/>
-  </a>
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/uvw327/gunit">
+  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed-raw/uvw327/gunit"></br>
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/uvw327/gunit">
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/uvw327/gunit">
+  <img alt="License" src="https://img.shields.io/badge/License-MIT-blue.svg">
 </p>
 
-### Thank you for supporting my project
+## Upstream
 
----
-
-## Sponsors
-
-[<img src="https://avatars.githubusercontent.com/u/822035?v=4)" alt="bitbrain" width="125"/>](https://github.com/bitbrain) miguel a.k. bitbrain
-[<img src="https://avatars.githubusercontent.com/u/2313134?v=4" alt="sebastianhutter" width="125"/>](https://github.com/sebastianhutter) Sebastian Hutter
-[<img src="https://avatars.githubusercontent.com/u/836370?v=4" alt="rafaelGuerreiro" width="125"/>](https://github.com/rafaelGuerreiro) Rafael Guerreiro
-[<img src="https://avatars.githubusercontent.com/u/58704291?v=4" alt="greenpixels" width="125"/>](https://github.com/greenpixels) Sven Teigler
+gunit is derived from [GdUnit4](https://github.com/MikeSchulze/gdUnit4). The upstream project and its
+contributors are credited in [LICENSE](LICENSE) and the source history. This fork is maintained independently
+and is not endorsed by the upstream project.

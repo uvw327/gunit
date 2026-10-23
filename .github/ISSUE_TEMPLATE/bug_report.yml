@@ -1,18 +1,17 @@
 name: Bug Report
-description: Report a GdUnit4 bug
-title: "GD-XXX: Brief description of the issue"
+description: Report a gunit bug
+title: "GUNIT-XXX: Brief description of the issue"
 labels: ["API", "bug"]
 type: bug
-projects: ["godot-gdunit-labs/3"]
 assignees:
-  - MikeSchulze
+  - uvw327
 
 body:
   - type: markdown
     attributes:
       value: |
         ### Thanks for taking the time to fill out this bug report!
-        - Please search [open](https://github.com/godot-gdunit-labs/gdUnit4/issues?q=label%3Abug%20is%3Aissue) for existing issues for
+        - Please search [open](https://github.com/uvw327/gunit/issues?q=label%3Abug%20is%3Aissue) for existing issues for
           potential duplicates before filing yours.
         - Verify that you are using a [supported Godot version](https://docs.godotengine.org/en/stable/about/release_policy.html).
           Please always check if your issue is reproducible in the latest version – it may already have been fixed!
@@ -23,8 +22,8 @@ body:
   - type: input
     id: gdunit-version
     attributes:
-      label: The used GdUnit4 version
-      description: Which GdUnit4 version are you using? You can find it in the plugin list of the Project Settings or in the file `addons/gdUnit4/plugin.cfg`.
+      label: The used gunit version
+      description: Which gunit version are you using? You can find it in the plugin list of the Project Settings or in the file `addons/gunit/plugin.cfg`.
       placeholder: e.g. 6.2.2 or master@abc1234
     validations:
       required: true
@@ -79,7 +78,7 @@ body:
         If applicable, include information such as input data, specific configurations, or screenshots.
       placeholder: |
         1. Create a new Godot project
-        2. Install GdUnit4 version X.X.X
+        2. Install gunit version X.X.X
         3. Create a test script with the following content:
         4. Run the test
         5. Observe the error
@@ -105,7 +104,7 @@ body:
     attributes:
       label: Minimal Reproduction Project
       description: |
-        Small Godot project reproducing the issue (exclude .godot folder and exclude the addon/gdunit4)
+        Small Godot project reproducing the issue (exclude .godot folder and exclude the addon/gunit)
       placeholder: |
         Drag and drop a ZIP file (max 10 MB)
         **Wait for upload to complete before selecting other fields**

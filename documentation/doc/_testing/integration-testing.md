@@ -27,7 +27,7 @@ and environment changes.
 
 ### Integration Tests: Using the SceneRunner to Test Your Scene
 
-The **SceneRunner** tool in GdUnit4 is specifically designed to facilitate integration testing by simulating interactions and processing within your scene.
+The **SceneRunner** tool in gunit is specifically designed to facilitate integration testing by simulating interactions and processing within your scene.
 
 <figure class="video_container">
     <iframe width="560" height="315"

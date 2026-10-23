@@ -8,7 +8,7 @@ nav_order: 4
 
 # Simulate Touchscreen Inputs
 
-This section provides an overview of how to simulate touchscreen interactions in your scene using the Scene Runner in GdUnit4.
+This section provides an overview of how to simulate touchscreen interactions in your scene using the Scene Runner in gunit.
 These functions allow you to test different touch events, such as taps, drags, and drops, without requiring a physical touchscreen device.
 For more detailed information on Godot touchscreen events, please refer to the [official Godot documentation](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#touch-events){:target="_blank"}
 

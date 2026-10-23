@@ -15,16 +15,15 @@
 # in the templates via {{ site.myvariable }}.
 color_scheme: light
 logo: './assets/images/logo.png'
-title: GdUnit4
+title: gunit
 
-email: mikeschulze.lpz@gmail.com
-baseurl: '/gdUnit4' # the subpath of your site, e.g. /blog
-# url: "http://GdUnit4.com" # the base hostname & protocol for your site, e.g. http://example.com
-github_username: MikeSchulze
+baseurl: '/gunit' # the subpath of your site, e.g. /blog
+# url: "http://gunit.com" # the base hostname & protocol for your site, e.g. http://example.com
+github_username: uvw327
 
 aux_links:
-  'GdUnit4 on GitHub':
-    - '//github.com/MikeSchulze/gdUnit4'
+  'gunit on GitHub':
+    - '//github.com/uvw327/gunit'
 aux_links_new_tab: true
 
 # Version configuration

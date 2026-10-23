@@ -46,7 +46,7 @@ Note that the keyboard shortcuts for these buttons may vary depending on your sp
 The **Run Overall** button provides a convenient way to execute all the tests in your project at once, instead of running them one by one or selecting
 a custom set of tests. By clicking the "Run Overall" button, you can initiate the execution of all the tests in your project, saving you time and effort.
 ![overall-button]({{site.baseurl}}/assets/images/inspector/overall-button.png){:.centered}
-To enable the **Run Overall** button in GdUnit4, you need to adjust the [UI settings]({{site.baseurl}}/first_steps/settings/#ui-settings).<br>
+To enable the **Run Overall** button in gunit, you need to adjust the [UI settings]({{site.baseurl}}/first_steps/settings/#ui-settings).<br>
 Once you have enabled the **Run Overall** button, it should be visible in the inspector.
 
 ---

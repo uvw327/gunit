@@ -8,9 +8,9 @@ nav_order: 2
 
 # Testing Scene Interactions
 
-## Verified 3D Platformer with GdUnit4
+## Verified 3D Platformer with gunit
 
-In this tutorial, I explain how to use the Scene Runner in GdUnit4 to verify that a character in a 3D platformer can make certain jumps and cannot make others.<br>
+In this tutorial, I explain how to use the Scene Runner in gunit to verify that a character in a 3D platformer can make certain jumps and cannot make others.<br>
 This tutorial focuses on how to use Scene Runner, but it may also be helpful if you are just starting to make a 3D platformer in Godot.<br>
 
 <figure class="video_container">

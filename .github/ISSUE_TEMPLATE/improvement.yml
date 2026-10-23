@@ -1,18 +1,17 @@
 name: Improvement
-description: Create an improvement issue to improve GdUnit4 codebase
-title: "GD-XXX: Brief description of the improvement"
+description: Create an improvement issue to improve gunit codebase
+title: "GUNIT-XXX: Brief description of the improvement"
 labels: ["improvement"]
-projects: ["godot-gdunit-labs/3"]
 type: improvement
 assignees:
-  - MikeSchulze
+  - uvw327
 
 body:
   - type: markdown
     attributes:
       value: |
         ### Thanks for suggesting code improvements!
-        - Please search [existing issues](https://github.com/godot-gdunit-labs/gdUnit4/issues?q=label%3Aimprovement%20is%3Aissue) to avoid duplicates
+        - Please search [existing issues](https://github.com/uvw327/gunit/issues?q=label%3Aimprovement%20is%3Aissue) to avoid duplicates
         - Consider the impact on existing users and backward compatibility
         - Focus on improving code quality, maintainability, or performance
 

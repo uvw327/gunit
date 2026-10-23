@@ -16,7 +16,7 @@ Automated tools are used to confirm the new code is bug-free before integration.
 
 ## Command Line Tool
 
-GdUnit4 provides a command line tool that allows you to automate your testing workflow, including CI.
+gunit provides a command line tool that allows you to automate your testing workflow, including CI.
 
 For more details please show at [Command Line Tool]({{site.baseurl}}/advanced_testing/cmd){:target="_blank"}
 
@@ -27,8 +27,8 @@ Please visit [GitHub Workflows Page](https://docs.github.com/en/actions/using-wo
 
 ### Using the gdUnit4-action
 
-This GitHub Action automates the execution of GdUnit4 unit tests within the Godot Engine 4.x environment.
-It provides flexibility in configuring the Godot version, GdUnit4 version, test paths, and other parameters to suit your testing needs.<br>
+This GitHub Action automates the execution of gunit unit tests within the Godot Engine 4.x environment.
+It provides flexibility in configuring the Godot version, gunit version, test paths, and other parameters to suit your testing needs.<br>
 Find here on GitHub Marketplace [gdUnit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action){:target="_blank"}
 
 Example workflow: (Please note that this is just an example and needs to be adapted to your project environment.)
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           lfs: true
-      # run tests by using the gdUnit4-action with Godot version 4.2.1 and the latest GdUnit4 release 
+      # run tests by using the gdUnit4-action with Godot version 4.2.1 and the latest gunit release 
       - uses: MikeSchulze/gdUnit4-action@v1.0.2
         with:
           godot-version: '4.2.1'

@@ -9,17 +9,17 @@ nav_order: 14
 
 ## The GdUnit Command Line Tool
 
-GdUnit4 provides a command line tool named `res://addons/gdUnit4/bin/GdUnitCmdTool.gd` that allows you to run
+gunit provides a command line tool named `res://addons/gunit/bin/GdUnitCmdTool.gd` that allows you to run
 a specific set of test suites and tests from the command line.
 The tool provides a set of commands that can be used to control the execution of tests.
-You can use the provided scripts `addons/gdunit4/runtest.sh` for linux/macos and `addons/gdunit4/runtest.cmd`
+You can use the provided scripts `addons/gunit/runtest.sh` for linux/macos and `addons/gunit/runtest.cmd`
 for windows to execute the tool.
 
 To get an overview of the available commands, execute it with the command `-help`.
 
 ```bash
 ----------------------------------------------------------------------------------------------
- GdUnit4 Commandline Tool
+ gunit Commandline Tool
 
  Usage:
         runtest -a <directory|path of testsiute>
@@ -68,7 +68,7 @@ To get an overview of the available commands, execute it with the command `-help
   REG ADD HKCU\CONSOLE /f /v VirtualTerminalLevel /t REG_DWORD /d 1
   ```
 
-  Now you can run your tests by `./addons/gdUnit4/runtest`
+  Now you can run your tests by `./addons/gunit/runtest`
 
 ## Preconditions to run on MacOS and Linux
 
@@ -81,10 +81,10 @@ To get an overview of the available commands, execute it with the command `-help
 
   ```shell
   export GODOT_BIN=/Applications/Godot.app/Contents/MacOS/Godot
-  chmod +x ./addons/gdUnit4/runtest.sh
+  chmod +x ./addons/gunit/runtest.sh
   ```
 
-  Now you can run your tests by `./addons/gdUnit4/runtest.sh`
+  Now you can run your tests by `./addons/gunit/runtest.sh`
 
 ### How to use
 
@@ -96,13 +96,13 @@ You can use the tool to run a complete test package or only a specific set of ex
 {% tab cmd_1 Unix/Linix %}
 ```shell
 # runs all testsuites located under the directory '/myProject/test'
-./addons/gdUnit4/runtest.sh -a /myProject/test
+./addons/gunit/runtest.sh -a /myProject/test
 ```
 {% endtab %}
 {% tab cmd_1 Windows %}
 ```shell
 # runs all testsuites located under the directory '/myProject/test'
-./addons/gdUnit4/runtest -a /myProject/test
+./addons/gunit/runtest -a /myProject/test
 ```
 {% endtab %}
 {% endtabs %}
@@ -113,13 +113,13 @@ You can specify one ore more directories for execution
 {% tab cmd_1 Unix/Linix %}
 ```shell
 # runs all testsuites located under the directory /myProject/test/foo/bar1' and '/myProject/test/foo/bar3'
-./addons/gdUnit4/runtest.sh -a /myProject/test/foo/bar1 -a /myProject/test/foo/bar3
+./addons/gunit/runtest.sh -a /myProject/test/foo/bar1 -a /myProject/test/foo/bar3
 ```
 {% endtab %}
 {% tab cmd_1 Windows %}
 ```shell
 # runs all testsuites located under the directory /myProject/test/foo/bar1' and '/myProject/test/foo/bar3'
-./addons/gdUnit4/runtest -a /myProject/test/foo/bar1 -a /myProject/test/foo/bar3
+./addons/gunit/runtest -a /myProject/test/foo/bar1 -a /myProject/test/foo/bar3
 ```
 {% endtab %}
 {% endtabs %}
@@ -132,13 +132,13 @@ You can do this easily with the command '-i'.
 {% tab cmd_1 Unix/Linix %}
 ```shell
 # runs all testsuites located under the directory /myProject/test' exclusive all tests located under '/myProject/test/foo/bar3'
-./addons/gdUnit4/runtest.sh -a /myProject/test -i /myProject/test/foo/bar3
+./addons/gunit/runtest.sh -a /myProject/test -i /myProject/test/foo/bar3
 ```
 {% endtab %}
 {% tab cmd_1 Windows %}
 ```shell
 # runs all testsuites located under the directory /myProject/test' exclusive all tests located under '/myProject/test/foo/bar3'
-./addons/gdUnit4/runtest -a /myProject/test -i /myProject/test/foo/bar3
+./addons/gunit/runtest -a /myProject/test -i /myProject/test/foo/bar3
 ```
 {% endtab %}
 {% endtabs %}
@@ -149,13 +149,13 @@ You can also specify skipping by testsuite name and/or testcase name.
 {% tab cmd_1 Unix/Linix %}
 ```bash
 # runs all testsuites located under the directory /myProject/test' exclusive testsuite 'ClassATest' and 'ClassBTest:test_abc'
-./addons/gdUnit4/runtest.sh -a /myProject/test -i ClassATest -i ClassBTest:test_abc
+./addons/gunit/runtest.sh -a /myProject/test -i ClassATest -i ClassBTest:test_abc
 ```
 {% endtab %}
 {% tab cmd_1 Windows %}
 ```bash
 # runs all testsuites located under the directory /myProject/test' exclusive testsuite 'ClassATest' and 'ClassBTest:test_abc'
-./addons/gdUnit4/runtest -a /myProject/test -i ClassATest -i ClassBTest:test_abc
+./addons/gunit/runtest -a /myProject/test -i ClassATest -i ClassBTest:test_abc
 ```
 {% endtab %}
 {% endtabs %}
@@ -166,19 +166,19 @@ You can also rerun the latest test execution (executed over the UI GdUnit-inspec
 {% tab cmd_1 Unix/Linix %}
 ```shell
 # loads latest GdUnitRunner.cfg and runs the configured tests
-./addons/gdUnit4/runtest.sh -conf
+./addons/gunit/runtest.sh -conf
 
 # loads a specific test configuration and runs the configured tests (since v1.0.6)
-./addons/gdUnit4/runtest.sh -conf <test_config.cfg>
+./addons/gunit/runtest.sh -conf <test_config.cfg>
 ```
 {% endtab %}
 {% tab cmd_1 Windows %}
 ```shell
 # loads latest GdUnitRunner.cfg and runs the configured tests
-./addons/gdUnit4/runtest -conf
+./addons/gunit/runtest -conf
 
 # loads a specific test configuration and runs the configured tests (since v1.0.6)
-./addons/gdUnit4/runtest -conf <test_config.cfg>
+./addons/gunit/runtest -conf <test_config.cfg>
 ```
 {% endtab %}
 {% endtabs %}

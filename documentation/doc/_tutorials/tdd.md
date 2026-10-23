@@ -6,20 +6,20 @@ nav_order: 1
 ---
 
 
-## Test Driven Development (TDD) with GdUnit4
+## Test Driven Development (TDD) with gunit
 
 Test Driven Development is a software development methodology in which tests are written before the code. In TDD, developers write a failing test first,
 then write the minimum amount of code needed to pass the test, and then refactor the code to improve its design.
 The cycle is repeated until all the requirements are implemented.
 
-GdUnit4 provides a framework for writing and running tests in the Godot game engine. With GdUnit4,
-developers can write tests for their code and run them automatically. TDD with GdUnit4 involves writing tests that check the expected behavior of the code
+gunit provides a framework for writing and running tests in the Godot game engine. With gunit,
+developers can write tests for their code and run them automatically. TDD with gunit involves writing tests that check the expected behavior of the code
 before writing the code itself. By writing tests first, developers can ensure that the code meets the requirements and works as expected.
 
-## Verified TicTacToe with GdUnit4
+## Verified TicTacToe with gunit
 
-The Verified TicTacToe example tutorial walks you through creating a TicTacToe game using TDD with GdUnit4. The tutorial shows you how to write tests for the
-different components of the game, including game logic. By following this tutorial, you will learn how to use TDD with GdUnit4 to develop high-quality,
+The Verified TicTacToe example tutorial walks you through creating a TicTacToe game using TDD with gunit. The tutorial shows you how to write tests for the
+different components of the game, including game logic. By following this tutorial, you will learn how to use TDD with gunit to develop high-quality,
 reliable code.
 <figure class="video_container">
     <iframe width="560" height="315"

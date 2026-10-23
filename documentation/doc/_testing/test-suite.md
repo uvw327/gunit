@@ -46,8 +46,8 @@ Use the **[TestSuite]** attribute to define TestSuite.
 ```cs
 namespace Examples;
 
-using GdUnit4;
-using static GdUnit4.Assertions;
+using gunit;
+using static gunit.Assertions;
 
 [TestSuite]
 public class GdUnitExampleTest

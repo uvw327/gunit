@@ -9,7 +9,7 @@ nav_order: 3
 
 # Simulate Mouse Inputs
 
-This page provides guidance on how to test mouse inputs in your scene using GdUnit4.
+This page provides guidance on how to test mouse inputs in your scene using gunit.
 For more detailed information on Godot mouse events, please refer to the [official Godot documentation](https://docs.godotengine.org/en/stable/tutorials/inputs/input_examples.html#mouse-events){:target="_blank"}
 
 ## Function Overview

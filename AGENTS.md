@@ -17,11 +17,11 @@ agent memory conventions are defined centrally in the AI harness:
 
 ## What This Project Is
 
-GdUnit4 is a Godot 4 embedded unit testing framework (Godot plugin) supporting GDScript.
-The plugin lives entirely under `addons/gdUnit4/` and is self-tested — the framework uses itself to run its own test suite.
+gunit is a Godot 4 embedded unit testing framework (Godot plugin) supporting GDScript.
+The plugin lives entirely under `addons/gunit/` and is self-tested — the framework uses itself to run its own test suite.
 
 Supported Godot versions: (read the **Compatibility Overview** table in `README.md`
-and find the row whose GdUnit4 version contains `master`).
+and find the row whose gunit version contains `master`).
 
 ## Commands
 
@@ -32,13 +32,13 @@ Tests require a Godot binary. Set `GODOT_BIN` or pass `--godot_binary`:
 ```bash
 # GDScript tests
 export GODOT_BIN=/path/to/godot
-./addons/gdUnit4/runtest.sh
+./addons/gunit/runtest.sh
 
 # With explicit binary
-./addons/gdUnit4/runtest.sh --godot_binary /path/to/godot
+./addons/gunit/runtest.sh --godot_binary /path/to/godot
 
 # Run a specific test path
-./addons/gdUnit4/runtest.sh --godot_binary /path/to/godot -a res://addons/gdUnit4/test/asserts/
+./addons/gunit/runtest.sh --godot_binary /path/to/godot -a res://addons/gunit/test/asserts/
 ```
 
 ### GDScript Linting
@@ -46,7 +46,7 @@ export GODOT_BIN=/path/to/godot
 Requires [gdstyle](https://github.com/atelico/gdstyle) 0.4.0, configured by `gdstyle.toml` in the repository root:
 
 ```bash
-gdstyle check --max-warnings 0 addons/gdUnit4/
+gdstyle check --max-warnings 0 addons/gunit/
 ```
 
 The whole plugin, sources and tests, must lint without warnings. Directories named `resources` and the
@@ -63,7 +63,7 @@ markdownlint-cli2 --config .markdownlint.jsonc "**/*.md"
 ### Releasing
 
 Pushing a `v*` tag (e.g. `v0.1.0`) triggers `.github/workflows/release-addon.yml`. The workflow packages
-`addons/gdUnit4` into `gunit-<tag>.zip` with all `*.uid` files excluded and publishes the archive as a GitHub Release.
+`addons/gunit` into `gunit-<tag>.zip` with all `*.uid` files excluded and publishes the archive as a GitHub Release.
 
 ```bash
 git tag v0.1.0
@@ -75,7 +75,7 @@ git push origin v0.1.0
 ### Plugin Structure
 
 ```text
-addons/gdUnit4/
+addons/gunit/
 ├── plugin.cfg          # Plugin metadata and version
 ├── plugin.gd           # Plugin entry point (EditorPlugin)
 ├── bin/                # CLI tools (GdUnitCmdTool.gd, GdUnitCopyLog.gd)
@@ -83,7 +83,7 @@ addons/gdUnit4/
 └── test/               # Self-tests (mirrors src/ structure)
 ```
 
-### Source Modules (`addons/gdUnit4/src/`)
+### Source Modules (`addons/gunit/src/`)
 
 | Directory | Purpose |
 | --------- | ------- |
@@ -103,7 +103,7 @@ addons/gdUnit4/
 
 ### Test Organization
 
-Tests in `addons/gdUnit4/test/` mirror the `src/` structure. For example:
+Tests in `addons/gunit/test/` mirror the `src/` structure. For example:
 
 - `src/asserts/GdUnitArrayAssertImpl.gd` → `test/asserts/GdUnitArrayAssertImplTest.gd`
 - `src/cmd/CmdArgumentParser.gd` → `test/cmd/CmdArgumentParserTest.gd`
@@ -155,7 +155,7 @@ Do not skip linting or proceed without it.
 ## Godot API Compatibility
 
 Before using any Godot API function, class, or feature, read the **Compatibility Overview** table in `README.md`
-and find the row whose GdUnit4 version contains `master`. That row lists the exact Godot versions that must be supported.
+and find the row whose gunit version contains `master`. That row lists the exact Godot versions that must be supported.
 
 All Godot API usage must be compatible with **every** version listed in that row. If an API is not available in
 all of them, it cannot be used without a version guard. When uncertain, check the
@@ -163,10 +163,10 @@ all of them, it cannot be used without a version guard. When uncertain, check th
 
 ## Testing Requirements
 
-Every code change must be accompanied by new or updated tests. Tests live under `addons/gdUnit4/test/` and mirror
+Every code change must be accompanied by new or updated tests. Tests live under `addons/gunit/test/` and mirror
 the `src/` structure (e.g. `src/core/Foo.gd` → `test/core/FooTest.gd`).
 
-See `addons/gdUnit4/test/AGENTS.md` for the full GdUnit4 fluent assertion syntax, test suite skeleton,
+See `addons/gunit/test/AGENTS.md` for the full gunit fluent assertion syntax, test suite skeleton,
 section grouping conventions, mocking, scene runner, and auto-free usage.
 
 ## Documentation
@@ -196,12 +196,12 @@ bundle install
 bundle exec jekyll serve
 ```
 
-The site is served at `http://localhost:4000/gdUnit4`.
+The site is served at `http://localhost:4000/gunit`.
 
 ### Deployment
 
 There is no automated documentation deployment. When publishing manually, deploy the site to the `gh-pages` branch
-under versioned paths (e.g., `/gdUnit4/v6.1.x/`) and update `/gdUnit4/latest/` for the latest overall release.
+under versioned paths (e.g., `/gunit/v6.1.x/`) and update `/gunit/latest/` for the latest overall release.
 Only the newest patch in a major.minor series should be published (e.g., v6.1.2 won't be overwritten by v6.1.1).
 The `current_version` in `documentation/_config.yml` should be updated when releasing a new minor version.
 
@@ -233,7 +233,7 @@ Run all linting locally before pushing:
 
 ```bash
 # GDScript lint
-gdstyle check --max-warnings 0 addons/gdUnit4/
+gdstyle check --max-warnings 0 addons/gunit/
 
 # Markdown lint
 markdownlint-cli2 --config .markdownlint.jsonc "**/*.md"
