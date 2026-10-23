@@ -1105,7 +1105,6 @@ func test_text_input_processing() -> void:
 
 #region documented examples
 # The following tests verify the examples of the migration guide page
-# documentation/doc/_first_steps/migration-v7.md
 
 
 func test_doc_migration_key_modifier_example() -> void:

@@ -40,7 +40,6 @@ func test_test_count_without_tests() -> void:
 
 #region documented examples
 # The following tests verify the examples of the migration guide page
-# documentation/doc/_first_steps/migration-v7.md
 
 
 func test_doc_migration_test_count_example() -> void:

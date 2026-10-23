@@ -91,7 +91,6 @@ func test_flaky_success() -> void:
 
 #region documented examples
 # The following tests verify the examples of the migration guide page
-# documentation/doc/_first_steps/migration-v7.md
 
 
 func test_doc_migration_error_string_example() -> void:

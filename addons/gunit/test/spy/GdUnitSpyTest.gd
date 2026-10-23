@@ -738,7 +738,6 @@ func test_spy_with_enum_in_constructor() -> void:
 
 #region documented examples
 # The following tests verify the examples of the spy documentation page
-# documentation/doc/_advanced_testing/spy.md
 
 
 func test_doc_verify_example() -> void:

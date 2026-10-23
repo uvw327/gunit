@@ -1,19 +1,4 @@
 # .gitattributes
-# Exclude files not needed for AssetLib users.
-
-/**                    export-ignore
-/addons                !export-ignore
-/addons/gunit        !export-ignore
-/addons/gunit/**     !export-ignore
-/addons/gunit/test   export-ignore
-/documentation         export-ignore
-
-# Exclude AI agent files from asset library exports
-/addons/gunit/**/AGENTS.md   export-ignore
-/addons/gunit/**/CLAUDE.md   export-ignore
-/addons/gunit/**/.claude     export-ignore
-
-
 # Ensure Unix line endings for text files
 * text=auto eol=lf
 
@@ -23,7 +8,6 @@
 *.md text eol=lf
 *.json text eol=lf
 *.js text eol=lf
-*.cs text eol=lf
 *.gd text eol=lf
 *.cfg text eol=lf
 *.txt text eol=lf
