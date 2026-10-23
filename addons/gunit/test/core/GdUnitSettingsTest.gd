@@ -267,15 +267,6 @@ func test_save_property_does_not_write_project_file() -> void:
 	assert_str(FileAccess.get_file_as_string("res://project.godot")).is_equal(project_file)
 
 
-func test_set_update_notification_does_not_write_project_file() -> void:
-	var project_file := FileAccess.get_file_as_string("res://project.godot")
-
-	GdUnitSettings.set_update_notification(true)
-
-	assert_bool(GdUnitSettings.is_update_notification_enabled()).is_true()
-	assert_str(FileAccess.get_file_as_string("res://project.godot")).is_equal(project_file)
-
-
 func test_set_log_path_does_not_write_project_file() -> void:
 	var project_file := FileAccess.get_file_as_string("res://project.godot")
 

@@ -2,8 +2,6 @@
 class_name GdUnitConsole
 extends Control
 
-const GdUnitUpdateClient = preload("res://addons/gunit/src/update/GdUnitUpdateClient.gd")
-
 var _test_reporter: GdUnitConsoleTestReporter
 ## Optional project configuration to control the console output.[br]
 ## [br]
@@ -38,38 +36,6 @@ func _notification(what: int) -> void:
 			instance.gdunit_client_connected.disconnect(_on_gdunit_client_connected)
 		if instance.gdunit_client_disconnected.is_connected(_on_gdunit_event):
 			instance.gdunit_client_disconnected.disconnect(_on_gdunit_client_disconnected)
-
-
-func setup_update_notification(control: Button) -> void:
-	if not GdUnitSettings.is_update_notification_enabled():
-		_test_reporter.println_message("The search for updates is deactivated.", Color.CORNFLOWER_BLUE)
-		return
-
-	_test_reporter.print_message("Searching for updates... ", Color.CORNFLOWER_BLUE)
-	var update_client := GdUnitUpdateClient.new()
-	add_child(update_client)
-	var response: GdUnitUpdateClient.HttpResponse = await update_client.request_latest_version()
-	if response.status() != 200:
-		_test_reporter.println_message("Information cannot be retrieved from GitHub!", GdUnitEditorColorTheme.state_failure)
-		_test_reporter.println_message("Error:  %s" % response.response(), GdUnitEditorColorTheme.state_failure)
-		return
-	var latest_version := update_client.extract_latest_version(response)
-	if not latest_version.is_greater(GdUnit4Version.current()):
-		_test_reporter.println_message("gunit is up-to-date.", GdUnitEditorColorTheme.state_success)
-		return
-
-	_test_reporter.println_message("A new update is available %s" % latest_version, GdUnitEditorColorTheme.state_warning)
-	_test_reporter.println_message("Open the gunit settings and check the update tab.", GdUnitEditorColorTheme.state_warning)
-
-	control.icon = GdUnitUiTools.get_icon("Notification", GdUnitEditorColorTheme.state_warning)
-	var tween := create_tween()
-	tween.tween_property(control, "self_modulate", Color.VIOLET, .2).set_trans(Tween.TransitionType.TRANS_LINEAR)
-	tween.tween_property(control, "self_modulate", GdUnitEditorColorTheme.state_warning, .2).set_trans(Tween.TransitionType.TRANS_BOUNCE)
-	tween.parallel()
-	tween.tween_property(control, "scale", Vector2.ONE * 1.05, .4).set_trans(Tween.TransitionType.TRANS_LINEAR)
-	tween.tween_property(control, "scale", Vector2.ONE, .4).set_trans(Tween.TransitionType.TRANS_BOUNCE)
-	tween.set_loops(-1)
-	tween.play()
 
 
 func _on_gdunit_event(event: GdUnitEvent) -> void:

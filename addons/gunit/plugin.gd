@@ -31,9 +31,7 @@ func _enter_tree() -> void:
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_UR, _gd_inspector)
 	# Install the gunit Console
 	_gd_console = (load("res://addons/gunit/src/ui/GdUnitConsole.tscn") as PackedScene).instantiate()
-	var control: Control = add_control_to_bottom_panel(_gd_console, "gunitConsole")
-	@warning_ignore("unsafe_method_access")
-	await _gd_console.setup_update_notification(control)
+	add_control_to_bottom_panel(_gd_console, "gunitConsole")
 	# Connect to be notified for script changes to be able to discover new tests
 	GdUnitTestDiscoverGuard.instance()
 	@warning_ignore("return_value_discarded")

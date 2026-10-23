@@ -20,7 +20,6 @@ var _font_size: float
 @onready var _input_capture: GdUnitInputCapture = %GdUnitInputCapture
 @onready var _property_error: Window = %"propertyError"
 @onready var _tab_container: TabContainer = %Properties
-@onready var _update_tab: Control = %Update
 
 
 func _ready() -> void:
@@ -34,7 +33,6 @@ func _ready() -> void:
 	setup_properties(_properties_ui, GdUnitSettings.UI_SETTINGS)
 	setup_properties(_properties_report, GdUnitSettings.REPORT_SETTINGS)
 	setup_properties(_properties_shortcuts, GdUnitSettings.SHORTCUT_SETTINGS)
-	check_for_update()
 
 
 func _sort_by_key(left: GdUnitProperty, right: GdUnitProperty) -> bool:
@@ -221,21 +219,6 @@ func reimport(path: String) -> void:
 	EditorInterface.get_resource_filesystem().reimport_files(files)
 	for directory in DirAccess.get_directories_at(path):
 		reimport(directory)
-
-
-func check_for_update() -> void:
-	if not GdUnitSettings.is_update_notification_enabled():
-		return
-	var response: GdUnitUpdateClient.HttpResponse = await _update_client.request_latest_version()
-	if response.status() != 200:
-		printerr("Latest version information cannot be retrieved from GitHub!")
-		printerr("Error:  %s" % response.response())
-		return
-	var latest_version := _update_client.extract_latest_version(response)
-	if latest_version.is_greater(GdUnit4Version.current()):
-		var tab_index := _tab_container.get_tab_idx_from_control(_update_tab)
-		_tab_container.set_tab_button_icon(tab_index, GdUnitUiTools.get_icon("Notification", Color.YELLOW))
-		_tab_container.set_tab_tooltip(tab_index, "An new update is available.")
 
 
 func _on_btn_report_bug_pressed() -> void:

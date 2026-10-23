@@ -22,7 +22,6 @@ const MAIN_CATEGORY = "gunit"
 # Common Settings
 const COMMON_SETTINGS = MAIN_CATEGORY + "/settings"
 const GROUP_COMMON = COMMON_SETTINGS + "/common"
-const UPDATE_NOTIFICATION_ENABLED = GROUP_COMMON + "/update_notification_enabled"
 const SERVER_TIMEOUT = GROUP_COMMON + "/server_connection_timeout_minutes"
 const GROUP_HOOKS = MAIN_CATEGORY + "/hooks"
 const SESSION_HOOKS = GROUP_HOOKS + "/session_hooks"
@@ -97,7 +96,6 @@ static var _property_help: Dictionary[String, String] = {}
 
 
 static func setup() -> void:
-	create_property_if_need(UPDATE_NOTIFICATION_ENABLED, true, "Show notification if new gunit version is found")
 	# test settings
 	create_property_if_need(SERVER_TIMEOUT, DEFAULT_SERVER_TIMEOUT, "Server connection timeout in minutes")
 	create_property_if_need(TEST_TIMEOUT, DEFAULT_TEST_TIMEOUT, "Test case runtime timeout in seconds")
@@ -201,17 +199,6 @@ static func get_setting(name: String, default: Variant) -> Variant:
 	if ProjectSettings.has_setting(name):
 		return ProjectSettings.get_setting(name)
 	return default
-
-
-static func is_update_notification_enabled() -> bool:
-	if ProjectSettings.has_setting(UPDATE_NOTIFICATION_ENABLED):
-		return ProjectSettings.get_setting(UPDATE_NOTIFICATION_ENABLED)
-	return false
-
-
-static func set_update_notification(enable: bool) -> void:
-	ProjectSettings.set_setting(UPDATE_NOTIFICATION_ENABLED, enable)
-	_save_settings()
 
 
 static func get_log_path() -> String:

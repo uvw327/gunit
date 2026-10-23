@@ -18,37 +18,6 @@ func _notification(what: int) -> void:
 			_http_request.queue_free()
 
 
-#func list_tags() -> void:
-#	_http_request.connect("request_completed",Callable(self,"_response_request_tags"))
-#	var error = _http_request.request("https://api.github.com/repos/uvw327/gunit/tags")
-#	if error != OK:
-#		push_error("An error occurred in the HTTP request.")
-
-
-func request_latest_version() -> HttpResponse:
-	var error := _http_request.request("https://api.github.com/repos/uvw327/gunit/tags")
-	if error != OK:
-		var message := "Request latest version failed, %s" % error_string(error)
-		return HttpResponse.new(error, message.to_utf8_buffer())
-	return await self.request_completed
-
-
-func request_releases() -> HttpResponse:
-	var error := _http_request.request("https://api.github.com/repos/uvw327/gunit/releases")
-	if error != OK:
-		var message := "request_releases failed: %d" % error
-		return HttpResponse.new(error, message.to_utf8_buffer())
-	return await self.request_completed
-
-
-func request_image(url: String) -> HttpResponse:
-	var error := _http_request.request(url)
-	if error != OK:
-		var message := "request_image failed: %d" % error
-		return HttpResponse.new(error, message.to_utf8_buffer())
-	return await self.request_completed
-
-
 func request_zip_package(url: String, file: String) -> HttpResponse:
 	_http_request.set_download_file(file)
 	var error := _http_request.request(url)
@@ -56,11 +25,6 @@ func request_zip_package(url: String, file: String) -> HttpResponse:
 		var message := "request_zip_package failed: %d" % error
 		return HttpResponse.new(error, message.to_utf8_buffer())
 	return await self.request_completed
-
-
-func extract_latest_version(response: HttpResponse) -> GdUnit4Version:
-	var body: Array = response.response()
-	return GdUnit4Version.parse(str(body[0]["name"]))
 
 
 func _on_request_completed(_result: int, response_http_status: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
