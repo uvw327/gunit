@@ -146,7 +146,7 @@ func get_discovered_tests() -> Array[GdUnitTestCase]:
 
 ## Discovers tests in a script and tracks changes.[br]
 ## [br]
-## Handles both GDScript and C# test suites.[br]
+## Handles GDScript test suites.[br]
 ## The guard maintains test identity through changes.[br]
 ## [br]
 ## [param script] The test script to analyze[br]
@@ -163,10 +163,6 @@ func discover(script: Script, discover_sink: Callable = default_discover_sink) -
 		_discovered_changes["added_tests"] = Array([], TYPE_OBJECT, "RefCounted", GdUnitTestCase)
 
 	if GdUnitTestSuiteScanner.is_test_suite(script):
-		# for cs scripts we need to recomplie before discover new tests
-		if script.get_class() == "CSharpScript":
-			await rebuild_project(script)
-
 		# rediscover all tests
 		var source_file := script.resource_path
 		var discovered_tests: Array[GdUnitTestCase] = []
@@ -292,26 +288,3 @@ func is_test_moved(left: GdUnitTestCase, right: GdUnitTestCase) -> bool:
 func test_equals(left: GdUnitTestCase, right: GdUnitTestCase) -> bool:
 	return left.display_name == right.display_name
 
-
-# do rebuild the entire project, there is actual no way to enforce the Godot engine itself to do this
-func rebuild_project(script: Script) -> void:
-	var class_path := ProjectSettings.globalize_path(script.resource_path)
-	print_rich("[color=CORNFLOWER_BLUE]GdUnitTestDiscoverGuard: CSharpScript change detected on: '%s' [/color]" % class_path)
-	var scene_tree := Engine.get_main_loop() as SceneTree
-	await scene_tree.process_frame
-
-	var output := []
-	var exit_code := OS.execute("dotnet", ["--version"], output)
-	if exit_code == -1:
-		print_rich("[color=CORNFLOWER_BLUE]GdUnitTestDiscoverGuard:[/color] [color=RED]Rebuild the project failed.[/color]")
-		print_rich("[color=CORNFLOWER_BLUE]GdUnitTestDiscoverGuard:[/color] [color=RED]Can't find installed `dotnet`! Please check your environment is setup correctly.[/color]")
-		return
-
-	print_rich("[color=CORNFLOWER_BLUE]GdUnitTestDiscoverGuard:[/color] [color=DEEP_SKY_BLUE]Found dotnet v%s[/color]" % str(output[0]).strip_edges())
-	output.clear()
-
-	exit_code = OS.execute("dotnet", ["build"], output)
-	print_rich("[color=CORNFLOWER_BLUE]GdUnitTestDiscoverGuard:[/color] [color=DEEP_SKY_BLUE]Rebuild the project ... [/color]")
-	for out: String in output:
-		print_rich("[color=DEEP_SKY_BLUE] 		%s" % out.strip_edges())
-	await scene_tree.process_frame

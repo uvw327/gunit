@@ -27,7 +27,6 @@ const STATE = GdUnitInspectorTreeConstants.STATE
 
 # loading tree icons
 var _icon_gd_script: Texture2D
-var _icon_cs_script: Texture2D
 var _icon_folder: Texture2D
 var _tree_root: TreeItem
 var _current_selected_item: TreeItem = null
@@ -210,7 +209,6 @@ func disable_test_recovery() -> void:
 func _init_icons() -> void:
 	_spinner.icon = GdUnitUiTools.get_spinner()
 	_icon_gd_script = GdUnitUiTools.get_icon("GDScript", GdUnitEditorColorTheme.state_initial)
-	_icon_cs_script = GdUnitUiTools.get_icon("CSharpScript", GdUnitEditorColorTheme.state_initial)
 	_icon_folder = GdUnitUiTools.get_icon("Folder", GdUnitEditorColorTheme.folder_color)
 
 
@@ -975,8 +973,6 @@ func _find_highest_state(item: TreeItem) -> STATE:
 func get_icon_by_file_type(path: String) -> Texture2D:
 	if path.get_extension() == "gd":
 		return _icon_gd_script
-	if path.get_extension() == "cs":
-		return _icon_cs_script
 	return _icon_folder
 
 

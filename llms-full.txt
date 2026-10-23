@@ -21,31 +21,20 @@
 - `network/` — Client/server for distributed test reporting
 - `reporters/` — HTML and JUnit XML report generation
 - `ui/` — Godot editor UI (Test Inspector panel)
-- `dotnet/` — C#-specific integration layer
 - `update/` — Integrated update tool
 
 ## Test File Conventions
 
 Tests mirror `src/` structure under `test/`. Example:
 - `src/asserts/GdUnitArrayAssertImpl.gd` → `test/asserts/GdUnitArrayAssertImplTest.gd`
-- C#-specific tests: `test/dotnet/`
-
-## C# Build
-
-```bash
-dotnet build --debug
-dotnet format gdUnit4.csproj --verify-no-changes --verbosity diagnostic
-```
 
 ## Coding Conventions
 
-**GDScript** — enforced by `gdstyle check` (gdstyle 0.3.3, configured by `gdstyle.toml`):
+**GDScript** — enforced by `gdstyle check` (gdstyle 0.4.0, configured by `gdstyle.toml`):
 - Max line length: 180 characters
 - Max file lines: 1000
 - Max public methods: 40
 - Max function arguments: 11
-
-**C#** — StyleCop.Analyzers, `TreatWarningsAsErrors = true`, nullable reference types enabled, C# 13.0.
 
 ## GDScript Linting
 
@@ -55,8 +44,9 @@ gdstyle check --max-warnings 0 addons/gdUnit4/
 
 ## Branch and PR Conventions
 
-- Main branch: `master`
+- Main branch: `main`
 - Feature branches named after issue number (e.g. `GD-111`)
-- PRs must link to an issue and pass all CI checks
-- CI runs format checks, `gdstyle check`, and tests against Godot 4.7, 4.7.1, and 4.8 (dev), see the Compatibility Overview in `README.md`
+- PRs must link to an issue and pass all local checks
+- Run `gdstyle check`, the GDScript test suite, and the Markdown lint locally before pushing
+- Pushing a `v*` tag builds the addon release archive
 - PR descriptions must include `# Why` and `# What` sections

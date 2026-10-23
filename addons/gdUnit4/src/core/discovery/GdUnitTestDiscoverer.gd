@@ -117,11 +117,6 @@ static func discover_tests(source_script: Script, discover_sink := default_disco
 	if source_script is GDScript:
 		for test_case in discover_tests_from_gd_script(source_script as GDScript):
 			discover_sink.call(test_case)
-	elif source_script.get_class() == "CSharpScript":
-		if not GdUnit4CSharpApiLoader.is_api_loaded():
-			return
-		for test_case in GdUnit4CSharpApiLoader.discover_tests(source_script):
-			discover_sink.call(test_case)
 
 
 static func discover_tests_from_gd_script(script: GDScript) -> Array[GdUnitTestCase]:

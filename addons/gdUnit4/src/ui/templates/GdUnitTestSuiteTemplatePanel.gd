@@ -92,7 +92,6 @@ func setup_fonts() -> void:
 func setup_supported_types() -> void:
 	_selected_type.clear()
 	_selected_type.add_item("GD - GDScript", GdUnitTestSuiteTemplate.TEMPLATE_ID_GD)
-	_selected_type.add_item("C# - CSharpScript", GdUnitTestSuiteTemplate.TEMPLATE_ID_CS)
 
 
 func setup_tags_help() -> void:

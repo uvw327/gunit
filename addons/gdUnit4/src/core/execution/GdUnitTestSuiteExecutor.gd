@@ -39,16 +39,15 @@ func run_and_wait(tests: Array[GdUnitTestCase]) -> void:
 		@warning_ignore("unsafe_call_argument")
 		var suite_tests: Array[GdUnitTestCase] = Array(grouped_by_suites[suite_path], TYPE_OBJECT, "RefCounted", GdUnitTestCase)
 		var script := GdUnitTestSuiteScanner.load_with_disabled_warnings(suite_path)
-		if script.get_class() == "GDScript":
-			var context := GdUnitExecutionContext.new(suite_path)
-			GdUnitThreadManager.get_current_context().set_execution_context(context)
-			var test_suite := scanner.load_suite(script as GDScript, suite_tests)
-			context.test_suite = test_suite
-			(Engine.get_main_loop() as SceneTree).root.add_child(test_suite)
-			await _execute_stage.execute(context)
-			context.dispose()
-		else:
-			await GdUnit4CSharpApiLoader.execute(suite_tests)
+		if not script is GDScript:
+			continue
+		var context := GdUnitExecutionContext.new(suite_path)
+		GdUnitThreadManager.get_current_context().set_execution_context(context)
+		var test_suite := scanner.load_suite(script as GDScript, suite_tests)
+		context.test_suite = test_suite
+		(Engine.get_main_loop() as SceneTree).root.add_child(test_suite)
+		await _execute_stage.execute(context)
+		context.dispose()
 	if not _debug_mode:
 		GdUnitSignals.instance().gdunit_event.emit(GdUnitStop.new())
 

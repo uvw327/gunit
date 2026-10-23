@@ -10,8 +10,6 @@ static func create(source: Script, line_number: int) -> GdUnitResult:
 	@warning_ignore("return_value_discarded")
 	GdUnitScriptEditorControls.save_and_close_script(test_suite_path, true)
 
-	if source.get_class() == "CSharpScript":
-		return GdUnit4CSharpApiLoader.create_test_suite(source.resource_path, line_number + 1, test_suite_path)
 	var parser := GdScriptParser.new()
 	var lines := source.source_code.split("\n")
 	var current_line := lines[line_number]

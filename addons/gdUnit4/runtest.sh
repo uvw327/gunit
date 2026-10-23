@@ -42,14 +42,8 @@ if [ ! -x "$godot_binary" ]; then
     exit 1
 fi
 
-# Get Godot version and check if it's a .NET build
+# Get Godot version
 GODOT_VERSION=$("$godot_binary" --version)
-if echo "$GODOT_VERSION" | grep -i "mono" > /dev/null; then
-    echo "Godot .NET detected"
-    echo "Compiling c# classes ... Please Wait"
-    dotnet build --debug
-    echo "done $?"
-fi
 
 # Run the tests with the filtered arguments.
 # --remote-debug tcp://127.0.0.1:0 prevents Godot from activating its local interactive

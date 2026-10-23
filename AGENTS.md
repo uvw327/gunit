@@ -17,11 +17,11 @@ agent memory conventions are defined centrally in the AI harness:
 
 ## What This Project Is
 
-GdUnit4 is a Godot 4 embedded unit testing framework (Godot plugin) supporting GDScript and C#.
+GdUnit4 is a Godot 4 embedded unit testing framework (Godot plugin) supporting GDScript.
 The plugin lives entirely under `addons/gdUnit4/` and is self-tested — the framework uses itself to run its own test suite.
 
 Supported Godot versions: (read the **Compatibility Overview** table in `README.md`
-and find the row whose GdUnit4 version contains `master`). C# targets net9.0 with .NET SDK 9.0.308 (pinned in `global.json`).
+and find the row whose GdUnit4 version contains `master`).
 
 ## Commands
 
@@ -39,18 +39,6 @@ export GODOT_BIN=/path/to/godot
 
 # Run a specific test path
 ./addons/gdUnit4/runtest.sh --godot_binary /path/to/godot -a res://addons/gdUnit4/test/asserts/
-```
-
-For .NET projects, `runtest.sh` also runs `dotnet build --debug` automatically.
-
-### C# Build and Format
-
-```bash
-# Build
-dotnet build --debug
-
-# Verify formatting (no changes applied)
-dotnet format gdUnit4.csproj --verify-no-changes --verbosity diagnostic
 ```
 
 ### GDScript Linting
@@ -112,7 +100,6 @@ addons/gdUnit4/
 | `reporters/` | HTML and JUnit XML report generation |
 | `ui/` | Godot editor UI — Test Inspector panel |
 | `cmd/` | Command-line argument parsing (CmdArgumentParser, CmdCommandHandler) |
-| `dotnet/` | C#-specific integration layer |
 
 ### Test Organization
 
@@ -120,8 +107,6 @@ Tests in `addons/gdUnit4/test/` mirror the `src/` structure. For example:
 
 - `src/asserts/GdUnitArrayAssertImpl.gd` → `test/asserts/GdUnitArrayAssertImplTest.gd`
 - `src/cmd/CmdArgumentParser.gd` → `test/cmd/CmdArgumentParserTest.gd`
-
-C#-specific tests live under `test/dotnet/`.
 
 ### Key Core Files
 
@@ -167,8 +152,6 @@ or download the release binary from https://github.com/atelico/gdstyle/releases/
 
 Do not skip linting or proceed without it.
 
-**C#:** StyleCop.Analyzers enforced. `TreatWarningsAsErrors = true`. Nullable reference types enabled. C# language version 13.0.
-
 ## Godot API Compatibility
 
 Before using any Godot API function, class, or feature, read the **Compatibility Overview** table in `README.md`
@@ -200,7 +183,6 @@ Markdown source files live under `documentation/doc/` in Jekyll collections:
 | Collection | Path | Content |
 | ---------- | ---- | ------- |
 | `first_steps` | `doc/_first_steps/` | Installation, running tests, settings |
-| `csharp_project_setup` | `doc/_csharp_project_setup/` | C# setup, VSTest adapter |
 | `testing` | `doc/_testing/` | Test suites, test cases, all assert types |
 | `advanced_testing` | `doc/_advanced_testing/` | Mocking, spying, scene runner, signals, fuzzing, etc. |
 | `tutorials` | `doc/_tutorials/` | TDD and scene runner examples |
@@ -255,7 +237,4 @@ gdstyle check --max-warnings 0 addons/gdUnit4/
 
 # Markdown lint
 markdownlint-cli2 --config .markdownlint.jsonc "**/*.md"
-
-# C# format check (if C# files changed)
-dotnet format gdUnit4.csproj --verify-no-changes --verbosity diagnostic
 ```

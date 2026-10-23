@@ -101,23 +101,6 @@ func test_discover_tests_inherited() -> void:
 		])
 
 
-#if GDUNIT4NET_API_V5
-func test_discover_csharp_tests(_do_skip := not GdUnit4CSharpApiLoader.is_api_loaded()) -> void:
-	var script: Script = load("res://addons/gdUnit4/test/core/discovery/resources/DiscoverExampleTestSuite.cs")
-	var discovered_tests := []
-	GdUnitTestDiscoverer.discover_tests(script, \
-		func discover(test_case: GdUnitTestCase) -> void:
-			discovered_tests.append(test_case)
-	)
-	assert_array(discovered_tests)\
-		.extractv(extr("test_name"), extr("display_name"), extr("fully_qualified_name"))\
-		.contains_exactly([
-			tuple("TestCase1", "TestCase1", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase1"),
-			tuple("TestCase2", "TestCase2", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase2"),
-		])
-#endif
-
-
 func test_scan_test_directories() -> void:
 	assert_array(GdUnitTestDiscoverer.scan_test_directories("res://", "test", [])).contains_exactly([
 		"res://addons/gdUnit4/test",

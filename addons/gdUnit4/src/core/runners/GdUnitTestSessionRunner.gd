@@ -174,10 +174,3 @@ func prints_warning(message: String) -> void:
 func _on_gdunit_event(_event: GdUnitEvent) -> void:
 	pass
 
-
-## Event bridge from C# GdUnit4.ITestEventListener.cs[br]
-## Used to handle test events from C# tests.
-
-
-func PublishEvent(data: Dictionary) -> void:  # gdstyle:ignore=naming/function-name-snake-case
-	_on_gdunit_event(GdUnitEvent.new().deserialize(data))

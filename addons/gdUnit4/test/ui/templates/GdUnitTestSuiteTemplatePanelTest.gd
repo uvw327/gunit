@@ -22,11 +22,3 @@ func test_load_template_gd() -> void:
 
 	assert_int(runner.get_property("_selected_template")).is_equal(GdUnitTestSuiteTemplate.TEMPLATE_ID_GD)
 	assert_str(runner.get_property("_template_editor").text).is_equal(GdUnitTestSuiteTemplate.default_gd_template().replace("\r", ""))
-
-
-func test_load_template_cs() -> void:
-	var runner := scene_runner("res://addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn")
-	runner.invoke("load_template", GdUnitTestSuiteTemplate.TEMPLATE_ID_CS)
-
-	assert_int(runner.get_property("_selected_template")).is_equal(GdUnitTestSuiteTemplate.TEMPLATE_ID_CS)
-	assert_str(runner.get_property("_template_editor").text).is_equal(GdUnitTestSuiteTemplate.default_cs_template().replace("\r", ""))

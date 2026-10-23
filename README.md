@@ -84,7 +84,7 @@
 
 **Gd**(*Godot*)**Unit**(*Unit Testing*)**4**(*Godot 4.x*)
 
-GdUnit4 is an embedded unit testing framework designed for testing Gd scripts, C# scripts, and scenes in the Godot editor.
+GdUnit4 is an embedded unit testing framework designed for testing GDScript files and scenes in the Godot editor.
 With GdUnit4, you can easily create and run unit tests to verify the functionality and performance of your code, ensuring
 that it meets your requirements and specifications.<br>
 GdUnit4 is a powerful tool that supports Test-Driven Development ([TDD](https://en.wikipedia.org/wiki/Test-driven_development)), a popular software development
@@ -97,8 +97,8 @@ ensure that your code is thoroughly tested and free of bugs, which can save you 
 
 ### Core Testing Features
 
-* **Support for GDScript and C#**  
-  Write and execute tests in both GDScript and C#
+* **GDScript Test Support**  
+  Write and execute tests in GDScript
 * **Embedded Test Inspector**  
   Navigate your test suites directly within the Godot editor
 * **Test Discovery**  
@@ -160,16 +160,6 @@ ensure that your code is thoroughly tested and free of bugs, which can save you 
   Public marketplace action for integrating GdUnit4 into your CI workflow  
   [gdunit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action)
 
-### GdUnit4Net - C# Support
-
-* **C# API** - [gdUnit4.api](https://github.com/godot-gdunit-labs/gdUnit4Net/blob/master/README.md)  
-  Full support for writing tests in C#
-* **VSTest Integration** - [gdunit4.test.adapter](https://github.com/godot-gdunit-labs/gdUnit4Net/blob/master/TestAdapter/README.md)  
-  Run and debug tests in:
-  * Visual Studio
-  * Visual Studio Code
-  * JetBrains Rider
-
 ---
 
 ## Basic Test Example
@@ -197,9 +187,6 @@ The video walks through practical automated testing techniques that can help imp
 
 <p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">
   <a href="https://godot-gdunit-labs.github.io/gdUnit4/latest/first_steps/install/">How to Install the GdUnit4 plugin</a>
-</p>
-<p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">
-  <a href="https://godot-gdunit-labs.github.io/gdUnit4/latest/csharp_project_setup/csharp-setup/">How to setup GdUnit4 for C#</a>
 </p>
 
 <p align="left" style="font-family: Bedrock; font-size:21pt; color:#7253ed; font-style:bold">

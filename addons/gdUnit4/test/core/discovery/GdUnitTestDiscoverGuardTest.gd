@@ -338,30 +338,6 @@ func test_discover_moved_test_gdscript() -> void:
 		])
 
 
-#if GDUNIT4NET_API_V5
-func test_discover_on_csharp_script(_do_skip := not GdUnit4CSharpApiLoader.is_api_loaded()) -> void:
-	var discoverer: GdUnitTestDiscoverGuard = auto_free(GdUnitTestDiscoverGuard.new())
-	var discovered_tests: Array[GdUnitTestCase] = []
-	var script := load_non_cached("res://addons/gdUnit4/test/core/discovery/resources/DiscoverExampleTestSuite.cs")
-	# simulate initial discovery of a new test suite
-	# we overwrite the default discover sync to catch the tests and not emit `gdunit_test_discovered`
-	await discoverer.discover(
-		script,
-		func(test_case: GdUnitTestCase) -> void:
-			# we need to manual update the cache here, this is normal made by gdunit_test_discovered signal
-			discoverer.sync_test_added(test_case)
-			discovered_tests.append(test_case)
-	)
-
-	assert_array(discovered_tests)\
-		.extractv(extr("test_name"), extr("display_name"), extr("fully_qualified_name"))\
-		.contains_exactly([
-			tuple("TestCase1", "TestCase1", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase1"),
-			tuple("TestCase2", "TestCase2", "gdUnit4.addons.gdUnit4.test.core.discovery.resources.DiscoverExampleTestSuite.TestCase2"),
-		])
-#endif
-
-
 # we need to load the scripts freshly uncached because of script changes during test execution
 func load_non_cached(resource_path: String) -> Script:
 	return ResourceLoader.load(resource_path, "Script", ResourceLoader.CACHE_MODE_IGNORE)

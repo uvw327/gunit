@@ -6,23 +6,4 @@ const DEFAULT_TEMP_TS_GD = """
 	class_name ${suite_class_name}
 	extends GdUnitTestSuite
 """
-const DEFAULT_TEMP_TS_CS = """
-	// GdUnit generated TestSuite
 
-	using Godot;
-	using GdUnit4;
-
-	namespace ${name_space}
-	{
-		using static Assertions;
-		using static Utils;
-
-		[TestSuite]
-		public class ${suite_class_name}
-		{
-			// TestSuite generated from
-			private const string sourceClazzPath = "${source_resource_path}";
-
-		}
-	}
-"""

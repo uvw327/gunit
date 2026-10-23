@@ -236,14 +236,11 @@ static func is_test_suite(script: Script) -> bool:
 				if base.resource_path.find("GdUnitTestSuite") != -1:
 					return true
 				stack.push_back(base)
-	elif script != null and script.get_class() == "CSharpScript":
-		return true
 	return false
 
 
 static func _is_script_format_supported(resource_path: String) -> bool:
-	var ext := resource_path.get_extension()
-	return ext == "gd" or (ext == "cs" and ClassDB.class_exists("CSharpScript"))
+	return resource_path.get_extension() == "gd"
 
 
 static func parse_test_suite_name(script: Script) -> String:

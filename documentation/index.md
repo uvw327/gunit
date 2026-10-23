@@ -15,7 +15,7 @@ build on (v4.7.stable.official [5b4e0cb0f])
 
 **Gd**(*Godot*)**Unit**(*Unit Testing*)**4**(*Godot 4.x*)
 
-GdUnit4 is an embedded unit testing framework designed for testing Gd scripts, C# scripts, and scenes in the Godot editor. With GdUnit4, you can easily
+GdUnit4 is an embedded unit testing framework designed for testing GDScript files and scenes in the Godot editor. With GdUnit4, you can easily
 create and run unit tests to verify the functionality and performance of your code, ensuring that it meets your requirements and specifications.<br>
 GdUnit4 is a powerful tool that supports Test-Driven Development ([TDD](https://en.wikipedia.org/wiki/Test-driven_development){:target="_blank"}),
 a popular software development approach that emphasizes creating automated tests before writing any code. By using GdUnit4 for TDD,
@@ -26,8 +26,8 @@ you can ensure that your code is thoroughly tested and free of bugs, which can s
 
 ### Core Testing Features
 
-* **Support for GDScript and C#**  
-  Write and execute tests in both GDScript and C#
+* **GDScript Test Support**  
+  Write and execute tests in GDScript
 * **Embedded Test Inspector**  
   Navigate your test suites directly within the Godot editor
 * **Test Discovery**  
@@ -88,16 +88,6 @@ you can ensure that your code is thoroughly tested and free of bugs, which can s
 * **GitHub Action Integration**  
   Public marketplace action for integrating GdUnit4 into your CI workflow  
   [gdunit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action)
-
-### GdUnit4Net - C# Support
-
-* **C# API** - [gdUnit4.api](https://github.com/MikeSchulze/gdUnit4Net/blob/master/README.md)  
-  Full support for writing tests in C#
-* **VSTest Integration** - [gdunit4.test.adapter](https://github.com/MikeSchulze/gdUnit4Net/blob/master/TestAdapter/README.md)  
-  Run and debug tests in:
-    * Visual Studio
-    * Visual Studio Code
-    * JetBrains Rider
 
 ## You are welcome to
 <!-- markdownlint-capture -->

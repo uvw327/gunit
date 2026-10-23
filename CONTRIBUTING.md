@@ -63,8 +63,7 @@ The use of AI is permitted, but you remain fully responsible for your contributi
 
 ## Project Setup
 
-Most contributions can be made using the standard (non-Mono) Godot version.  
-C# support is only required when working on the C# API.
+Use the standard (non-.NET) Godot version.
 
 ### Prerequisites
 
@@ -81,30 +80,6 @@ All contributions must be compatible with the Godot versions currently supported
 - **Target Versions:** Please refer to the [Compatibility Overview](./README.md#compatibility-overview) for the list of supported Godot versions on the master branch.
 - **Verification:** You are responsible for ensuring that your changes are fully functional across these versions.
 - **Testing:** We recommend testing your changeset locally in the oldest and newest supported versions listed to avoid compatibility regressions.
-
-### C# Setup - (Optional)
-
-To contribute to the C# API, additional settings are required.
-
-- Use a correct Godot **Mono build version** specified in [README.MD](./README.md#compatibility-overview)d)
-- Install the .NET SDK version specified in [global.json](./global.json)
-
-[.NET installation instructions](https://learn.microsoft.com/en-us/dotnet/core/install/)
-
-#### Verify your setup
-
-Check the SDK(s) is installed on your system:  
-`dotnet --list-sdks`
-
-Build the C# project:  
-`dotnet build`
-
-The terminal should print "Build succeeded".
-If Godot shows a generic error such as:  
-`Build error: Failed to build project. Check MSBuild panel for details.`  
-This can occur due to the strict build settings. Check the terminal output for details and ensure your changes comply with them.
-
-For more details, refer to the GdUnit4Net repository.
 
 ### Setup Git Hooks
 
@@ -151,10 +126,9 @@ In short: We eliminate the clutter so the AI can find the right answers faster.
 ### Notes for contributors
 
 - Basic understanding of object-oriented concepts (interfaces, inheritance) is recommended
-- C# knowledge is helpful but not required for GDScript-only contributions
 - All plugin sources and tests must pass `gdstyle check` without warnings
 - Please follow existing project rules and formatting expectations for the files you modify
-- Never commit changes to `project.godot` unless we need to update the C# API dependencies
+- Never commit unrelated changes to `project.godot`
 - Follow the repository configuration and formatting rules defined in files such as [gdstyle.toml](./gdstyle.toml), [.editorconfig](./.editorconfig),
   [.markdownlint.jsonc](./.markdownlint.jsonc), and [.yamllint.yml](./.yamllint.yml)
 
@@ -169,4 +143,3 @@ If you have any concerns, please reach out to the maintainers.
 To maintain code consistency, please adhere to the following coding style guides:
 
 - <a href='https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html' target="_blank">Godot's GDScript Conventions</a>
-- <a href='https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions' target="_blank">C# Coding Conventions</h>

@@ -57,7 +57,6 @@ const GDSCRIPT_WARNINGS_DIRECTORY_RULES := CATEGORY_GDSCRIPT_WARNINGS + "directo
 const TEMPLATES = MAIN_CATEGORY + "/templates"
 const TEMPLATES_TS = TEMPLATES + "/testsuite"
 const TEMPLATE_TS_GD = TEMPLATES_TS + "/GDScript"
-const TEMPLATE_TS_CS = TEMPLATES_TS + "/CSharpScript"
 # UI Setiings
 const UI_SETTINGS = MAIN_CATEGORY + "/ui"
 const GROUP_UI_INSPECTOR = UI_SETTINGS + "/inspector"
