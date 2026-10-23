@@ -26,6 +26,9 @@ func _init(report_writer: GdUnitReportWriter, hook_name: String, hook_descriptio
 
 
 func startup(session: GdUnitTestSession) -> GdUnitResult:
+	# do not collect any report data when the project configuration disables the reports
+	if not session.is_reports_enabled():
+		return GdUnitResult.success()
 	test_session = session
 	_report_summary = GdUnitReportSummary.new(_report_converter)
 	_reporter.init_summary()
@@ -34,8 +37,11 @@ func startup(session: GdUnitTestSession) -> GdUnitResult:
 
 
 func shutdown(session: GdUnitTestSession) -> GdUnitResult:
+	# do not write any report file when the project configuration disables the reports
+	if not session.is_reports_enabled():
+		return GdUnitResult.success()
 	var report_path := _report_writer.write(session.report_path, _report_summary)
-	session.send_message("Open {0} Report at: {1}".format([_report_writer.output_format(), GdUnitFileAccess.as_file_uri(report_path)]))
+	session.send_verbose_message("Open {0} Report at: {1}".format([_report_writer.output_format(), GdUnitFileAccess.as_file_uri(report_path)]))
 
 	return GdUnitResult.success()
 

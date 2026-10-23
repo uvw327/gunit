@@ -148,6 +148,34 @@ The text field at the bottom displays contextual information about the selected 
 
 ---
 
+## Project Configuration
+
+The optional project configuration file is located in the project root: `res://.gunit.json`.
+If the file is missing, all options are disabled. The configuration file contains a JSON object:
+
+```json
+{
+    "reports": true,
+    "verbose": false
+}
+```
+
+* **reports**
+  Controls the report file generation of the [built-in system hooks](#built-in-system-hooks).
+  When set to `true`, the HTML and JUnit XML reports are written to the report directory after each test session
+  (see [The Report]({{site.baseurl}}/advanced_testing/cmd/#the-report)).
+  When the option is missing or set to `false`, no report files are written, existing reports are left untouched, and the
+  console output does not contain the `Open HTML Report at:` and `Open XML Report at:` messages.
+
+* **verbose**
+  Controls the amount of informational output. When set to `false` (the default), only the test results, the statistics
+  and the summary are printed. Informational messages like the installed session hooks, the runner setup or the client
+  connection are suppressed. Set it to `true` to see the complete output.
+
+An invalid configuration file is reported as a warning and is handled like a missing file, so all options stay disabled.
+
+---
+
 ## UI Settings
 
 ![settings-ui]({{site.baseurl}}/assets/images/settings/settings-ui.png){:.centered}

@@ -43,6 +43,12 @@ signal gdunit_event_debug(event: GdUnitEvent)
 ## [param message] The message to broadcast.
 @warning_ignore("unused_signal")
 signal gdunit_message(message: String)
+## Emitted to broadcast an informational message that is only relevant in verbose mode.[br]
+## [br]
+## The receivers decide by the project configuration whether the message is shown, see [GdUnitProjectConfig].
+## [param message] The message to broadcast.
+@warning_ignore("unused_signal")
+signal gdunit_verbose_message(message: String)
 ## Emitted to update test failure status.[br]
 ## [param is_failed] Whether the test has failed.
 @warning_ignore("unused_signal")

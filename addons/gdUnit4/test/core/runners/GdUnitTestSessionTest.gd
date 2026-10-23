@@ -1,6 +1,9 @@
 class_name GdUnitTestSessionTest
 extends GdUnitTestSuite
 
+const REPORTS_ENABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/reports_enabled.json"
+const REPORTS_DISABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/reports_disabled.json"
+
 
 #region find_test_by_id
 func test_find_test_by_id() -> void:
@@ -47,6 +50,74 @@ func test_doc_migration_test_count_example() -> void:
 
 	assert_int(test_count).is_equal(2)
 #endregion
+
+
+#region reports enabled
+func test_is_reports_enabled_by_project_config() -> void:
+	var session := GdUnitTestSession.new([], "res://reports", _project_config(REPORTS_ENABLED_CONFIG))
+
+	assert_bool(session.is_reports_enabled()).is_true()
+
+
+func test_is_reports_disabled_by_project_config() -> void:
+	var session := GdUnitTestSession.new([], "res://reports", _project_config(REPORTS_DISABLED_CONFIG))
+
+	assert_bool(session.is_reports_enabled()).is_false()
+
+
+func test_is_reports_disabled_when_project_config_is_not_set() -> void:
+	var session := GdUnitTestSession.new([], "res://reports", GdUnitProjectConfig.new())
+
+	assert_bool(session.is_reports_enabled()).is_false()
+#endregion
+
+
+#region verbose messages
+func test_send_verbose_message() -> void:
+	var session := GdUnitTestSession.new([], "res://reports")
+	var verbose_messages: Array[String] = []
+	var messages: Array[String] = []
+	var collect_verbose := func(message: String) -> void:
+		verbose_messages.append(message)
+	var collect_message := func(message: String) -> void:
+		messages.append(message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.connect(collect_message)
+
+	session.send_verbose_message("verbose message")
+
+	GdUnitSignals.instance().gdunit_verbose_message.disconnect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.disconnect(collect_message)
+
+	assert_array(verbose_messages).contains_exactly(["verbose message"])
+	assert_array(messages).is_empty()
+
+
+func test_send_message_is_not_a_verbose_message() -> void:
+	var session := GdUnitTestSession.new([], "res://reports")
+	var verbose_messages: Array[String] = []
+	var messages: Array[String] = []
+	var collect_verbose := func(message: String) -> void:
+		verbose_messages.append(message)
+	var collect_message := func(message: String) -> void:
+		messages.append(message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.connect(collect_message)
+
+	session.send_message("message")
+
+	GdUnitSignals.instance().gdunit_verbose_message.disconnect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.disconnect(collect_message)
+
+	assert_array(messages).contains_exactly(["message"])
+	assert_array(verbose_messages).is_empty()
+#endregion
+
+
+func _project_config(config_file: String) -> GdUnitProjectConfig:
+	var config := GdUnitProjectConfig.new()
+	config.load_config(config_file)
+	return config
 
 
 func _test_cases() -> Array[GdUnitTestCase]:

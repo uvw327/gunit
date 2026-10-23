@@ -1,10 +1,16 @@
 @tool
+class_name GdUnitConsole
 extends Control
 
 const GdUnitUpdateClient = preload("res://addons/gdUnit4/src/update/GdUnitUpdateClient.gd")
 const TITLE = "gdUnit4 ${version} Console"
 
 var _test_reporter: GdUnitConsoleTestReporter
+## Optional project configuration to control the console output.[br]
+## [br]
+## By default the configuration is loaded from [code].gunit.json[/code] on every message, so changes are applied
+## immediately without restarting the editor.
+var project_config: GdUnitProjectConfig
 
 @onready var header := $VBoxContainer/Header
 @onready var title: RichTextLabel = $VBoxContainer/Header/header_title
@@ -17,6 +23,7 @@ func _ready() -> void:
 	GdUnit4Version.init_version_label(title)
 	GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
 	GdUnitSignals.instance().gdunit_message.connect(_on_gdunit_message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(_on_gdunit_verbose_message)
 	GdUnitSignals.instance().gdunit_client_connected.connect(_on_gdunit_client_connected)
 	GdUnitSignals.instance().gdunit_client_disconnected.connect(_on_gdunit_client_disconnected)
 	_test_reporter = GdUnitConsoleTestReporter.new(GdUnitRichTextMessageWriter.new(output))
@@ -29,6 +36,8 @@ func _notification(what: int) -> void:
 			instance.gdunit_event.disconnect(_on_gdunit_event)
 		if instance.gdunit_message.is_connected(_on_gdunit_event):
 			instance.gdunit_message.disconnect(_on_gdunit_message)
+		if instance.gdunit_verbose_message.is_connected(_on_gdunit_verbose_message):
+			instance.gdunit_verbose_message.disconnect(_on_gdunit_verbose_message)
 		if instance.gdunit_client_connected.is_connected(_on_gdunit_event):
 			instance.gdunit_client_connected.disconnect(_on_gdunit_client_connected)
 		if instance.gdunit_client_disconnected.is_connected(_on_gdunit_event):
@@ -77,12 +86,24 @@ func _on_gdunit_event(event: GdUnitEvent) -> void:
 
 func _on_gdunit_client_connected(client_id: int) -> void:
 	_test_reporter.clear()
-	_test_reporter.println_message("GdUnit Test Client connected with id: %d" % client_id, GdUnitEditorColorTheme.folder_color)
+	if _is_verbose_enabled():
+		_test_reporter.println_message("GdUnit Test Client connected with id: %d" % client_id, GdUnitEditorColorTheme.folder_color)
 
 
 func _on_gdunit_client_disconnected(client_id: int) -> void:
-	_test_reporter.println_message("GdUnit Test Client disconnected with id: %d" % client_id, GdUnitEditorColorTheme.folder_color)
+	if _is_verbose_enabled():
+		_test_reporter.println_message("GdUnit Test Client disconnected with id: %d" % client_id, GdUnitEditorColorTheme.folder_color)
 
 
 func _on_gdunit_message(message: String) -> void:
 	_test_reporter.println_message(message, GdUnitEditorColorTheme.folder_color)
+
+
+func _on_gdunit_verbose_message(message: String) -> void:
+	if _is_verbose_enabled():
+		_on_gdunit_message(message)
+
+
+func _is_verbose_enabled() -> bool:
+	var config := project_config if project_config != null else GdUnitProjectConfig.load_default()
+	return config.is_verbose_enabled()

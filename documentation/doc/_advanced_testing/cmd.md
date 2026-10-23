@@ -224,6 +224,20 @@ overview of the executed tests. You can find the reports in the report folder as
 - index.htm - the HTML report
 - results.xml - the [JUnit report](https://www.ibm.com/docs/en/developer-for-zos/14.1.0?topic=formats-junit-xml-format){:target="_blank"}
 
+The report files are only generated when they are enabled in the project configuration file `res://.gunit.json`:
+
+```json
+{
+    "reports": true,
+    "verbose": false
+}
+```
+
+Without this file (or with `"reports": false`) no report folder is created and no report files are written.
+By default the console output is reduced to the test results and the summary; set `"verbose": true` to see additional
+informational messages like the installed session hooks and the report locations.
+See [Project Configuration]({{site.baseurl}}/first_steps/settings/#project-configuration) for details.
+
 ### The HTML report
 
 ![main]({{site.baseurl}}/assets/images/reports/GdUnit3Report-main.png)

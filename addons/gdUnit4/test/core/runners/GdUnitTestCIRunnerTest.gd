@@ -1,6 +1,10 @@
 extends GdUnitTestSuite
 
 const DiscoverExampleTestSuite: GDScript = preload("res://addons/gdUnit4/test/core/discovery/resources/DiscoverExampleTestSuite.gd")
+const REPORTS_ENABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/reports_enabled.json"
+const REPORTS_DISABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/reports_disabled.json"
+const VERBOSE_ENABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/verbose_enabled.json"
+const VERBOSE_DISABLED_CONFIG := "res://addons/gdUnit4/test/core/resources/project_config/verbose_disabled.json"
 
 var _test_paths: PackedStringArray = []
 
@@ -20,6 +24,12 @@ func _absolute_path(path: String) -> String:
 	var absolute_path := ProjectSettings.globalize_path(path)
 	_test_paths.append(absolute_path)
 	return absolute_path
+
+
+func _project_config(config_file: String) -> GdUnitProjectConfig:
+	var config := GdUnitProjectConfig.new()
+	config.load_config(config_file)
+	return config
 
 
 func _create_report_history(report_base_path: String, count: int) -> void:
@@ -172,6 +182,7 @@ func test_set_report_dir_absolute_root_path() -> void:
 #region cleanup_report_history
 func test_cleanup_report_history_on_absolute_report_dir() -> void:
 	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(REPORTS_ENABLED_CONFIG)
 	runner.set_report_dir(_absolute_path("user://tmp/gdunit_test_report_history"))
 	runner.set_report_count("2")
 	_create_report_history(runner.report_base_path, 5)
@@ -182,12 +193,25 @@ func test_cleanup_report_history_on_absolute_report_dir() -> void:
 
 func test_cleanup_report_history_on_relative_report_dir() -> void:
 	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(REPORTS_ENABLED_CONFIG)
 	runner.set_report_dir(_relative_path(".gdunit_test_reports/shard_1"))
 	runner.set_report_count("2")
 	_create_report_history(runner.report_base_path, 5)
 
 	runner.cleanup_report_history()
 	assert_array(DirAccess.get_directories_at(runner.report_base_path)).contains_exactly_in_any_order(["report_4", "report_5"])
+
+
+func test_cleanup_report_history_is_skipped_when_reports_disabled() -> void:
+	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(REPORTS_DISABLED_CONFIG)
+	runner.set_report_dir(_absolute_path("user://tmp/gdunit_test_report_history_disabled"))
+	runner.set_report_count("2")
+	_create_report_history(runner.report_base_path, 5)
+
+	assert_int(runner.cleanup_report_history()).is_equal(0)
+	assert_array(DirAccess.get_directories_at(runner.report_base_path)) \
+		.contains_exactly_in_any_order(["report_1", "report_2", "report_3", "report_4", "report_5"])
 
 
 #endregion
@@ -213,3 +237,59 @@ func test_free_runner_without_registered_session_runner() -> void:
 	Engine.set_meta(GdUnitSettings.GDUNIT_RUNNER, session_runner)
 	assert_bool(has_runner).is_false()
 #endregion
+
+
+#region verbose output
+func test_console_info_verbose_is_ignored_when_verbose_disabled() -> void:
+	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(VERBOSE_DISABLED_CONFIG)
+	var writer := FakeConsoleWriter.new()
+	runner._console = writer
+
+	runner.console_info_verbose("a verbose message")
+
+	assert_array(writer.messages).is_empty()
+
+
+func test_console_info_verbose_prints_when_verbose_enabled() -> void:
+	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(VERBOSE_ENABLED_CONFIG)
+	var writer := FakeConsoleWriter.new()
+	runner._console = writer
+
+	runner.console_info_verbose("a verbose message")
+
+	assert_array(writer.messages).contains_exactly(["a verbose message"])
+
+
+func test_verbose_messages_are_ignored_when_verbose_disabled() -> void:
+	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(VERBOSE_DISABLED_CONFIG)
+	var writer := FakeConsoleWriter.new()
+	runner._console = writer
+
+	runner._on_send_verbose_message("a verbose message")
+
+	assert_array(writer.messages).is_empty()
+
+
+func test_verbose_messages_are_printed_when_verbose_enabled() -> void:
+	var runner: GdUnitTestCIRunner = auto_free(GdUnitTestCIRunner.new())
+	runner.project_config = _project_config(VERBOSE_ENABLED_CONFIG)
+	var writer := FakeConsoleWriter.new()
+	runner._console = writer
+
+	runner._on_send_verbose_message("a verbose message")
+
+	assert_array(writer.messages).contains_exactly(["a verbose message"])
+
+
+#endregion
+
+
+class FakeConsoleWriter extends GdUnitCSIMessageWriter:
+
+	var messages: Array[String] = []
+
+	func _println_message(message: String, _color: Color, _indent: int, _flags: int) -> void:
+		messages.append(message)

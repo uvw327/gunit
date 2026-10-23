@@ -53,6 +53,8 @@ var max_report_history: int = GdUnitConstants.DEFAULT_REPORT_HISTORY_COUNT:
 		return max_report_history
 	set(value):
 		max_report_history = value
+## The project configuration loaded from [code].gunit.json[/code], controls the report generation and the console verbosity
+var project_config: GdUnitProjectConfig = GdUnitProjectConfig.load_default()
 ## The current runner configuration
 @warning_ignore("unused_private_class_variable")
 var _runner_config := GdUnitRunnerConfig.new()
@@ -106,7 +108,7 @@ func _process(_delta: float) -> void:
 			await init_runner()
 		RUN:
 			_hooks = GdUnitTestSessionHookService.instance()
-			_test_session = GdUnitTestSession.new(_test_cases, report_path)
+			_test_session = GdUnitTestSession.new(_test_cases, report_path, project_config)
 			GdUnitSignals.instance().gdunit_event.emit(GdUnitSessionStart.new())
 			# process next test suite
 			set_process(false)
@@ -134,6 +136,9 @@ func init_runner() -> void:
 
 
 func cleanup_report_history() -> int:
+	# do not remove existing reports when the report generation is disabled by the project configuration
+	if not project_config.reports_enabled():
+		return 0
 	return GdUnitFileAccess.delete_path_index_lower_equals_than(
 		report_path.get_base_dir(),
 		GdUnitConstants.REPORT_DIR_PREFIX,

@@ -126,6 +126,26 @@ func test_move_before() -> void:
 	assert_array(service.enigne_hooks).contains_exactly([hook_c, hook_b, hook_a])
 
 
+func test_register_hook_sends_verbose_message() -> void:
+	var service := hook_service()
+	var verbose_messages: Array[String] = []
+	var messages: Array[String] = []
+	var collect_verbose := func(message: String) -> void:
+		verbose_messages.append(message)
+	var collect_message := func(message: String) -> void:
+		messages.append(message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.connect(collect_message)
+
+	service.register(ExampleTestSessionHookA.new())
+
+	GdUnitSignals.instance().gdunit_verbose_message.disconnect(collect_verbose)
+	GdUnitSignals.instance().gdunit_message.disconnect(collect_message)
+
+	assert_array(verbose_messages).contains_exactly(["Session hook 'hook_a' installed."])
+	assert_array(messages).is_empty()
+
+
 func test_move_after() -> void:
 	var service := hook_service()
 	var hook_a := ExampleTestSessionHookA.new()

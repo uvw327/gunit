@@ -13,7 +13,7 @@ static func instance() -> GdUnitTestSessionHookService:
 	return GdUnitSingleton.instance(
 		"GdUnitTestSessionHookService",
 		func() -> GdUnitTestSessionHookService:
-			GdUnitSignals.instance().gdunit_message.emit("Installing GdUnit4 session system hooks.")
+			GdUnitSignals.instance().gdunit_verbose_message.emit("Installing GdUnit4 session system hooks.")
 			var service := GdUnitTestSessionHookService.new()
 			# Register default system hooks here
 			service._save_settings = false
@@ -62,7 +62,7 @@ func register(hook: GdUnitTestSessionHook, enabled: bool = true) -> GdUnitResult
 	_enable_hook(hook, enabled)
 	enigne_hooks.append(hook)
 	save_hock_setttings()
-	GdUnitSignals.instance().gdunit_message.emit("Session hook '%s' installed." % hook.name)
+	GdUnitSignals.instance().gdunit_verbose_message.emit("Session hook '%s' installed." % hook.name)
 
 	return GdUnitResult.success()
 
@@ -172,7 +172,7 @@ func load_hook_settings() -> void:
 			push_error(result.error_message())
 			continue
 
-		GdUnitSignals.instance().gdunit_message.emit("Installing GdUnit4 session hooks.")
+		GdUnitSignals.instance().gdunit_verbose_message.emit("Installing GdUnit4 session hooks.")
 		var hook: GdUnitTestSessionHook = result.value()
 
 		result = register(hook, enabled)

@@ -106,6 +106,7 @@ func _ready() -> void:
 	_executor.fail_fast(true)
 	_console_reporter = GdUnitConsoleTestReporter.new(_console, true)
 	GdUnitSignals.instance().gdunit_message.connect(_on_send_message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(_on_send_verbose_message)
 
 
 func _notification(what: int) -> void:
@@ -139,6 +140,15 @@ func console_info(message: String, color: Color = Color.WHITE) -> void:
 	_console.color(color).println_message(message)
 
 
+## Prints an info message to console, but only when the verbose console output is enabled.[br]
+## [br]
+## [param message] The message to print.[br]
+## [param color] Optional color for the message.
+func console_info_verbose(message: String, color: Color = Color.WHITE) -> void:
+	if project_config.is_verbose_enabled():
+		console_info(message, color)
+
+
 ## Prints error message to console.[br]
 ## [br]
 ## [param message] The error message to print.
@@ -158,7 +168,7 @@ func console_warning(message: String) -> void:
 ## [param path] The path where reports should be written.
 func set_report_dir(path: String) -> void:
 	report_base_path = ProjectSettings.globalize_path(path)
-	console_info(
+	console_info_verbose(
 		"Set write reports to %s" % report_base_path,
 		Color.DEEP_SKY_BLUE
 	)
@@ -176,7 +186,7 @@ func set_report_count(count: String) -> void:
 		)
 		max_report_history = GdUnitConstants.DEFAULT_REPORT_HISTORY_COUNT
 	else:
-		console_info(
+		console_info_verbose(
 			"Set report history count to %s" % count,
 			Color.DEEP_SKY_BLUE
 		)
@@ -186,7 +196,7 @@ func set_report_count(count: String) -> void:
 ## Disables fail-fast mode to run all tests.[br]
 ## By default tests stop on first failure.
 func disable_fail_fast() -> void:
-	console_info(
+	console_info_verbose(
 		"Disabled fail fast!",
 		Color.DEEP_SKY_BLUE
 	)
@@ -195,7 +205,7 @@ func disable_fail_fast() -> void:
 
 
 func run_self_test() -> void:
-	console_info(
+	console_info_verbose(
 		"Run GdUnit4 self tests.",
 		Color.DEEP_SKY_BLUE
 	)
@@ -274,7 +284,7 @@ func descripe_option(cmd_option: CmdOption) -> void:
 ## [br]
 ## [param path] Path to the configuration file.
 func load_test_config(path := GdUnitRunnerConfig.CONFIG_FILE) -> void:
-	console_info(
+	console_info_verbose(
 		"Loading test configuration %s\n" % path,
 		Color.CORNFLOWER_BLUE
 	)
@@ -304,7 +314,7 @@ func get_cmdline_args() -> PackedStringArray:
 
 ## Initializes the test runner and processes command line arguments.
 func init_gd_unit() -> void:
-	console_info(
+	console_info_verbose(
 		"""
 		--------------------------------------------------------------------------------------------------
 		GdUnit4 Comandline Tool
@@ -454,6 +464,11 @@ func is_skipped(test: GdUnitTestCase) -> bool:
 
 func _on_send_message(message: String) -> void:
 	_console.color(Color.CORNFLOWER_BLUE).println_message(message)
+
+
+func _on_send_verbose_message(message: String) -> void:
+	if project_config.is_verbose_enabled():
+		_on_send_message(message)
 
 
 func _on_gdunit_event(event: GdUnitEvent) -> void:

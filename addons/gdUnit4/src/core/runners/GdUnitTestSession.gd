@@ -89,6 +89,13 @@ signal test_event(event: GdUnitEvent)
 var report_path: String:
 	get:
 		return report_path
+## [b][color=red]@readonly: Should not be modified during test execution![/color][/b][br]
+## The project configuration loaded from [code].gunit.json[/code].[br]
+## [br]
+## Hooks and reporters use it to decide whether additional report files should be written for this session.
+var project_config: GdUnitProjectConfig:
+	get:
+		return project_config
 ## [b][color=red]@readonly: Should not be modified directly during test execution![/color][/b][br]
 ## Collection of test cases to be executed in this session, by their GUID.[br]
 ## [br]
@@ -109,14 +116,23 @@ var _test_cases_by_id: Dictionary[String, GdUnitTestCase] = {}
 ## [i]This constructor automatically connects to the global GdUnit event system
 ## and forwards all events to the session's test_event signal. This allows
 ## session-specific components to listen for test events without managing
-## global signal connections.[/i]
-func _init(test_cases: Array[GdUnitTestCase], session_report_path: String) -> void:
+## global signal connections.[/i][br]
+## [br]
+## [param session_project_config] The project configuration to use for this session, defaults to the configuration
+## loaded from [code].gunit.json[/code].
+func _init(test_cases: Array[GdUnitTestCase], session_report_path: String, session_project_config: GdUnitProjectConfig = null) -> void:
 	for test in test_cases:
 		_test_cases_by_id[test.guid._guid] = test
 	report_path = session_report_path
+	project_config = session_project_config if session_project_config != null else GdUnitProjectConfig.load_default()
 	GdUnitSignals.instance().gdunit_event.connect(func(event: GdUnitEvent) -> void:
 		test_event.emit(event)
 	)
+
+
+## Returns whether the report files are enabled for this session by the project configuration.
+func is_reports_enabled() -> bool:
+	return project_config != null and project_config.reports_enabled()
 
 
 ## Returns the number of test cases to be executed in this session.
@@ -162,3 +178,13 @@ func find_test_by_id(id: GdUnitGUID) -> GdUnitTestCase:
 ## [param message] The message text to send through the GdUnit messaging system
 func send_message(message: String) -> void:
 	GdUnitSignals.instance().gdunit_message.emit(message)
+
+
+## Sends an informational message through the GdUnit messaging system.[br]
+## [br]
+## In contrast to [method send_message], the message is only displayed when the verbose console output is enabled in the
+## project configuration (see [GdUnitProjectConfig]).
+## [br]
+## [param message] The message text to send through the GdUnit messaging system
+func send_verbose_message(message: String) -> void:
+	GdUnitSignals.instance().gdunit_verbose_message.emit(message)

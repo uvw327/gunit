@@ -31,6 +31,7 @@ func _ready() -> void:
 	@warning_ignore("return_value_discarded")
 	_client.connection_failed.connect(_on_connection_failed)
 	GdUnitSignals.instance().gdunit_message.connect(_on_send_message)
+	GdUnitSignals.instance().gdunit_verbose_message.connect(_on_send_verbose_message)
 	_executor.fail_fast(_runner_config.is_fail_fast())
 	var result := _client.start("127.0.0.1", _runner_config.server_port())
 	if result.is_error():
@@ -70,6 +71,14 @@ func gdunit_init() -> void:
 ## [param message] The message to send.
 func _on_send_message(message: String) -> void:
 	_client.send(RPCMessage.of(message))
+
+
+## Sends a verbose message via TCP to the GdUnit server, but only when the verbose console output is enabled.[br]
+## [br]
+## [param message] The message to send.
+func _on_send_verbose_message(message: String) -> void:
+	if project_config.is_verbose_enabled():
+		_on_send_message(message)
 
 
 ## Handles GdUnit events by sending them via TCP to the server.[br]
