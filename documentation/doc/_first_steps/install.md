@@ -74,5 +74,5 @@ for more details <a href=\"../../faq/solutions/#scriptresource-errors-after-the-
 
 After successfully installing and activating the gunit plugin, you will find the gunit inspector in the upper left corner of the Godot editor.
 
-* For detailed information about the inspector, please refer to the [GdUnit Inspector]({{site.baseurl}}/first_steps/inspector/)
+* For detailed information about the inspector, please refer to the [gunit Inspector]({{site.baseurl}}/first_steps/inspector/)
 ![activate-gdunit-step3]({{site.baseurl}}/assets/images/install/activate-gdunit-step3.png)

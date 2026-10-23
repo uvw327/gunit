@@ -29,8 +29,6 @@ Understanding when hooks execute is crucial for proper implementation:
 
 Every custom hook must extend `GdUnitTestSessionHook` and implement two key methods:
 
-{% tabs basic-hook %}
-{% tab basic-hook GdScript %}
 ```gdscript
 class_name MyCustomHook
 extends GdUnitTestSessionHook
@@ -42,7 +40,7 @@ func startup(session: GdUnitTestSession) -> GdUnitResult:
     # Initialize resources before tests run
     ...
     
-    # Send status messages through GdUnit messaging system
+    # Send status messages through gunit messaging system
     session.send_message("Custom hook initialized")
     
     # Return success or error
@@ -57,51 +55,6 @@ func shutdown(session: GdUnitTestSession) -> GdUnitResult:
     
     return GdUnitResult.success()
 ```
-{% endtab %}
-{% tab basic-hook C# %}
-
-{% include advice.html
-content="The GdUnitTestSessionHook is current not implemented and will be released with gdUnit4.api v5.1.0"
-%}
-
-```csharp
-using gunit;
-using Godot;
-
-public class MyCustomHook : GdUnitTestSessionHook
-{
-    public MyCustomHook() 
-        : base("MyCustomHook", "Description of what this hook does")
-    {
-    }
-
-    public override GdUnitResult Startup(GdUnitTestSession session)
-    {
-        // Initialize resources before tests run
-        ...
-        
-        // Send status messages through GdUnit messaging system
-        session.SendMessage("Custom hook initialized");
-        
-        // Return success or error
-        return GdUnitResult.Success();
-    }
-
-    public override GdUnitResult Shutdown(GdUnitTestSession session)
-    {
-        // Clean up resources after tests complete
-        ...
-        
-        // Send cleanup status
-        session.SendMessage("Custom hook cleanup completed");
-        
-        return GdUnitResult.Success();
-    }
-}
-```
-{% endtab %}
-{% endtabs %}
-
 
 ## GdUnitTestSession API
 
@@ -118,7 +71,7 @@ The `GdUnitTestSession` object passed to your hooks provides several useful prop
 | Method | Description |
 |--------|-------------|
 | `test_count()` | Returns the number of test cases to be executed |
-| `send_message(message: String)` | Sends a message through the GdUnit messaging system |
+| `send_message(message: String)` | Sends a message through the gunit messaging system |
 | `find_test_by_id(id: GdUnitGUID)` | Finds a test case by its unique identifier |
 
 ### Signals
@@ -127,16 +80,12 @@ The `GdUnitTestSession` object passed to your hooks provides several useful prop
 |--------|-------------|
 | `test_event(event: GdUnitEvent)` | Emitted when test execution events occur |
 
-
-
 ## Practical Examples
 
 ### Example 1: Database Test Hook
 
 This example shows how to set up and tear down a test database for integration testing:
 
-{% tabs database-example %}
-{% tab database-example GdScript %}
 ```gdscript
 class_name DatabaseTestHook
 extends GdUnitTestSessionHook
@@ -179,15 +128,11 @@ func shutdown(session: GdUnitTestSession) -> GdUnitResult:
     session.send_message("Database cleanup completed")
     return GdUnitResult.success()
 ```
-{% endtab %}
-{% endtabs %}
 
 ### Example 2: Performance Monitoring Hook
 
 This example tracks test execution performance and generates a report:
 
-{% tabs performance-example %}
-{% tab performance-example GdScript %}
 ```gdscript
 class_name PerformanceMonitorHook
 extends GdUnitTestSessionHook
@@ -249,15 +194,12 @@ func _generate_report(total_time: int) -> Dictionary:
         "timestamp": Time.get_datetime_string_from_system()
     }
 ```
-{% endtab %}
-{% endtabs %}
-
 
 ## Registering Hooks
 
 To use your custom hooks, you need to register them in the gunit settings:
 
-1. Open the **gunit Settings** (Tools button in the GdUnit Inspector)
+1. Open the **gunit Settings** (Tools button in the gunit Inspector)
    ![inspector-settings]({{site.baseurl}}/assets/images/settings/inspector-settings.png){:.centered}
 2. Navigate to the Hooks tab
 ![settings-hook]({{site.baseurl}}/assets/images/settings/settings-hooks.png){:.centered}
@@ -349,14 +291,18 @@ func _on_test_event(event: GdUnitEvent) -> void:
 gunit includes built-in system hooks that cannot be removed:
 
 ### GdUnitHtmlTestReporter
+
 Extends `GdUnitBaseReporterTestSessionHook` to generate interactive HTML test reports with:
+
 - Detailed test results and execution times
 - Collapsible sections for easy navigation
 - Visual charts and statistics
 - Failure details with stack traces
 
 ### GdUnitXMLTestReporter
+
 Extends `GdUnitBaseReporterTestSessionHook` to generate JUnit-compatible XML reports for:
+
 - CI/CD pipeline integration
 - Test result aggregation tools
 - Automated build systems
@@ -385,4 +331,4 @@ Extends `GdUnitBaseReporterTestSessionHook` to generate JUnit-compatible XML rep
 ## See Also
 
 - [Settings - Hooks Configuration]({{site.baseurl}}/first_steps/settings/#hooks-settings) - Configure and manage hooks in the gunit settings
-- [Test Setup/Teardown]({{site.baseurl}}/testing/hooks/#test-setupteardown) - Learn about test-level fixtures
+- [Test Setup/Teardown]({{site.baseurl}}/testing/hooks/#testcase-hooks) - Learn about test-level fixtures

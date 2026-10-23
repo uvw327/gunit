@@ -6,13 +6,13 @@ nav_order: 4
 
 # How to Run Tests
 
-Running tests in GdUnit is a straightforward process, and you have several options to choose from:
+Running tests in gunit is a straightforward process, and you have several options to choose from:
 
-## Using the GdUnit Inspector
+## Using the gunit Inspector
 
-The GdUnit Inspector provides various options to run single unit tests or sets of testsuites:
+The gunit Inspector provides various options to run single unit tests or sets of testsuites:
 
-- **Using the Button Bar**: You can use the buttons available in the GdUnit Inspector's to run tests.<br>
+- **Using the Button Bar**: You can use the buttons available in the gunit Inspector's to run tests.<br>
 Refer to the [Button Bar]({{site.baseurl}}/first_steps/inspector/#button-bar) section for more details.
 
 - **Using the Inspector Tree**: The Inspector Tree allows you to run tests from a hierarchical view.<br>

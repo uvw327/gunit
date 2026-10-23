@@ -19,9 +19,6 @@ The functions listed below use the following classes to simulate touchscreen inp
 * [InputEventScreenTouch](https://docs.godotengine.org/en/stable/classes/class_inputeventscreentouch.html#class-inputeventscreentouch){:target="_blank"}
 * [InputEventScreenDrag](https://docs.godotengine.org/en/stable/classes/class_inputeventscreendrag.html){:target="_blank"}
 
-{% tabs scene-runner-overview %}
-{% tab scene-runner-overview GdScript %}
-
 |Function|Description|
 |---|---|
 |[get_screen_touch_drag_position](#get_screen_touch_drag_position)| Returns the actual position of the touch drag position by given index. |
@@ -32,18 +29,6 @@ The functions listed below use the following classes to simulate touchscreen inp
 |[simulate_screen_touch_drag_relative](#simulate_screen_touch_drag_relative)| Simulates a touch screen drag&drop to the relative coordinates (offset). |
 |[simulate_screen_touch_drag_absolute](#simulate_screen_touch_drag_absolute)| Simulates a touch screen drop to the absolute coordinates. |
 |[simulate_screen_touch_drag_drop](#simulate_screen_touch_drag_drop)| Simulates a touch screen drop&drop to the absolute coordinates. |
-
-{% endtab %}
-{% tab scene-runner-overview C# %}
-
-|Function|Description|
-|---|---|
-|||
-
-### Not yet implemented
-
-{% endtab %}
-{% endtabs %}
 
 ## How to Simulate Touchscreen Interactions
 
@@ -90,9 +75,6 @@ See [Synchronize Inputs Events]({{site.baseurl}}/advanced_testing/scene_runner/s
 The **get_screen_touch_drag_position** function returns the current position of a drag event by its index.
 This is useful for verifying the location of touch events during drag operations.
 
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
-
 It takes the following arguments:
 
 ```gd
@@ -112,33 +94,11 @@ assert_that(drag_position).is_equal(Vector2(683, 339))
 
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use GetScreenTouchDragPosition:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 ---
 
 ### simulate_screen_touch_drag
 
 The **simulate_screen_touch_drag** function simulates a drag event from position. You can use this to start testing simple drag and drop interactions.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -160,25 +120,6 @@ await runner.simulate_screen_touch_drag()
 
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchDrag:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 We use **[await_input_processed()]({{site.baseurl}}/advanced_testing/scene_runner/sync_inputs/#synchronize-inputs-events)** to ensure that the simulation
 of the touchscreen input is complete before moving on to the next instruction.
 
@@ -187,9 +128,6 @@ of the touchscreen input is complete before moving on to the next instruction.
 ### simulate_screen_touch_pressed
 
 The **simulate_screen_touch_pressed** function simulates a touch pressed event at a specified position. You can use this to test simple tap interactions.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -215,25 +153,6 @@ assert_that(runner.get_screen_touch_drag_position(0)).is_equal(Vector2(683, 339)
 
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchPressed:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 We use **[await_input_processed()]({{site.baseurl}}/advanced_testing/scene_runner/sync_inputs/#synchronize-inputs-events)** to ensure that the simulation
 of the touchscreen input is complete before moving on to the next instruction.
 
@@ -242,9 +161,6 @@ of the touchscreen input is complete before moving on to the next instruction.
 ### simulate_screen_touch_press
 
 The **simulate_screen_touch_press** function simulates a screen touch press without releasing it immediately, effectively simulating a "hold" action.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -270,25 +186,6 @@ assert_that(runner.get_screen_touch_drag_position(0)).is_equal(Vector2(683, 339)
 
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchPress:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 We use **[await_input_processed()]({{site.baseurl}}/advanced_testing/scene_runner/sync_inputs/#synchronize-inputs-events)** to ensure that the simulation
 of the touchscreen input is complete before moving on to the next instruction.
 
@@ -298,9 +195,6 @@ of the touchscreen input is complete before moving on to the next instruction.
 
 The **simulate_screen_touch_release** function simulates the release of a screen touch event.
 This can be used in combination with simulate_screen_touch_press to complete a tap or hold interaction.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -328,25 +222,6 @@ await _runner.await_input_processed()
 
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchRelease:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 We use **[await_input_processed()]({{site.baseurl}}/advanced_testing/scene_runner/sync_inputs/#synchronize-inputs-events)** to ensure that the simulation of
 the touchscreen input is complete before moving on to the next instruction.
 
@@ -356,9 +231,6 @@ the touchscreen input is complete before moving on to the next instruction.
 
 The **simulate_screen_touch_drag_relative** function simulates a touch drag and drop event to a relative position.
 Use this function to test drag-and-drop mechanics that move objects by a specified offset.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -382,34 +254,12 @@ runner.simulate_screen_touch_press(0, Vector2(50, 50))
 await runner.simulate_screen_touch_drag_relative(0, Vector2(100, 0))
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchDragRelative:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 ---
 
 ### simulate_screen_touch_drag_absolute
 
 The **simulate_screen_touch_drag_absolute** function simulates a touch drag and drop event to an absolute position.
 Use this function to test scenarios where an object needs to be moved to a specific location.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -433,34 +283,12 @@ runner.simulate_screen_touch_press(0, Vector2(50, 50))
 await runner.simulate_screen_touch_drag_absolute(0, Vector2(150, 50))
 ```
 
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchDragAbsolute:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}
-
 ---
 
 ### simulate_screen_touch_drag_drop
 
 The **simulate_screen_touch_drag_drop** function simulates a complete drag and drop event from one position to another.
 This is ideal for testing complex drag-and-drop scenarios that require a specific start and end position.
-
-{% tabs scene-runner-func_name %}
-{% tab scene-runner-func_name GdScript %}
 
 It takes the following arguments:
 
@@ -483,22 +311,3 @@ var runner := scene_runner("res://test_scene.tscn")
 await runner.simulate_screen_touch_drag_drop(0, Vector2(50, 50), Vector2(100,50))
 
 ```
-
-{% endtab %}
-{% tab scene-runner-func_name C# %}
-
-It takes the following arguments:
-
-```cs
-// Not yet implemented!
-```
-
-Here is an example of how to use SimulateScreenTouchDragDrop:
-
-```cs
-ISceneRunner runner = ISceneRunner.Load("res://test_scene.tscn");
-
-```
-
-{% endtab %}
-{% endtabs %}

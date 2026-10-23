@@ -17,8 +17,6 @@ before the action under test runs.
 
 {% include signal_await_advice.html %}
 
-{% tabs assert-signal-overview %}
-{% tab assert-signal-overview GdScript %}
 **GdUnitSignalAssert**<br>
 
 |Function|Description|
@@ -27,19 +25,6 @@ before the action under test runs.
 |[is_not_emitted]({{site.baseurl}}/testing/assert-signal/#is_not_emitted) | Verifies that given signal is NOT emitted until waiting time.|
 |[is_signal_exists]({{site.baseurl}}/testing/assert-signal/#is_signal_exists) | Verifies if the signal exists on the emitter.|
 |[wait_until]({{site.baseurl}}/testing/assert-signal/#wait_until) | Sets the assert signal timeout in ms.|
-
-{% endtab %}
-{% tab assert-signal-overview C# %}
-**ISignalAssert**<br>
-
-|Function|Description|
-|--- | --- |
-|[IsEmitted]({{site.baseurl}}/testing/assert-signal/#is_emitted) | Verifies that given signal is emitted until waiting time.|
-|[IsNotEmitted]({{site.baseurl}}/testing/assert-signal/#is_not_emitted) | Verifies that given signal is NOT emitted until waiting time.|
-|[IsSignalExists]({{site.baseurl}}/testing/assert-signal/#is_signal_exists) | Verifies if the signal exists on the emitter.|
-
-{% endtab %}
-{% endtabs %}
 
 ---
 
@@ -53,9 +38,6 @@ This assertion waits for a signal to be emitted from the object under test and
 validates that it was emitted with the correct arguments. The function supports
 both typed signals (Signal type) and string-based signal names for flexibility
 in different testing scenarios.
-
-{% tabs assert-signal-is_emitted %}
-{% tab assert-signal-is_emitted GdScript %}
 
 ```gd
 ## [b]Parameters:[/b]
@@ -85,33 +67,6 @@ await assert_signal(instance).is_emitted(signal_b, "test", 42)
 # Wait max 500ms for signal with argument 10
 await assert_signal(instance).wait_until(500).is_emitted(signal_a, 10)
 ```
-{% endtab %}
-{% tab assert-signal-is_emitted C# %}
-```cs
-public Task<ISignalAssert> IsEmitted(string signal, params object[] args);
-```
-```cs
-[Signal]
-public delegate void SignalAEventHandler(int value);
-[Signal]
-public delegate void SignalBEventHandler(string name, int count);
-
-// Wait for signal emission without checking arguments
-await AssertSignal(instance).IsEmitted(SignalName.SignalA);
-// Using string name (dynamic)
-await AssertSignal(instance).IsEmitted("signal_a");
-
-// Wait for signal emission with specific argument
-await AssertSignal(instance).IsEmitted(SignalName.SignalA, 10);
-
-// Wait for signal with multiple arguments
-await AssertSignal(instance).IsEmitted(SignalName.SignalB, "test", 42);
-
-// Wait max 500ms for signal with argument 10
-await AssertSignal(instance).IsEmitted(SignalName.SignalA, 10).WithTimeout(500);
-```
-{% endtab %}
-{% endtabs %}
 
 {% include advice.html
 content="Omitting signal_args requires the signal to be emitted with no arguments. If the signal carries arguments, provide them or use argument matchers."
@@ -125,8 +80,6 @@ This assertion waits for a specified time period and validates that a signal
 was not emitted with the given arguments. Useful for ensuring certain conditions
 don't trigger unwanted signals or for verifying signal filtering logic.
 
-{% tabs assert-signal-is_not_emitted %}
-{% tab assert-signal-is_not_emitted GdScript %}
 ```gd
 ## [b]Parameters:[/b]
 ## [param signal_name]: The signal to monitor. Can be either:
@@ -156,33 +109,6 @@ await assert_signal(instance).wait_until(500).is_not_emitted(signal_b, "test", 4
 instance.emit_signal("signal_a", 20)  # Emits with 20, not 10
 await assert_signal(instance).wait_until(500).is_not_emitted(signal_a, 10)
 ```
-{% endtab %}
-{% tab assert-signal-is_not_emitted C# %}
-```cs
-public Task<ISignalAssert> IsNotEmitted(string signal, params object[] args);
-```
-```cs
-[Signal]
-public delegate void SignalAEventHandler(int value);
-[Signal]
-public delegate void SignalBEventHandler(string name, int count);
-
-// Verify signal is not emitted at all (without checking arguments)
-await AssertSignal(instance).IsNotEmitted(SignalName.SignalA).WithTimeout(500);
-await AssertSignal(instance).IsNotEmitted("signal_a").WithTimeout(500);
-
-// Verify signal is not emitted with specific argument
-await AssertSignal(instance).IsNotEmitted(SignalName.SignalA, 10).WithTimeout(500);
-
-// Verify signal is not emitted with multiple arguments
-await AssertSignal(instance).IsNotEmitted(SignalName.SignalB, "test", 42).WithTimeout(500);
-
-// Can be emitted with different arguments (this passes)
-instance.EmitSignal(SignalName.SignalA, 20);  // Emits with 20, not 10
-await AssertSignal(instance).IsNotEmitted(SignalName.SignalA, 10).WithTimeout(500);
-```
-{% endtab %}
-{% endtabs %}
 
 {% include advice.html
 content="Omitting signal_args requires the signal to be emitted with no arguments. If the signal carries arguments, provide them or use argument matchers."
@@ -197,8 +123,6 @@ Signal arguments can be verified using **exact values** or **argument matchers**
 When arguments are passed to `is_emitted()` or `is_not_emitted()`, the assertion performs an
 exact equality check against every emitted argument in order.
 
-{% tabs assert-signal-exact-args %}
-{% tab assert-signal-exact-args GdScript %}
 ```gd
 signal item_added(item_name: String, item_id: int)
 
@@ -208,20 +132,6 @@ await assert_signal(inventory).is_emitted(item_added, "sword", 1)
 # Fails — "shield" does not equal "sword"
 await assert_signal(inventory).is_emitted(item_added, "shield", 1)
 ```
-{% endtab %}
-{% tab assert-signal-exact-args C# %}
-```cs
-[Signal]
-public delegate void ItemAddedEventHandler(string itemName, int itemId);
-
-// Passes only when the signal is emitted with exactly ("sword", 1)
-await AssertSignal(inventory).IsEmitted(SignalName.ItemAdded, "sword", 1).WithTimeout(200);
-
-// Fails — "shield" does not equal "sword"
-await AssertSignal(inventory).IsEmitted(SignalName.ItemAdded, "shield", 1).WithTimeout(200);
-```
-{% endtab %}
-{% endtabs %}
 
 ### Matching with argument matchers
 
@@ -267,8 +177,6 @@ This assertion checks if a signal is defined on the object under test,
 regardless of whether it has been emitted. Useful for validating that
 objects have the expected signals before testing their emission.
 
-{% tabs assert-signal-is_signal_exists %}
-{% tab assert-signal-is_signal_exists GdScript %}
 ```gd
 ## [b]Parameters:[/b]
 ## [param signal_name]: The signal to check. Can be either:
@@ -292,36 +200,10 @@ await assert_signal(instance) \
     .is_signal_exists(my_signal) \
     .is_emitted(my_signal, 42)
 ```
-{% endtab %}
-{% tab assert-signal-is_signal_exists C# %}
-```cs
-public ISignalAssert IsSignalExists(string signal);
-```
-```cs
-[Signal]
-public delegate void MySignalEventHandler(int value);
-[Signal]
-public delegate void AnotherSignalEventHandler();
-
-// Verify signal exists using SignalName
-AssertSignal(instance).IsSignalExists(SignalName.MySignal);
-
-// Verify signal exists using string name
-AssertSignal(instance).IsSignalExists("my_signal");
-
-// Chain with other assertions
-await AssertSignal(instance)
-    .IsSignalExists(SignalName.MySignal)
-    .IsEmitted(SignalName.MySignal, 42);
-```
-{% endtab %}
-{% endtabs %}
 
 ## wait_until
 
 Sets the assert signal timeout in ms, if the time over a failure is reported.
-{% tabs assert-signal-wait_until %}
-{% tab assert-signal-wait_until GdScript %}
 ```gd
 func assert_signal(instance: Object>).wait_until(timeout: int) -> GdUnitSignalAssert
 ```
@@ -331,20 +213,6 @@ signal signal_a()
 # Do wait until 5s the instance has emitted the signal `signal_a`[br]
 await assert_signal(instance).wait_until(5000).is_emitted(signal_a)
 ```
-{% endtab %}
-{% tab assert-signal-wait_until C# %}
-```cs
-public static async Task<ISignalAssert> WithTimeout(this Task<ISignalAssert> task, int timeoutMillis);
-```
-```cs
-[Signal]
-public delegate void SignalAEventHandler();
-
-// Do wait until 5s the instance has emitted the signal `signal_a`
-await AssertSignal(instance).IsEmitted(SignalName.SignalA).WithTimeout(5000);
-```
-{% endtab %}
-{% endtabs %}
 
 ---
 

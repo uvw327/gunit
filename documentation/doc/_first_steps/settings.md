@@ -7,7 +7,7 @@ nav_order: 2
 # Settings
 
 gunit provides several customizable settings to meet your testing needs.
-To access these settings, simply press the 'tools' button located in the GdUnit inspector.
+To access these settings, simply press the 'tools' button located in the gunit inspector.
 ![inspector-settings]({{site.baseurl}}/assets/images/settings/inspector-settings.png){:.centered}
 
 ---
@@ -22,7 +22,7 @@ To access these settings, simply press the 'tools' button located in the GdUnit 
    runner is interrupted.
 
   * **Update Notification Enabled**<br>
-   This option enables or disables the GdUnit update notification. If enabled, a notification will appear when starting Godot to inform you about
+   This option enables or disables the gunit update notification. If enabled, a notification will appear when starting Godot to inform you about
    new updates available for installation.
 
 * **Test**
@@ -37,7 +37,7 @@ To access these settings, simply press the 'tools' button located in the GdUnit 
     Once the limit is reached or a failure occurs, the run stops. The default value is **10**.
 
   * **Auto Save Project Settings**<br>
-    When enabled (the default), GdUnit automatically saves your project settings before each test execution and restores them afterwards,
+    When enabled (the default), gunit automatically saves your project settings before each test execution and restores them afterwards,
     so a test that changes a setting cannot leak that change into later tests. Disable it to skip this snapshot when your suites rarely
     touch the project settings, and instead snapshot on demand with `save_project_settings()` / `restore_project_settings()`
     (see [Tools and Helpers]({{site.baseurl}}/advanced_testing/tools/)) in only the tests that need it.
@@ -68,30 +68,13 @@ To access these settings, simply press the 'tools' button located in the GdUnit 
       This setting configures the default timeout for a test case in seconds. If a test case runs longer than the specified timeout, the test will be
       interrupted and fail. You can override the default timeout on a per-test-case basis by specifying a different timeout using the `timeout` argument.
 
-{% tabs settings-timeout %}
-{% tab settings-timeout GdScript %}
-
 ```gd
 # Configures the test case to fail after a maximum of 2 seconds runtime
 func test_foo(timeout = 2000) -> void:
 ...
 ```
 
-{% endtab %}
-{% tab settings-timeout C# %}
-
-```cs
-// Configures the test case to fail after a maximum of 2 seconds runtime
-[TestCase(Timeout = 2000)]
-public async Task foo() {
-}
-```
-
-{% endtab %}
-{% endtabs %}
-
 ---
-
 
 ## Hooks Settings
 
@@ -102,10 +85,10 @@ Configure test session hooks and reporting mechanisms for automated test lifecyc
 ### Overview
 
 Test session hooks execute custom logic at the beginning and end of test sessions, enabling:
-- Automated test environment setup and teardown
-- Custom test report generation in various formats
-- Integration with external systems and CI/CD pipelines
-- Resource management across multiple test suites
+* Automated test environment setup and teardown
+* Custom test report generation in various formats
+* Integration with external systems and CI/CD pipelines
+* Resource management across multiple test suites
 
 ### Built-in System Hooks
 
@@ -130,6 +113,7 @@ gunit includes two pre-installed system hooks that provide essential reporting f
 ### Execution Order
 
 Hooks execute in the priority order shown in the list:
+
 1. **Startup Phase**: Hooks initialize in top-to-bottom order before tests begin
 2. **Test Execution**: All test suites run if startup succeeds
 3. **Shutdown Phase**: Hooks cleanup in reverse order after tests complete
@@ -209,7 +193,7 @@ An invalid configuration file is reported as a warning and is handled like a mis
   such as running tests and debugging tests.
 
 * **Inspector**<br>
-  In this section, you can customize the keyboard shortcuts for the GdUnit inspector in Godot. You can customize shortcuts for various actions,
+  In this section, you can customize the keyboard shortcuts for the gunit inspector in Godot. You can customize shortcuts for various actions,
   such as running tests, debugging tests, running overall tests, stopping the current test run, and rerunning tests until failure.
 
 ---
@@ -220,34 +204,34 @@ An invalid configuration file is reported as a warning and is handled like a mis
 
 * **Asserts**
   * **Strict Number Type Compare**<br>
-   This setting controls how numbers are compared in GdUnit. By default, GdUnit performs a type-safe comparison and will always fail if you compare an
+   This setting controls how numbers are compared in gunit. By default, gunit performs a type-safe comparison and will always fail if you compare an
    integer with a floating-point number, even if they have the same value. To allow equal values, such as `0` and `0.0`, you can turn off this configuration.
 
   * **Verbose Errors**<br>
-   This setting suppresses internal error reporting for failed assert conditions in GdUnit. When an assert condition fails, GdUnit normally generates an
+   This setting suppresses internal error reporting for failed assert conditions in gunit. When an assert condition fails, gunit normally generates an
    error message to indicate the failure. By enabling this setting, you can suppress these error messages, which can be useful in certain testing
    scenarios where error reporting is not necessary or desired.
 
   * **Verbose Warnings**<br>
-   This setting suppresses internal warning reporting for failed assert conditions in GdUnit. When an assert condition fails, GdUnit normally generates
+   This setting suppresses internal warning reporting for failed assert conditions in gunit. When an assert condition fails, gunit normally generates
    a warning message to indicate the failure. By enabling this setting, you can suppress these warning messages, which can be useful in certain testing
    scenarios where warning reporting is not necessary or desired.
 
 * **Godot**
   * **Push Error**<br>
-   This setting reports Godot push_error() notifications in GdUnit and causes the test to fail (by default, this setting is disabled).
+   This setting reports Godot push_error() notifications in gunit and causes the test to fail (by default, this setting is disabled).
    When Godot encounters an error condition, it can generate a push_error() notification to indicate the error.
-   By enabling this setting, you can capture these notifications in GdUnit and cause the associated test to fail.
+   By enabling this setting, you can capture these notifications in gunit and cause the associated test to fail.
    This can be useful in certain testing scenarios where error reporting is critical.
 
   * **Script Error**<br>
-   This setting reports Godot gdscript errors in GdUnit and causes the associated test to fail. When Godot encounters an error in a gdscript file,
-   such as a syntax error or a runtime error, GdUnit can capture the error and cause the associated test to fail.
+   This setting reports Godot gdscript errors in gunit and causes the associated test to fail. When Godot encounters an error in a gdscript file,
+   such as a syntax error or a runtime error, gunit can capture the error and cause the associated test to fail.
    By enabling this setting, you can ensure that errors in gdscript files are detected and reported in your tests.
 
 * **Common**
   * **Verbose Orphans**<br>
-   This setting enables or disables orphan node reporting in GdUnit. When this setting is enabled, GdUnit will report any nodes in your project that are
+   This setting enables or disables orphan node reporting in gunit. When this setting is enabled, gunit will report any nodes in your project that are
    not referenced by any other nodes or resources. These orphan nodes can indicate unused or unnecessary content in your project,
    which can be helpful in optimizing your project. By disabling this setting, you can suppress the reporting of orphan nodes,
    which can be useful in certain testing scenarios where orphan node reporting is not necessary or desired.
@@ -256,13 +240,13 @@ An invalid configuration file is reported as a warning and is handled like a mis
 
 ## Templates Settings
 
-When creating a new test-case in GdUnit, you can use this template to generate your test-suite.
+When creating a new test-case in gunit, you can use this template to generate your test-suite.
 To do this, simply right-click on the desired function you want to test and select 'Create Test' from the context menu.
 This will generate a new test-case using the default template, which you can customize to suit your testing needs.
 
 ![settings-template]({{site.baseurl}}/assets/images/settings/settings-template.png){:.centered}
 
-To personalize your test-suite template in GdUnit, you can use the provided tags to modify it according to your needs.<br>
+To personalize your test-suite template in gunit, you can use the provided tags to modify it according to your needs.<br>
 These tags allow you to add custom placeholders and data fields to your test-suite, making them more informative and easier to manage.
 To view a list of all the supported tags, simply click on the **Supported Tags** button in the template page.
 ![settings-template-editor-tags]({{site.baseurl}}/assets/images/settings/settings-template-editor-tags.png){:.centered}

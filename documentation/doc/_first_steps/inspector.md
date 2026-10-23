@@ -4,18 +4,18 @@ title: Test Inspector
 nav_order: 3
 ---
 
-# The GdUnit Test Inspector
+# The gunit Test Inspector
 
-The GdUnit Test Inspector is your entry point for running tests and reviewing their results. This page explains what each part of the inspector shows;
+The gunit Test Inspector is your entry point for running tests and reviewing their results. This page explains what each part of the inspector shows;
 for the different ways to trigger a test run, see [How to Run Tests]({{site.baseurl}}/first_steps/how-to-run-tests/).
 
 ## Overview
 
-The GdUnit inspector provides an overview of the currently executed tests and allows you to navigate them.
+The gunit inspector provides an overview of the currently executed tests and allows you to navigate them.
 It allows you to select individual tests and view possible test failures, including the full call stack. The integrated status bar gives you a quick overview
 of the last test run, including elapsed time and orphan nodes.
 
-![GdUnit inspector overview]({{site.baseurl}}/assets/images/inspector/inspector.png){:.centered}
+![gunit inspector overview]({{site.baseurl}}/assets/images/inspector/inspector.png){:.centered}
 
 - (1) [Button Bar](#button-bar)
 - (2) [Status Bar](#status-bar)
@@ -26,20 +26,20 @@ of the last test run, including elapsed time and orphan nodes.
 
 ## Button Bar
 
-The button bar contains several buttons that allow you to perform different actions in GdUnit:
+The button bar contains several buttons that allow you to perform different actions in gunit:
 ![button-bar]({{site.baseurl}}/assets/images/inspector/button-bar.png){:.centered}
 
 | Preview | Description |
 | ------- | ----------- |
-| ![doc button]({{site.baseurl}}/assets/images/inspector/icons/btn-doc.png) | Opens the GdUnit documentation page in your browser |
-| ![settings button]({{site.baseurl}}/assets/images/inspector/icons/btn-settings.png) | Opens the GdUnit settings window |
+| ![doc button]({{site.baseurl}}/assets/images/inspector/icons/btn-doc.png) | Opens the gunit documentation page in your browser |
+| ![settings button]({{site.baseurl}}/assets/images/inspector/icons/btn-settings.png) | Opens the gunit settings window |
 | ![run overall button]({{site.baseurl}}/assets/images/inspector/icons/btn-run-overall.png) | Run Overall tests |
 | ![run button]({{site.baseurl}}/assets/images/inspector/icons/btn-run.png) | (Re)Run the tests in runtime mode |
 | ![debug button]({{site.baseurl}}/assets/images/inspector/icons/btn-debug.png) | (Re)Run the tests in debug mode |
 | ![stop button]({{site.baseurl}}/assets/images/inspector/icons/btn-stop.png) | Stops the current test run |
-|  | Displays the version of GdUnit |
+|  | Displays the version of gunit |
 
-Note that the keyboard shortcuts for these buttons may vary depending on your specific GdUnit configuration.
+Note that the keyboard shortcuts for these buttons may vary depending on your specific gunit configuration.
 
 ### The Run Overall Button
 
@@ -116,7 +116,7 @@ Each test is prefixed with an icon showing its outcome:
 
 {% include advice.html
 content="Whats the difference between errors and failures?<br>
-GdUnit distinguishes between errors and failures. An error is a hard failure such as a test abort or timeout, while a failure is a test error caused
+gunit distinguishes between errors and failures. An error is a hard failure such as a test abort or timeout, while a failure is a test error caused
 by a failed assertion."
 %}
 
@@ -129,7 +129,7 @@ content="Double-clicking on a test in the test run overview jumps directly to th
 ## Failure Report
 
 This area displays the failure report of the currently selected failed test.<br>
-GdUnit generates the failure report based on the used assert, according to the scheme **expected** vs **current** value, followed by the full call stack
+gunit generates the failure report based on the used assert, according to the scheme **expected** vs **current** value, followed by the full call stack
 that led to the failure. Every stack frame is clickable and jumps straight to the corresponding source line.
 ![report]({{site.baseurl}}/assets/images/inspector/report.png){:.centered}
 

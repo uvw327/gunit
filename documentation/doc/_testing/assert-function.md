@@ -26,10 +26,7 @@ The default timeout of 2s can be overridden by wait_until(<time in ms>)
 |[wait_until]({{site.baseurl}}/testing/assert-function/#wait_until) | Sets the timeout in ms to wait the function returnd the expected value.|
 
 {% endtab %}
-
-{% tab assert-function-overview C# %}
-
-Not supported!
+{% tab assert-function-overview None %}
 
 {% endtab %}
 {% endtabs %}

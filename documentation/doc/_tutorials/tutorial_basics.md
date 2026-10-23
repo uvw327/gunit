@@ -18,8 +18,6 @@ of various functions, such as text formatting or input validation.
 To use this example, simply copy the code into a new gunit test script and modify the message and expected length and content to match your own requirements.
 When you run the test, gunit will compare the actual message length and content to the expected values, and report any discrepancies.
 
-{% tabs tuturial-basics %}
-{% tab tuturial-basics GdScript %}
 ```ruby
 extends GdUnitTestSuite
 
@@ -31,18 +29,5 @@ func test_example():
         # The message must start wiht `This is a ex`
         .starts_with("This is a ex")
 ```
-{% endtab %}
-{% tab tuturial-basics C# %}
-```cs
-[TestCase]
-public Example2()
-    // Verify the given string by using `AssertString`
-    AssertString("This is a example message")
-        // We expect a lenght equal 25 characters
-        .HasLength(25)
-        // The message must start wiht `This is a ex`
-        .StartsWith("This is a ex");
-```
-{% endtab %}
-{% endtabs %}
+
 If the test fails, gunit will report an failure message that shows the expected and actual values.

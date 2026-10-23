@@ -7,7 +7,7 @@ nav_order: 1
 
 # Tools and Helpers
 
-GdUnit provides several tools to help you write tests, including managing objects to free and accessing a temporary
+gunit provides several tools to help you write tests, including managing objects to free and accessing a temporary
     filesystem to store your test data.
 
 ---
@@ -24,45 +24,15 @@ Use **auto_free()** to automatically release objects when they are no longer in 
 Objects that are covered by **auto_free** only live in the scope where they are used.
 These scopes include the test suite setup, test case setup, and the tests themselves.
 
-{% tabs tools-auto_free %}
-{% tab tools-auto_free GdScript %}
-
 ```gd
 func auto_free(obj :Object) -> Object:
 ```
 
-{% endtab %}
-{% tab tools-auto_free C# %}
-
-```cs
-public static T AutoFree<T>(T obj);
-```
-
-{% endtab %}
-{% endtabs %}
-
 Here’s an small example:
-{% tabs tools-auto_free-example %}
-{% tab tools-auto_free-example GdScript %}
-
 ```gd
 # using auto_free() on Path object to register for freeing after the test is finished
 assert_object(auto_free(Path.new())).is_not_instanceof(Tree)
 ```
-
-{% endtab %}
-{% tab tools-auto_free-example C# %}
-
-```cs
-using static Assertions;
-
-  ...
-    // using AutoFree() on Path object to register for freeing after the test is finished
-    AssertObject(AutoFree(new Godot.Path())).IsNotInstanceOf<Godot.Tree>();
-```
-
-{% endtab %}
-{% endtabs %}
 
 Here's an extended example of a test suite to demonstrate the usage of auto_free() and freeing memory:
 
@@ -139,7 +109,7 @@ func print_obj_usage(name :String) :
 Helpers to snapshot and restore the in-memory [`ProjectSettings`](https://docs.godotengine.org/en/stable/classes/class_projectsettings.html)
 around a test that changes them, so the change does not leak into later tests.
 
-By default GdUnit automatically saves and restores your project settings around every test execution
+By default gunit automatically saves and restores your project settings around every test execution
 (the **Auto Save Project Settings** setting). If you turn that off — for example to save time in a suite
 where almost no test touches the settings — you can snapshot on demand in just the tests that need it:
 call **save_project_settings()** in `before()`/`before_test()` and **restore_project_settings()** in
@@ -171,7 +141,7 @@ func test_changes_a_setting() -> void:
 A helper to itemize the orphan nodes detected in the current test, reporting each one's class, instance ID, and the exact
 source line where it was created.
 
-By default, GdUnit only reports how many orphan nodes were detected, since capturing this detail has a runtime cost.
+By default, gunit only reports how many orphan nodes were detected, since capturing this detail has a runtime cost.
 Call **collect_orphan_node_details()** at the end of a test, or in `before_test()`/`after_test()`, to itemize whatever
 orphans that scope produced. See [Orphan Nodes]({{site.baseurl}}/advanced_testing/orphan/#detailed-orphan-reporting)
 for what the itemized report looks like.
@@ -200,22 +170,9 @@ This helper function creates a new directory under the temporary directory *user
 which can be useful for storing data during test execution.<br>
 The directory is automatically deleted after the test suite has finished executing.
 
-{% tabs tools-create_temp_dir %}
-{% tab tools-create_temp_dir GdScript %}
-
 ```gd
 func create_temp_dir(relative_path :String) -> String:
 ```
-
-{% endtab %}
-{% tab tools-create_temp_dir C# %}
-
-```cs
-public static string CreateTempDir(string path);
-```
-
-{% endtab %}
-{% endtabs %}
 
 Here’s an example:
 
@@ -244,22 +201,9 @@ Deletes the temporary directory created by **create_temp_dir()**.
 This function is called automatically after each execution of the test suite to ensure that the temporary directory
 is clean and ready for the next test suite.
 
-{% tabs tools-clean_temp_dir %}
-{% tab tools-clean_temp_dir GdScript %}
-
 ```gd
 func clean_temp_dir():
 ```
-
-{% endtab %}
-{% tab tools-clean_temp_dir C# %}
-
-```cs
-public static void ClearTempDir();
-```
-
-{% endtab %}
-{% endtabs %}
 
 ## create_temp_file()
 
@@ -267,7 +211,7 @@ The **create_temp_file()** function creates a new File under the temporary direc
 with the given name *\<file_name\>* and file *\<mode\>* (default = File.WRITE).<br>
 If successful, the returned File is automatically closed after the execution of the test suite.<br>
 We can create a small test file at the beginning of a test suite in the **before()** function and read it later
-in the test. It is not necessary to close the file, as the GdUnit test runner will close it automatically.
+in the test. It is not necessary to close the file, as the gunit test runner will close it automatically.
 
 ```gd
 func create_temp_file(relative_path :String, file_name :String, mode :=File.WRITE) -> File:

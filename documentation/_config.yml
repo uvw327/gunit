@@ -27,14 +27,9 @@ aux_links:
 aux_links_new_tab: true
 
 # Version configuration
+# The fork publishes a single documentation version (the current source);
+# the version switcher of the upstream site is not carried over.
 current_version: "v7.0.x"
-versions:
-  - "latest"
-  - "v7.0.x"
-  - "v6.2.x"
-  - "v6.1.x"
-  - "v6.0.x"
-  - "v5.1.x"
 
 
 # Define Jekyll collections with correct source paths

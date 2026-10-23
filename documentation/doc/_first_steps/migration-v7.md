@@ -9,8 +9,6 @@ nav_order: 6
 gunit v7 requires at least **Godot 4.7** and removes the API deprecated in v6.
 This page lists every change you have to apply to your project and your tests when upgrading from v6, each with a before and after example.
 
-The C# API is provided by [gdUnit4Net](https://github.com/godot-gdunit-labs/gdUnit4Net){:target="_blank"}, please check its release notes for C# related changes.
-
 ## Godot 4.7 Is Required
 
 gunit v7 requires at least **Godot 4.7**. Upgrade your project to Godot 4.7 or newer before you install gunit v7.

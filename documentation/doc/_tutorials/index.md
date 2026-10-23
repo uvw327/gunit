@@ -18,13 +18,13 @@ and set up in your Godot project.
 
 Here's a list of tutorials we currently have available:<br>
 
-* [Getting Started with GDScript Tests]({{site.baseurl}}/first_steps/getting-started/#create-your-first-test)<br>
+* [Getting Started with GDScript Tests]({{site.baseurl}}/first_steps/getting-started/#complete-your-first-test)<br>
 * [~~Test Fixtures and Setup Methods~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Assertions and Expectations~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Test Doubles: Stubs, Mocks, and Spies~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Running Tests from the Command Line~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
 * [~~Testing Signals and Events~~]({{site.baseurl}}/tutorials/index/#tutorial-list)<br>
-* [Test Driven Development (TDD) with gunit]({{site.baseurl}}/tutorials/tdd/#test-driven-development-tdd-with-gdunit4)<br>
+* [Test Driven Development (TDD) with gunit]({{site.baseurl}}/tutorials/tdd/#test-driven-development-tdd-with-gunit)<br>
 * [Testing Scene Interactions]({{site.baseurl}}/tutorials/scenerunner_examples/#testing-scene-interactions)<br>
 
 ## Basics

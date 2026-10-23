@@ -7,7 +7,7 @@ nav_order: 14
 
 # Command Line Tool
 
-## The GdUnit Command Line Tool
+## The gunit Command Line Tool
 
 gunit provides a command line tool named `res://addons/gunit/bin/GdUnitCmdTool.gd` that allows you to run
 a specific set of test suites and tests from the command line.
@@ -37,7 +37,7 @@ To get an overview of the available commands, execute it with the command `-help
   [-i, --ignore]                          Adds the given test suite or test case to the ignore list.
      -i <testsuite_name|testsuite_name:test-name>
 
-  [-c, --continue]                        By default GdUnit will abort on first test failure to be fail fast, instead of stop after first failure you can use this option to run the complete test set.
+  [-c, --continue]                        By default gunit will abort on first test failure to be fail fast, instead of stop after first failure you can use this option to run the complete test set.
 
   [-conf, --config]                       Run all tests by given test configuration. Default is 'GdUnitRunner.cfg'
      -conf [testconfiguration.cfg]
@@ -54,7 +54,7 @@ To get an overview of the available commands, execute it with the command `-help
   setx GODOT_BIN D:\develop\Godot.exe
   ```
 
-- The GdUnit tool uses colored console output and needs to be enabled manually under Windows 10.
+- The gunit tool uses colored console output and needs to be enabled manually under Windows 10.
 
   **Do it manually by open regedit:**
 
@@ -160,7 +160,7 @@ You can also specify skipping by testsuite name and/or testcase name.
 {% endtab %}
 {% endtabs %}
 
-You can also rerun the latest test execution (executed over the UI GdUnit-inspector)
+You can also rerun the latest test execution (executed over the UI gunit-inspector)
 
 {% tabs cmd_1 %}
 {% tab cmd_1 Unix/Linix %}
@@ -218,7 +218,7 @@ The tool ends with a certain return code, where you can check if the tests were 
 
 ## The Report
 
-The GdUnit command line tool generates a modern HTML and JUnit report with which you can quickly get an
+The gunit command line tool generates a modern HTML and JUnit report with which you can quickly get an
 overview of the executed tests. You can find the reports in the report folder as:
 
 - index.htm - the HTML report
@@ -240,20 +240,15 @@ See [Project Configuration]({{site.baseurl}}/first_steps/settings/#project-confi
 
 ### The HTML report
 
-![main]({{site.baseurl}}/assets/images/reports/GdUnit3Report-main.png)
-
 ## Report by Path
 
 You can switch between the full list of executed test-suites or the view collected by paths.
-![path]({{site.baseurl}}/assets/images/reports/GdUnit3Report-sort-by-path.png)
 If you click on a test-suite you can view the report for a specific test-suite.
 
 ## Select a Testsuite Report
 
 By further selecting the test cases, the test errors can be viewed in the "Failure Report" window.
-![report]({{site.baseurl}}/assets/images/reports/GdUnit3Report-failure-report.png)
 
 ## Logging
 
 If logging is enabled in your project, the report saves the current log and can be viewed by clicking `Logging`.
-![logging]({{site.baseurl}}/assets/images/reports/GdUnit3Report-logging.png)

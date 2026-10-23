@@ -85,15 +85,43 @@ Verification:
 
 ## Phase 3 - Documentation Cleanup
 
-- [ ] Remove the remaining `{% tab ... C# %}` examples from the documentation
-- [ ] Replace the remaining product-name prose in the docs (`GdUnit inspector`, `GdUnitHtmlTestReporter`, ...) with `gunit`
-- [ ] Update the CI documentation: `_faq/ci.md` and the README still advertise the upstream `gdUnit4-action`, which
-      installs upstream releases and is therefore wrong for fork users; document a fork-compatible CI setup
-- [ ] Replace upstream screenshots and links that no longer match the fork
-- [ ] Update the documentation site navigation and version paths
-- [ ] Publish or drop the Jekyll site; the fork currently has no automated deployment
+Status: **completed** (2026-10-23)
+
+Steps completed:
+
+- [x] Remove all `{% tab ... C# %}` examples from the documentation (209 tabs across 38 files; single-tab groups unwrapped,
+      the Windows/Unix and mock-strategy tab groups are kept)
+- [x] Remove the C#-only sections outside of tabs: the `[DataPoint]`/`IAsyncEnumerable` chapter, the C# chapters of
+      `assert-error.md`, the `GdUnit4Net` references, the C# advice boxes in `mock.md`/`spy.md`
+- [x] Delete the C#-only pages and assets: `assert-number.md` (entirely C#), 2 `*csharp*.svg` and 5 `cs-*.png` images
+- [x] Replace the product-name prose (`GdUnit inspector`, `GdUnit command line tool`, ...) with `gunit` in 22 files;
+      real GDScript class names (`GdUnitBoolAssert`, `GdUnitTestSessionHook`, ...) are intentionally kept
+- [x] Update the CI documentation: `_faq/ci.md` and the README no longer advertise the upstream `gdUnit4-action`;
+      both now document running `addons/gunit/runtest.sh` with a downloaded Godot binary (GitHub Actions + GitLab examples)
+- [x] Remove the broken report screenshots from `cmd.md` (the `assets/images/reports/` folder does not exist)
+- [x] Fix 23 broken internal links/anchors, add the missing `is_null`/`is_not_null` example sections to
+      `assert-float`/`assert-integer`/`assert-string`/`assert-vector`, and repair the `//` double-slash scene runner links
+- [x] Update the documentation site: drop the dead version switcher (it linked to version paths the fork does not publish),
+      keep `current_version` for the upgrade banner
+- [x] Publish the Jekyll site: new `.github/workflows/deploy-docs.yml` builds `documentation/` and deploys it to GitHub
+      Pages (requires enabling Pages with source "GitHub Actions" in the repository settings)
+- [x] Make `addons/gunit/runtest.sh` executable in git (mode 100644 -> 100755), it is used directly by the CI examples
+- [x] Run `markdownlint-cli2` and normalize the documentation (only the 14 pre-existing long lines and the README
+      first-line heading remain, both not auto-fixable)
+
+Verification:
+
+- Custom link checker over all 55 documentation pages: 0 broken page links, 0 broken anchors.
+- `markdownlint-cli2` (project config `.markdownlint.jsonc`): down from 66 findings on the pre-Phase-3 tree to 16
+  (14 x MD013 line length, 1 x MD041, 1 x MD032) - all pre-existing and not auto-fixable.
+- No `C#`/`dotnet`/`GdUnit4Net` references remain in the documentation text.
+- No addon source code was changed in this phase (only the executable bit of `runtest.sh`), so the test suite was not
+  re-run; the last full run is recorded under Phase 2.
 
 ## Follow-up work
 
 - Keep `addons/gunit/test/` running with a non-.NET Godot binary; C# tests are removed in Phase 1.
 - Update this file when a phase is completed and keep the status list accurate.
+- Enable GitHub Pages (Settings -> Pages -> Source: GitHub Actions) to activate the documentation deployment.
+- `documentation/build.sh` still contains the old manual `bundle exec jekyll build` flow; it is no longer needed for
+  releases but kept for local previews.

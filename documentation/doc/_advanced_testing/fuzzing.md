@@ -13,17 +13,9 @@ Fuzz Testing or Fuzzing is a software testing technique of putting invalid or ra
 and security loopholes. The purpose of fuzz testing is inserting data using automated or semi-automated techniques and testing the system for
 various exceptions like system crashing or failure of built-in code, etc.
 
-{% tabs fuzzing-definition %}
-{% tab fuzzing-definition GdScript %}
 ```gd
 func test_my_test(fuzzer := <Fuzzer>, <fuzzer_iterations>, <fuzzer_seed>):
 ```
-{% endtab %}
-{% tab fuzzing-definition C# %}
-```cs
-```
-{% endtab %}
-{% endtabs %}
 
 {% include advice.html
 content="Fuzzing is current only supported for GdScripts."
@@ -33,7 +25,7 @@ content="Fuzzing is current only supported for GdScripts."
 
 ## Fuzzers Overview
 
-For now GdUnit provides only this very small set of Fuzzer implementations and will be extend later!
+For now gunit provides only this very small set of Fuzzer implementations and will be extend later!
 
 |Fuzzer|Description|
 |---|---|
@@ -55,20 +47,9 @@ If your test is configured with a fuzzer argument, it will iterate multiple time
 The default number of iterations is set to 1000 and can be configured with the optional argument `fuzzer_iterations`.
 If you want to have the same fuzzer results, you can set a seed with the optional argument `fuzzer_seed`.
 
-{% tabs fuzzing-using %}
-{% tab fuzzing-using GdScript %}
-
 ```gd
 func test_name(fuzzer := <Fuzzer>, <fuzzer_iterations>, <fuzzer_seed>):
 ```
-{% endtab %}
-{% tab fuzzing-using C# %}
-
-```cs
-    ..
-```
-{% endtab %}
-{% endtabs %}
 
 * **Example**
 
@@ -84,7 +65,7 @@ func test_name(fuzzer := <Fuzzer>, <fuzzer_iterations>, <fuzzer_seed>):
       assert_int(fuzzer_a.next_value()).is_between(-23, 22)
       assert_int(fuzzer_b.next_value()).is_between(-23, 22)
   ```
-    
+
   💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
 
 * **fuzzer_iterations**

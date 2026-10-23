@@ -16,28 +16,12 @@ To skip an individual test case, you can use the `do_skip` parameter when defini
 
 Here's an example of skipping an individual test case:
 
-{% tabs faq-test-skip_test %}
-{% tab faq-test-skip_test GdScript %}
-
 ```gd
 func test_case1(_do_skip := true):
     ...
 ```
 
 💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
-
-{% endtab %}
-{% tab faq-test-skip_test C# %}
-
-```cs
-[TestCase(DoSkip = true)]
-public void Case1()
-{
-   ...
-```
-
-{% endtab %}
-{% endtabs %}
 
 In this example, the test `test_case1` will be skipped because the `do_skip` parameter is set to `true`.
 
@@ -47,27 +31,12 @@ You can skip entire test suites using the `do_skip` parameter on the `before` ho
 
 Here's an example of skipping an entire test suite:
 
-{% tabs faq-test-skip %}
-{% tab faq-test-skip GdScript %}
-
 ```gd
 func before(_do_skip := true):
     # Test hook code here
 ```
 
 💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
-
-{% endtab %}
-{% tab faq-test-skip C# %}
-
-```cs
-[Before(DoSkip = true)]
-public void Before()
-{
-```
-
-{% endtab %}
-{% endtabs %}
 
 In this example, all tests within this test-suite will be skipped because the `do_skip` parameter is set to `true`.
 
@@ -76,28 +45,12 @@ In this example, all tests within this test-suite will be skipped because the `d
 You can provide a custom skip reason using the `skip_reason` parameter. This reason will be displayed when the test is skipped. It helps provide context for
 why the test is being skipped.
 
-{% tabs faq-test-skip-reason %}
-{% tab faq-test-skip-reason GdScript %}
-
 ```gd
 func test_case1(_do_skip := true, _skip_reason := "Test case under development"):
     # Test case code here
 ```
 
 💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
-
-{% endtab %}
-{% tab faq-test-skip-reason C# %}
-
-```cs
-[TestCase(DoSkip = true, SkipReason="Test case under development")]
-public void Case1()
-{
-   ...
-```
-
-{% endtab %}
-{% endtabs %}
 
 In this example, the test `test_case1` will be skipped with the reason "Test case under development."
 
@@ -108,28 +61,12 @@ For example, you can use an expression to dynamically decide whether a test shou
 
 Here's an example of using a conditional expression to skip a test case:
 
-{% tabs faq-test-skip-expression %}
-{% tab faq-test-skip-expression GdScript %}
-
 ```gd
 func test_case1(_do_skip := Engine.get_version_info().hex < 0x40100):
     # Test case code here
 ```
 
 💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
-
-{% endtab %}
-{% tab faq-test-skip-expression C# %}
-
-```cs
-[TestCase(DoSkip = Engine.get_version_info().hex < 0x40100)]
-public void Case1()
-{
-   ...
-```
-
-{% endtab %}
-{% endtabs %}
 
 In this example, the test `test_case1` will be skipped for all Godot version before 4.1.x the expression is evaluates at runtime.
 

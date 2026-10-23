@@ -4,7 +4,7 @@ title: Test Case
 nav_order: 3
 ---
 
-# GdUnit Test Case
+# gunit Test Case
 
 ## TestCase Definition
 
@@ -16,7 +16,7 @@ The function name must start with the prefix **test_** to be identified as a tes
 but it should correspond to the function being tested. Test *[arguments]* are optional and will be explained later in the advanced testing section.<br>
 When naming your tests, use a descriptive name that accurately represents what the test does.
 
-In addition to containing multiple test cases, a TestSuite can also contain test setup and teardown [(**hooks**)]({{site.baseurl}}/testing/hooks/#gdunit-hooks) that are executed before and after each test case, as well as before and after the entire TestSuite.
+In addition to containing multiple test cases, a TestSuite can also contain test setup and teardown [(**hooks**)]({{site.baseurl}}/testing/hooks/#gunit-hooks) that are executed before and after each test case, as well as before and after the entire TestSuite.
 This allows you to control the test environment and ensure that tests are executed in a consistent and repeatable manner.
 
 - [TestCase Hooks]({{site.baseurl}}/testing/hooks/#testcase-hooks)
@@ -25,8 +25,6 @@ This allows you to control the test environment and ensure that tests are execut
 
 ## Single TestCase
 
-{% tabs faq-test-case-name %}
-{% tab faq-test-case-name GdScript %}
 To define a TestCase you have to use the prefix `test_` e.g. `test_verify_is_string`<br>
 
 ```gd
@@ -44,30 +42,6 @@ func test_string_to_lower() -> void:
 
 We named it **test_*string_to_lower()*** because we test the `to_lower` function on a string.<br>
 
-{% endtab %}
-{% tab faq-test-case-name C# %}
-Use the **[TestCase]** attribute to define a method as a TestCase.
-
-```cs
-namespace Examples;
-
-using gunit;
-using static gunit.Assertions;
-
-[TestSuite]
-public class GdUnitExampleTest
-{
-   [TestCase]
-   public void StringToLower() {
-      AssertString("AbcD".ToLower()).IsEqual("abcd");
-   }
-}
-```
-
-We named it **StringToLower()** because we test the `ToLower` function on a string.<br>
-{% endtab %}
-{% endtabs %}
-
 ## Using Parameterized TestCases
 
 See [Testing with Parameterized TestCases]({{site.baseurl}}/advanced_testing/paramerized_tests/#testing-with-parameterized-testcases)<br>
@@ -78,10 +52,7 @@ See [Testing with Fuzzers]({{site.baseurl}}/advanced_testing/fuzzing/#testing-wi
 
 ## TestCase Parameters
 
-GdUnit allows you to define additional test parameters to have more control over the test execution.
-{% tabs faq-test-case-attr %}
-{% tab faq-test-case-attr GdScript %}
-
+gunit allows you to define additional test parameters to have more control over the test execution.
 | Parameter                                                                                       | Description                                                                                                                         |
 |-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | [timeout]({{site.baseurl}}/testing/test-case/#timeout)                                          | Defines a custom timeout in milliseconds. By default, a TestCase will be interrupted after 5 minutes if the tests are not finished. |
@@ -96,27 +67,13 @@ GdUnit allows you to define additional test parameters to have more control over
 content="To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.."
 %}
 
-{% endtab %}
-{% tab faq-test-case-attr C# %}
-
-| Parameter | Description |
-|---| ---|
-| Timeout | Defines a custom timeout in milliseconds. By default, a TestCase will be interrupted after 5 minutes if the tests are not finished. |
-| TestName | Defines a custom TestCase name. |
-| Seed | Defines a seed to provide test data. |
-
-{% endtab %}
-{% endtabs %}
-
 ### timeout
 
 The **timeout** paramater sets the duration in milliseconds before a test case is interrupted. By default, a test case will be interrupted after 5 minutes
 if it has not finished executing.
-You can customize the default timeout value in the [GdUnit Settings]({{site.baseurl}}/first_steps/settings/#test-timeout-seconds).
+You can customize the default timeout value in the [gunit Settings]({{site.baseurl}}/first_steps/settings/#common-settings).
 A test case that is interrupted by a timeout is marked and reported as a failure.
 
-{% tabs faq-test-case-attr-timeout %}
-{% tab faq-test-case-attr-timeout GdScript %}
 Sets the test execution timeout to 2s.
 
 ```gd
@@ -125,20 +82,6 @@ func test_with_timeout(_timeout := 2000):
 ```
 
 💡 To avoid warnings about unused arguments, use the underscore prefix `_` or use `@warning_ignore(“unused_parameter”)`.
-
-{% endtab %}
-{% tab faq-test-case-attr-timeout C# %}
-Sets the test execution timeout to 2s.
-
-```cs
-[TestCase(Timeout = 2000)]
-public async Task ATestWithTimeout()
-{
-   ...
-```
-
-{% endtab %}
-{% endtabs %}
 
 ### fuzzer parameters
 
@@ -164,12 +107,12 @@ and get clearer failure reports.
 By default, gunit will continue executing all assertions in a test case even after one fails.
 While this can provide comprehensive feedback about all failing conditions, it can also lead to:
 
-* **Cascading failures**: Later assertions may fail because earlier ones didn't establish the expected state
-* **Misleading error messages**: Subsequent failures might not represent real issues but rather consequences of the first failure
-* **Debugger interruptions**: In debug mode, accessing properties on null objects will cause the debugger to break with runtime errors,
+- **Cascading failures**: Later assertions may fail because earlier ones didn't establish the expected state
+- **Misleading error messages**: Subsequent failures might not represent real issues but rather consequences of the first failure
+- **Debugger interruptions**: In debug mode, accessing properties on null objects will cause the debugger to break with runtime errors,
     stopping test execution unexpectedly
-* **Longer execution time**: Unnecessary processing when the test has already failed
-* **Cluttered output**: Multiple failure messages when only the first one is relevant
+- **Longer execution time**: Unnecessary processing when the test has already failed
+- **Cluttered output**: Multiple failure messages when only the first one is relevant
 
 ### Example Without Fail Fast
 

@@ -146,9 +146,9 @@ ensure that your code is thoroughly tested and free of bugs, which can save you 
   Generate comprehensive HTML test reports
 * **JUnit XML Report**  
   Export test results in JUnit XML format for CI integration
-* **GitHub Action Integration**  
-  Public marketplace action for integrating gunit into your CI workflow  
-  [gdunit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action)
+* **CI Ready**  
+  Ready-to-use `runtest.sh` / `runtest.cmd` scripts and a documented GitHub Actions setup,
+  see [Continuous Integration Testing](documentation/doc/_faq/ci.md)
 
 ---
 

@@ -13,7 +13,7 @@ This section lists known problems and possible solutions/workarounds.
 - [Script/Resource Errors after the plugin is installed]({{site.baseurl}}/faq/solutions/#scriptresource-errors-after-the-plugin-is-installed)
 - [Modifying the Game Engine State 'mainLoop.Paused = true' during Tests]({{site.baseurl}}/faq/solutions/#modifying-the-game-engine-state-mainlooppaused--true-during-tests)
 - [Modifying ProjectSettings during Tests]({{site.baseurl}}/faq/solutions/#modifying-projectsettings-during-tests)
-- [Export Failures with gunit Plugin Installed]({{site.baseurl}}/faq/solutions/#export-failures-with-gdunit4-plugin-installed)
+- [Export Failures with gunit Plugin Installed]({{site.baseurl}}/faq/solutions/#export-failures-with-gunit-plugin-installed)
 - [How to Exclude Directories from Test Discovery]({{site.baseurl}}/faq/solutions/#how-to-exclude-directories-from-test-discovery)
 
 ---
@@ -46,9 +46,6 @@ causing the gunit test window to remain open even after tests are complete.
 When you modify engine states during tests, ensure you restore them to their previous values when the test is finished.
 You can achieve this by adding an "after test" stage to your test suite.
 
-{% tabs mainloop_paused %}
-{% tab mainloop_paused GDScript %}
-
 ```ruby
 # Reset the paused mode back to false after each test
 func after_test() -> void:
@@ -64,32 +61,6 @@ func test_game_paused() -> void:
     assert_that(mainLoop.paused).is_true()
 ```
 
-{% endtab %}
-{% tab mainloop_paused C# %}
-
-```cs
-// Reset the paused mode back to false after each test
-[AfterTest]
-public void TearDown() =>
-    ((SceneTree)Engine.GetMainLoop()).Paused = false;
-
-
-[TestCase]
-public void GamePaused()
-{
-    var mainLoop = (SceneTree)Engine.GetMainLoop();
-
-    AssertThat(mainLoop.Paused).IsFalse();
-
-    // The following lines cause the gunit test window to remain open even after tests are complete
-    mainLoop.Paused = true;
-    AssertThat(mainLoop.Paused).IsTrue();
-}
-```
-
-{% endtab %}
-{% endtabs %}
-
 ---
 
 ### Modifying ProjectSettings during Tests
@@ -101,9 +72,6 @@ persist across tests within the same Godot session and can cause later tests to 
 
 gunit automatically snapshots all `ProjectSettings` before each test suite and each individual test, and
 restores any changed values afterwards. There is no need to manually save and restore settings in `after` hooks:
-
-{% tabs projectsettings_isolation %}
-{% tab projectsettings_isolation GDScript %}
 
 ```gdscript
 # unnecessary — the framework restores ProjectSettings automatically
@@ -121,38 +89,6 @@ Simply set what the tests need — the original value is restored automatically:
 func before() -> void:
     ProjectSettings.set_setting("debug/gdscript/warnings/inferred_declaration", 0)
 ```
-
-{% endtab %}
-{% tab projectsettings_isolation C# %}
-
-```csharp
-// unnecessary — the framework restores ProjectSettings automatically
-[Before]
-public void Setup()
-{
-    _saved = ProjectSettings.GetSetting("debug/gdscript/warnings/inferred_declaration");
-    ProjectSettings.SetSetting("debug/gdscript/warnings/inferred_declaration", 0);
-}
-
-[After]
-public void TearDown()
-{
-    ProjectSettings.SetSetting("debug/gdscript/warnings/inferred_declaration", _saved);
-}
-```
-
-Simply set what the tests need — the original value is restored automatically:
-
-```csharp
-[Before]
-public void Setup()
-{
-    ProjectSettings.SetSetting("debug/gdscript/warnings/inferred_declaration", 0);
-}
-```
-
-{% endtab %}
-{% endtabs %}
 
 ---
 

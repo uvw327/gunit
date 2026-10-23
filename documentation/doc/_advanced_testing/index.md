@@ -21,10 +21,10 @@ You should also have gunit installed and set up in your Godot project.
 Here's a list of advanced techniques we currently have available:<br>
 
 * [Tools and Helpers]({{site.baseurl}}/advanced_testing/tools/#tools-and-helpers)<br>
-* [Test Session Hooks]({{site.baseurl}}/advanced_testing/hooks/#hooks)<br>
+* [Test Session Hooks]({{site.baseurl}}/advanced_testing/hooks/#testing-with-hooks)<br>
 * [Testing with Fuzzers]({{site.baseurl}}/advanced_testing/fuzzing/#testing-with-fuzzers)<br>
 * [Testing with Parameterized TestCases]({{site.baseurl}}/advanced_testing/paramerized_tests/#testing-with-parameterized-testcases)<br>
-* [Testing Signals]({{site.baseurl}}/advanced_testing/signals/#signal-monitor)<br>
+* [Testing Signals]({{site.baseurl}}/advanced_testing/signals/#monitor-signals)<br>
 * [Using Mocks]({{site.baseurl}}/advanced_testing/mock/#mocking--mocks)<br>
 * [Using Spys]({{site.baseurl}}/advanced_testing/spy/#spy)<br>
 * [Using Argument Matchers]({{site.baseurl}}/advanced_testing/argument_matchers/#argument-matchers)<br>

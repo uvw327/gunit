@@ -10,8 +10,6 @@ nav_order: 5
 
 Create a new folder called **first_steps** in your project's root directory and copy the following class into it.
 It should be located at `res://first_steps/test_person.gd`.
-{% tabs first-step-test_class %}
-{% tab first-step-test_class test_person.gd %}
 ```gd
 class_name TestPerson
 extends Node
@@ -28,8 +26,6 @@ func _init(first_name: String, last_name: String) -> void:
 func full_name() -> String:
     return _first_name + " " + _last_name
 ```
-{% endtab %}
-{% endtabs %}
 
 ## Creating a Test
 
@@ -72,7 +68,7 @@ same for its first frame.
 
 ## Complete Your First Test
 
-To complete your test, you must specify what you want to test by using assertions. GdUnit provides a large number of assert functions to compare
+To complete your test, you must specify what you want to test by using assertions. gunit provides a large number of assert functions to compare
 an actual value with an expected value.
 
 In this case, we did a test for the function `full_name()` which has a return type of String. To verify the return value of the function,
@@ -131,8 +127,8 @@ func test_full_name() -> void:
 {% endtab %}
 {% endtabs %}
 
-GdUnit offers a wide range of [Asserts]({{site.baseurl}}/testing/assert/) for all basic built-in types and much more.
-A collection of tests is called a Test Suite in GdUnit.<br>
+gunit offers a wide range of [Asserts]({{site.baseurl}}/testing/assert/) for all basic built-in types and much more.
+A collection of tests is called a Test Suite in gunit.<br>
 You can find more details about creating [Test Setup/Teardown]({{site.baseurl}}/testing/hooks).
 
 Now, run your test again and it should complete successfully.<br>

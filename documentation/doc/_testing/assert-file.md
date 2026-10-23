@@ -8,8 +8,6 @@ parent: Asserts
 
 An assertion tool to verify file resources and their properties.
 
-{% tabs assert-file-overview %}
-{% tab assert-file-overview GdScript %}
 **GdUnitFileAssert**<br>
 
 | Function               |Description|
@@ -19,12 +17,6 @@ An assertion tool to verify file resources and their properties.
 | [is_script]({{site.baseurl}}/testing/assert-file/#is_script) | Verifies the given resource is a gd script |
 | [contains_exactly]({{site.baseurl}}/testing/assert-file/#contains_exactly) | Verifies the given resource contains the content |
 
-{% endtab %}
-{% tab assert-file-overview C# %}
-Not yet implemented!
-{% endtab %}
-{% endtabs %}
-
 ---
 
 ## File Assert Examples
@@ -32,8 +24,6 @@ Not yet implemented!
 ### is_file
 
 Verifies the given resource is a file that can be opened for reading.
-{% tabs assert-file-is_file %}
-{% tab assert-file-is_file GdScript %}
 ```gd
 func assert_file(<current>).is_file() -> GdUnitFileAssert
 ```
@@ -45,17 +35,10 @@ assert_file("res://test.gd").is_file()
 assert_file("res://nonexistent.gd").is_file()
 assert_file("res://some_directory/").is_file()
 ```
-{% endtab %}
-{% tab assert-file-is_file C# %}
-Not yet implemented!
-{% endtab %}
-{% endtabs %}
 
 ### exists
 
 Verifies the given resource exists in the file system.
-{% tabs assert-file-exists %}
-{% tab assert-file-exists GdScript %}
 ```gd
 func assert_file(<current>).exists() -> GdUnitFileAssert
 ```
@@ -66,17 +49,10 @@ assert_file("res://test.gd").exists()
 # this assertion fails if the file doesn't exist
 assert_file("res://nonexistent.gd").exists()
 ```
-{% endtab %}
-{% tab assert-file-exists C# %}
-Not yet implemented!
-{% endtab %}
-{% endtabs %}
 
 ### is_script
 
 Verifies the given resource is a valid GDScript file.
-{% tabs assert-file-is_script %}
-{% tab assert-file-is_script GdScript %}
 ```gd
 func assert_file(<current>).is_script() -> GdUnitFileAssert
 ```
@@ -91,17 +67,10 @@ assert_file("res://data.json").is_script()
 # this assertion also fails if the file doesn't exist
 assert_file("res://nonexistent.gd").is_script()
 ```
-{% endtab %}
-{% tab assert-file-is_script C# %}
-Not yet implemented!
-{% endtab %}
-{% endtabs %}
 
 ### contains_exactly
 
 Verifies the given GDScript resource contains exactly the specified content as an array of lines.
-{% tabs assert-file-contains_exactly %}
-{% tab assert-file-contains_exactly GdScript %}
 ```gd
 func assert_file(<current>).contains_exactly(<expected_rows> :Array) -> GdUnitFileAssert
 ```
@@ -124,8 +93,3 @@ assert_file("res://test.gd").contains_exactly([
 # this assertion also fails if the file is not a GDScript
 assert_file("res://data.json").contains_exactly(["some content"])
 ```
-{% endtab %}
-{% tab assert-file-contains_exactly C# %}
-Not yet implemented!
-{% endtab %}
-{% endtabs %}

@@ -8,8 +8,7 @@ nav_order: 7
 # Spy
 
 {% include advice.html
-content="This Spy implementation is only available for GDScripts, for C# you can use already existing mocking frameworks
-like <a href='https://github.com/devlooped/moq' target='_blank'><b>Moq</b></a>"
+content="This Spy implementation is only available for GDScript."
 %}
 
 ## Definition

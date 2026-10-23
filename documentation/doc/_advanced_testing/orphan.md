@@ -16,7 +16,7 @@ One helpful tool for managing objects is to use the [**auto_free**]({{site.baseu
 
 ## Monitoring
 
-GdUnit helps you monitor for orphan nodes by counting any detected orphan nodes for each test run in the
+gunit helps you monitor for orphan nodes by counting any detected orphan nodes for each test run in the
 [Status Bar]({{site.baseurl}}/first_steps/inspector/#status-bar), and reporting them in the
 [Failure Report]({{site.baseurl}}/first_steps/inspector/#failure-report) for the currently selected test.
 
@@ -27,9 +27,9 @@ including **before()**, **before_test()**, and the test itself.
 
 ### Detailed Orphan Reporting
 
-By default, GdUnit only reports how many orphan nodes a test produced, shown as a plain warning like in the screenshot above.
+By default, gunit only reports how many orphan nodes a test produced, shown as a plain warning like in the screenshot above.
 Capturing the detail behind each orphan has a runtime cost, so it's opt-in: call
-[`collect_orphan_node_details()`]({{site.baseurl}}/advanced_testing/tools/#collect_orphan_node_details) at the point GdUnit's hint suggests, and the
+[`collect_orphan_node_details()`]({{site.baseurl}}/advanced_testing/tools/#collect_orphan_node_details) at the point gunit's hint suggests, and the
 report itemizes every detected orphan node instead, including its class, instance ID, and the exact source line where it was created.
 
 ![orphan-nodes-detailed]({{site.baseurl}}/assets/images/monitoring/orphan-nodes-detailed.png){:.centered}

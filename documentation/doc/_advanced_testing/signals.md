@@ -7,7 +7,7 @@ nav_order: 5
 
 # Testing for Signals
 
-With GdUnit, you can test signals in your Godot projects. GdUnit provides two tools specifically for working with signals:
+With gunit, you can test signals in your Godot projects. gunit provides two tools specifically for working with signals:
 `assert_signal()` and `monitor_signals()`.<br>
 By using these tools, you can test the emission of signals in your Godot projects and ensure that the correct signals are being sent and received.
 
@@ -21,8 +21,6 @@ For more details show [assert_signal]({{site.baseurl}}/testing/assert-signal/#si
 
 Here's an example of using `assert_signal()`:
 
-{% tabs assert_signal %}
-{% tab assert_signal GdScript %}
 ```gd
 extends GdUnitTestSuite
 
@@ -82,82 +80,6 @@ func test_is_signal_exists() -> void:
         .is_signal_exists("tree_exited")
 
 ```
-{% endtab %}
-{% tab assert_signal C# %}
-```cs
-using System.Threading.Tasks;
-
-using gunit.Asserts;
-using gunit.Core.Signals;
-
-using static Assertions;
-
-[TestSuite]
-public partial class SignalAssertTest
-{
-    private sealed partial class TestEmitter : Godot.Node
-    {
-        [Godot.Signal]
-        public delegate void SignalAEventHandler();
-
-        [Godot.Signal]
-        public delegate void SignalBEventHandler(string value);
-
-        [Godot.Signal]
-        public delegate void SignalCEventHandler(string value, int count);
-
-        private int frame;
-
-        public override void _Process(double delta)
-        {
-            switch (frame)
-            {
-                case 5:
-                    EmitSignal(SignalName.SignalA);
-                    break;
-                case 10:
-                    EmitSignal(SignalName.SignalB, "abc");
-                    break;
-                case 15:
-                    EmitSignal(SignalName.SignalC, "abc", 100);
-                    break;
-            }
-            frame++;
-        }
-    }
-
-    [TestCase]
-    public async Task IsEmitted()
-    {
-        var node = AutoFree(new TestEmitter())!;
-        await AssertSignal(node).IsEmitted("SignalA").WithTimeout(200);
-        await AssertSignal(node).IsEmitted("SignalB", "abc").WithTimeout(200);
-        await AssertSignal(node).IsEmitted("SignalC", "abc", 100).WithTimeout(200);
-    }
-
-    [TestCase]
-    public async Task IsNoEmitted()
-    {
-        var node = AddNode(new Godot.Node2D());
-        await AssertSignal(node).IsNotEmitted("visibility_changed", 10).WithTimeout(100);
-    }
-
-    [TestCase]
-    public void IsSignalExists()
-    {
-        var node = AutoFree(new Godot.Node2D())!;
-
-        AssertSignal(node).IsSignalExists("visibility_changed")
-            .IsSignalExists("draw")
-            .IsSignalExists("visibility_changed")
-            .IsSignalExists("tree_entered")
-            .IsSignalExists("tree_exiting")
-            .IsSignalExists("tree_exited");
-    }
-}
-```
-{% endtab %}
-{% endtabs %}
 
 ## Monitor Signals
 
@@ -166,30 +88,12 @@ It sets up a signal monitoring system for the specified object, which enables yo
 
 {% include signal_await_advice.html %}
 
-{% tabs monitor_signals-overview %}
-{% tab monitor_signals-overview GdScript %}
 ```gd
 func monitor_signals(source: Object, use_auto_free := true) -> Object:
 ```
-{% endtab %}
-{% tab monitor_signals-overview C# %}
-In C#, the monitor is integrated into the AssertSignal and is generated implicitly the first time an assertion is used on an emitter.
-To visualize this better, you can use StartMonitoring. From this point on, all emitted signals are recorded.
-```cs
-/// <summary>
-/// Starts the monitoring of emitted signals during the test runtime.
-/// It should be called first if you want to collect all emitted signals after the emitter has been created.
-/// </summary>
-/// <returns></returns>
-public ISignalAssert StartMonitoring();
-```
-{% endtab %}
-{% endtabs %}
 
 Here's an example of using signal monitors.
 
-{% tabs monitor_signals-example %}
-{% tab monitor_signals-example GdScript %}
 ```gd
 extends GdUnitTestSuite
 
@@ -233,75 +137,3 @@ func test_monitor_signals() -> void:
     await assert_signal(emitter_b).wait_until(50).is_emitted(emitter_b.my_signal_a)
 
 ```
-
-{% endtab %}
-{% tab monitor_signals-example C# %}
-```cs
-using System.Threading.Tasks;
-
-using gunit.Asserts;
-using gunit.Core.Signals;
-
-using static Assertions;
-
-[TestSuite]
-public partial class SignalAssertTest
-{
-    public sealed partial class MyEmitter : Godot.Node {
-
-        [Godot.Signal]
-        public delegate void SignalAEventHandler();
-
-        [Godot.Signal]
-        public delegate void SignalBEventHandler(string value);
-
-        public void DoEmitSignalA() => EmitSignal(SignalName.SignalA);
-
-        public void DoEmitSignalB() => EmitSignal(SignalName.SignalB, "foo");
-    }
-
-    [TestCase(Timeout = 1000)]
-    public async Task MonitorOnSignal()
-    {
-        var emitterA = AutoFree(new MyEmitter())!;
-        var emitterB = AutoFree(new MyEmitter())!;
-
-        // verify initial the emitters are not monitored
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterA, MyEmitter.SignalName.SignalA)).IsFalse();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterA, MyEmitter.SignalName.SignalB)).IsFalse();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterB, MyEmitter.SignalName.SignalA)).IsFalse();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterB, MyEmitter.SignalName.SignalB)).IsFalse();
-
-        // start monitoring on the emitter A
-        AssertSignal(emitterA).StartMonitoring();
-        // verify the emitters are now monitored
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterA, MyEmitter.SignalName.SignalA)).IsTrue();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterA, MyEmitter.SignalName.SignalB)).IsTrue();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterB, MyEmitter.SignalName.SignalA)).IsFalse();
-        AssertThat(GodotSignalCollector.Instance.IsSignalCollecting(emitterB, MyEmitter.SignalName.SignalB)).IsFalse();
-
-        // verify the signals are not emitted initial
-        await AssertSignal(emitterA).IsNotEmitted(MyEmitter.SignalName.SignalA).WithTimeout(50);
-        await AssertSignal(emitterA).IsNotEmitted(MyEmitter.SignalName.SignalB).WithTimeout(50);
-        await AssertSignal(emitterB).IsNotEmitted(MyEmitter.SignalName.SignalA).WithTimeout(50);
-        await AssertSignal(emitterB).IsNotEmitted(MyEmitter.SignalName.SignalB).WithTimeout(50);
-
-        // emit signal `signal_a` on emitter_a
-        emitterA.DoEmitSignalA();
-        await AssertSignal(emitterA).IsEmitted(MyEmitter.SignalName.SignalA).WithTimeout(50);
-
-        // emit signal `my_signal_b` on emitter_a
-        emitterA.DoEmitSignalB();
-        await AssertSignal(emitterA).IsEmitted(MyEmitter.SignalName.SignalB, "foo").WithTimeout(50);
-        // verify emitter_b still has nothing emitted
-        await AssertSignal(emitterB).IsNotEmitted(MyEmitter.SignalName.SignalA).WithTimeout(50);
-        await AssertSignal(emitterB).IsNotEmitted(MyEmitter.SignalName.SignalB).WithTimeout(50);
-
-        // now verify emitter b
-        emitterB.DoEmitSignalA();
-        await AssertSignal(emitterB).IsEmitted(MyEmitter.SignalName.SignalA).WithTimeout(50);
-    }
-}
-```
-{% endtab %}
-{% endtabs %}

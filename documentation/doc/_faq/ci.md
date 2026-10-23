@@ -25,17 +25,18 @@ For more details please show at [Command Line Tool]({{site.baseurl}}/advanced_te
 To deploy with GitHub Actions, you need to create a new workflow file in the *\.github/workflows/* directory and name it *ci\.yml*.
 Please visit [GitHub Workflows Page](https://docs.github.com/en/actions/using-workflows){:target="_blank"}
 
-### Using the gdUnit4-action
+### Running gunit tests on GitHub Actions
 
-This GitHub Action automates the execution of gunit unit tests within the Godot Engine 4.x environment.
-It provides flexibility in configuring the Godot version, gunit version, test paths, and other parameters to suit your testing needs.<br>
-Find here on GitHub Marketplace [gdUnit4-action](https://github.com/marketplace/actions/gdunit4-test-runner-action){:target="_blank"}
+The upstream *gdUnit4-action* installs official gdUnit4 releases and is therefore **not compatible with this fork**.
+Instead, run the command line tool that ships with the addon: your repository already contains `addons/gunit`,
+so you only need to provide a Godot binary (gunit v7 requires at least Godot 4.7), import the project once,
+and execute `addons/gunit/runtest.sh`.
 
 Example workflow: (Please note that this is just an example and needs to be adapted to your project environment.)
 {% raw %}
 ```yaml
-name: ci-pr-example
-run-name: ${{ github.head_ref || github.ref_name }}-ci-pr-example
+name: ci
+run-name: ${{ github.head_ref || github.ref_name }}-ci
 
 on:
   pull_request:
@@ -46,7 +47,7 @@ on:
 
 
 concurrency:
-  group: ci-pr-example${{ github.event.number }}
+  group: ci-${{ github.event.number || github.ref_name }}
   cancel-in-progress: true
 
 
@@ -63,20 +64,41 @@ jobs:
       statuses: write
 
     steps:
-      # checkout your repository
+      # checkout your repository (contains the addon at addons/gunit)
       - uses: actions/checkout@v4
         with:
           lfs: true
-      # run tests by using the gdUnit4-action with Godot version 4.2.1 and the latest gunit release 
-      - uses: MikeSchulze/gdUnit4-action@v1.0.2
+      # download the official Godot binary (gunit v7 requires at least Godot 4.7)
+      - name: Install Godot
+        run: |
+          curl -sL -o godot.zip https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip
+          unzip -q godot.zip
+          chmod +x Godot_v4.7.2-stable_linux.x86_64
+          echo "GODOT_BIN=$PWD/Godot_v4.7.2-stable_linux.x86_64" >> "$GITHUB_ENV"
+      # import the project once to build the global class cache
+      - name: Import project
+        run: '$GODOT_BIN --headless --path . --import --quit'
+      # run the tests by using the gunit command line tool
+      # use '-c' to run the complete test set instead of aborting on the first failure
+      - name: Run tests
+        run: ./addons/gunit/runtest.sh -a res://test -c
+      # collect the JUnit/HTML reports written to the reports folder
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          godot-version: '4.2.1'
-          paths: |
-            res://project/tests/
-          timeout: 5
-          report-name: test_report.xml      
+          name: test-report
+          path: reports/
 ```
 {% endraw %}
+
+Notes:
+
+- `runtest.sh` needs the Godot binary either via the `GODOT_BIN` environment variable or the `--godot_binary` argument.
+- On Windows runners use `addons\gunit\runtest.cmd` instead, or run the workflow inside WSL.
+- The tool exits with a non-zero code when tests fail, which fails the workflow step as expected.
+- Test reports are written to the `reports/` folder by default and can be configured in `res://.gunit.json`,
+  see [Project Configuration]({{site.baseurl}}/first_steps/settings/#project-configuration).
 
 ## Howto deploy with GitLab CI
 
@@ -112,13 +134,13 @@ linux:
     paths:
       - build/linux
 
-gdunit4:
+gunit:
   stage: tests
   dependencies:
     - linux
   script:
     - export GODOT_BIN=/usr/local/bin/godot
-    - ./runtest.sh -a ./test || if [ $? -eq 101 ]; then echo "warnings"; elif [ $? -eq 0 ]; then echo "success"; else exit 1; fi
+    - ./addons/gunit/runtest.sh -a ./test || if [ $? -eq 101 ]; then echo "warnings"; elif [ $? -eq 0 ]; then echo "success"; else exit 1; fi
   artifacts:
     when: always
     reports:

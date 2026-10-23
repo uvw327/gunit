@@ -8,8 +8,7 @@ nav_order: 6
 # Mocking / Mocks
 
 {% include advice.html
-content="This Mocking implementation is only available for GDScripts, for C# you can use already existing mocking frameworks
-like <a href='https://github.com/devlooped/moq' target='_blank'><b>Moq</b></a>"
+content="This Mocking implementation is only available for GDScript."
 %}
 
 ## Definition
@@ -224,7 +223,7 @@ mocked_node.get_name()
 verify_no_interactions(mocked_node)
 ```
 
-###  verify_no_more_interactions
+### verify_no_more_interactions
 
 This method checks if the specified mock has any unverified interactions.
 If the mock has recorded more interactions than you verified with **verify()**, an error is reported.
@@ -354,7 +353,7 @@ Here's an example:
 {% tabs mock-modes %}
 {% tab mock-modes RETURN_DEFAULTS %}
 
-If *RETURN_DEFAULTS* is used, all functions will return [default values]({{site.baseurl}}/advanced_testing/mock/#default-values) for a mocked class.
+If *RETURN_DEFAULTS* is used, all functions will return [default values]({{site.baseurl}}/advanced_testing/mock/#mock-working-modes) for a mocked class.
 
 ```gd
 var mock := mock(TestClass) as TestClass
