@@ -49,7 +49,7 @@ For .NET projects, `runtest.sh` also runs `dotnet build --debug` automatically.
 # Build
 dotnet build --debug
 
-# Verify formatting (CI-style check, no changes applied)
+# Verify formatting (no changes applied)
 dotnet format gdUnit4.csproj --verify-no-changes --verbosity diagnostic
 ```
 
@@ -61,7 +61,7 @@ Requires [gdstyle](https://github.com/atelico/gdstyle) 0.4.0, configured by `gds
 gdstyle check --max-warnings 0 addons/gdUnit4/
 ```
 
-CI lints the whole plugin, sources and tests, and fails on any warning. Directories named `resources` and the
+The whole plugin, sources and tests, must lint without warnings. Directories named `resources` and the
 intentionally malformed scanner test suite are excluded in `gdstyle.toml`.
 
 ### Markdown Linting
@@ -69,7 +69,17 @@ intentionally malformed scanner test suite are excluded in `gdstyle.toml`.
 Run markdownlint-cli2 locally before pushing to catch formatting issues early:
 
 ```bash
-markdownlint-cli2 --config .github/actions/formatting_checks/.markdownlint.jsonc "**/*.md"
+markdownlint-cli2 --config .markdownlint.jsonc "**/*.md"
+```
+
+### Releasing
+
+Pushing a `v*` tag (e.g. `v0.1.0`) triggers `.github/workflows/release-addon.yml`. The workflow packages
+`addons/gdUnit4` into `gunit-<tag>.zip` with all `*.uid` files excluded and publishes the archive as a GitHub Release.
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
 ```
 
 ## Architecture
@@ -179,7 +189,7 @@ section grouping conventions, mocking, scene runner, and auto-free usage.
 ## Documentation
 
 The `documentation/` folder is a Jekyll site built with the [just-the-docs](https://just-the-docs.com/) theme (Ruby 3.4.7, Jekyll ~4.4.1).
-It is published to GitHub Pages via `.github/workflows/deploy-gh-pages.yml`, triggered on release events or manual dispatch.
+There is currently no automated deployment workflow in this repository.
 
 All documentation content must follow the shared rule `../ai-harness-core/shared-rules/documentation-style.md`.
 
@@ -208,17 +218,17 @@ The site is served at `http://localhost:4000/gdUnit4`.
 
 ### Deployment
 
-The workflow deploys docs to the `gh-pages` branch under versioned paths (e.g., `/gdUnit4/v6.1.x/`)
-and `/gdUnit4/latest/` for the latest overall release.
-Only the newest patch in a major.minor series is deployed (e.g., v6.1.2 won't be overwritten by v6.1.1).
+There is no automated documentation deployment. When publishing manually, deploy the site to the `gh-pages` branch
+under versioned paths (e.g., `/gdUnit4/v6.1.x/`) and update `/gdUnit4/latest/` for the latest overall release.
+Only the newest patch in a major.minor series should be published (e.g., v6.1.2 won't be overwritten by v6.1.1).
 The `current_version` in `documentation/_config.yml` should be updated when releasing a new minor version.
 
 ## Branch and PR Conventions
 
-- Main branch: `master`
+- Main branch: `main`
 - Feature branches should be named after the issue number (e.g., `GD-111`)
-- PRs must link to an issue and pass all CI checks before merging
-- CI runs format checks, `gdstyle check`, and tests against Godot 4.7, 4.7.1, and 4.8 (dev), see the Compatibility Overview in `README.md`
+- PRs must link to an issue and pass all local checks before merging
+- Run `gdstyle check` and the test suite locally against the Godot versions listed in the Compatibility Overview in `README.md`
 
 ### Git Hooks
 
@@ -237,14 +247,14 @@ When editing or creating `.tscn` files, do not manually remove uid attributes â€
 
 ### Before Pushing
 
-Run all linting locally before pushing to avoid CI failures:
+Run all linting locally before pushing:
 
 ```bash
-# GDScript lint (mirrors .github/workflows/gdstyle.yml)
+# GDScript lint
 gdstyle check --max-warnings 0 addons/gdUnit4/
 
 # Markdown lint
-markdownlint-cli2 --config .github/actions/formatting_checks/.markdownlint.jsonc "**/*.md"
+markdownlint-cli2 --config .markdownlint.jsonc "**/*.md"
 
 # C# format check (if C# files changed)
 dotnet format gdUnit4.csproj --verify-no-changes --verbosity diagnostic

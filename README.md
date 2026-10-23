@@ -77,7 +77,7 @@
 
 <p align="center">
   <img alt="GitHub branch checks state" src="https://img.shields.io/github/checks-status/MikeSchulze/gdunit4/master"></br>
-  <img alt="" src="https://github.com/godot-gdunit-labs/gdUnit4/actions/workflows/ci-dev.yml/badge.svg?branch=master"></br>
+  <img alt="Release Addon" src="https://github.com/uvw327/gunit/actions/workflows/release-addon.yml/badge.svg"></br>
 </p>
 
 ## What is GdUnit4?

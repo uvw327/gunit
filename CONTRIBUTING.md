@@ -34,7 +34,7 @@ review and discuss code changes.
    - Make sure each pull request is associated with only one issue.
    - If the pull request is still in progress, mark it as a draft.
    - Ensure your code follows the [Coding Style](#coding-style) conventions
-   - Ensure that the continuous integration (CI) process passes successfully.
+   - Ensure that all local checks and tests pass successfully.
 6. Submit the pull request!
 
 ## Pull Request Rules
@@ -102,7 +102,7 @@ Build the C# project:
 The terminal should print "Build succeeded".
 If Godot shows a generic error such as:  
 `Build error: Failed to build project. Check MSBuild panel for details.`  
-This can occur due to CI rules. Check the terminal output for details and ensure your changes comply with them.
+This can occur due to the strict build settings. Check the terminal output for details and ensure your changes comply with them.
 
 For more details, refer to the GdUnit4Net repository.
 
@@ -129,7 +129,7 @@ GDScript linting uses [`gdstyle` 0.4.0](https://github.com/atelico/gdstyle/relea
 [Install gdstyle](https://github.com/atelico/gdstyle#installation)
 
 You can optionally run `gdstyle check` locally to check your changes before submitting a PR.  
-Linting is enforced by CI for all plugin sources and tests, any warning fails the check:
+Linting is required for all plugin sources and tests, any warning fails the check:
 
 ```bash
 gdstyle check --max-warnings 0 addons/gdUnit4/
@@ -153,10 +153,10 @@ In short: We eliminate the clutter so the AI can find the right answers faster.
 - Basic understanding of object-oriented concepts (interfaces, inheritance) is recommended
 - C# knowledge is helpful but not required for GDScript-only contributions
 - All plugin sources and tests must pass `gdstyle check` without warnings
-- Please follow existing project rules and CI expectations for the files you modify
+- Please follow existing project rules and formatting expectations for the files you modify
 - Never commit changes to `project.godot` unless we need to update the C# API dependencies
 - Follow the repository configuration and formatting rules defined in files such as [gdstyle.toml](./gdstyle.toml), [.editorconfig](./.editorconfig),
-  [.markdownlint.jsonc](./.github/actions/formatting_checks/.markdownlint.jsonc), and [.yamllint.yml](./.github/actions/formatting_checks/.yamllint.yml)
+  [.markdownlint.jsonc](./.markdownlint.jsonc), and [.yamllint.yml](./.yamllint.yml)
 
 ## License
 

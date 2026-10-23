@@ -1,0 +1,62 @@
+name: Release Addon
+
+run-name: ${{ github.ref_name }}-release-addon
+
+on: # yamllint disable-line rule:truthy
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Release GdUnit4 addon
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout GdUnit Repository
+        uses: actions/checkout@v7
+
+      - name: Build addon package
+        id: build-package
+        shell: bash
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          package="gunit-${TAG}.zip"
+          # package the addon folder without the generated Godot *.uid files
+          zip -r "${package}" addons/gdUnit4 -x '*.uid'
+          echo "package=${package}" >> "${GITHUB_OUTPUT}"
+          echo "Created '${package}' containing $(unzip -Z1 "${package}" | wc -l) entries."
+
+      - name: Verify package content
+        shell: bash
+        env:
+          PACKAGE: ${{ steps.build-package.outputs.package }}
+        run: |
+          set -euo pipefail
+          entries="$(unzip -Z1 "${PACKAGE}")"
+          if grep -q '\.uid$' <<< "${entries}"; then
+            echo "::error::The package '${PACKAGE}' contains *.uid files."
+            exit 1
+          fi
+          if ! grep -qx 'addons/gdUnit4/plugin.cfg' <<< "${entries}"; then
+            echo "::error::The package '${PACKAGE}' does not contain the addon 'addons/gdUnit4/plugin.cfg'."
+            exit 1
+          fi
+          echo "Package content is valid."
+
+      - name: Publish release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE: ${{ steps.build-package.outputs.package }}
+        run: |
+          set -euo pipefail
+          gh release create "${GITHUB_REF_NAME}" "${PACKAGE}" \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes
