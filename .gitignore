@@ -19,6 +19,7 @@ gunit-examples/
 .DS_Store
 .vscode/
 .idea/**
+.workbuddy/
 
 
 # temporary generated files
