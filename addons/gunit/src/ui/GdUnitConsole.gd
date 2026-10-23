@@ -3,7 +3,6 @@ class_name GdUnitConsole
 extends Control
 
 const GdUnitUpdateClient = preload("res://addons/gunit/src/update/GdUnitUpdateClient.gd")
-const TITLE = "gunit ${version} Console"
 
 var _test_reporter: GdUnitConsoleTestReporter
 ## Optional project configuration to control the console output.[br]
@@ -12,15 +11,12 @@ var _test_reporter: GdUnitConsoleTestReporter
 ## immediately without restarting the editor.
 var project_config: GdUnitProjectConfig
 
-@onready var header := $VBoxContainer/Header
-@onready var title: RichTextLabel = $VBoxContainer/Header/header_title
 @onready var output: RichTextLabel = $VBoxContainer/Console/TextEdit
 
 
 func _ready() -> void:
 	GdUnitFonts.init_fonts(output)
 	output.add_theme_constant_override("line_separation", 3)
-	GdUnit4Version.init_version_label(title)
 	GdUnitSignals.instance().gdunit_event.connect(_on_gdunit_event)
 	GdUnitSignals.instance().gdunit_message.connect(_on_gdunit_message)
 	GdUnitSignals.instance().gdunit_verbose_message.connect(_on_gdunit_verbose_message)

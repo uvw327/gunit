@@ -28,31 +28,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Header" type="Control" parent="VBoxContainer" unique_id=1823073031]
-auto_translate_mode = 2
-custom_minimum_size = Vector2(0, 36)
-layout_mode = 2
-size_flags_vertical = 0
-localize_numeral_system = false
-
-[node name="header_title" type="RichTextLabel" parent="VBoxContainer/Header" unique_id=20617532]
-auto_translate_mode = 2
-custom_minimum_size = Vector2(0, 36)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-localize_numeral_system = false
-bbcode_enabled = true
-scroll_active = false
-autowrap_mode = 0
-shortcut_keys_enabled = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Console" type="ScrollContainer" parent="VBoxContainer" unique_id=547060555]
 layout_mode = 2
 size_flags_horizontal = 3
